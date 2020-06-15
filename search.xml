@@ -38,7 +38,8 @@
 <blockquote>
 <p>我的内容是引用的</p>
 </blockquote>
-]]></content>
+<p><code>在视频连接中插入 class=&quot;bilibili&quot;</code></p>
+<iframe class="bilibili" src="//player.bilibili.com/player.html?aid=286039785&bvid=BV1mf4y1y7pp&cid=202160057&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>]]></content>
       <categories>
         <category>前端</category>
       </categories>

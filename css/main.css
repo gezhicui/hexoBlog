@@ -1832,7 +1832,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #7a2bba;
+  background: #96a379;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3146,6 +3146,34 @@ background-attachment
 @media (max-width: 992px) {
   .site-meta {
     background-image: url("https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/top.png");
-    width: 100%;
+    background-size: 100%;
+  }
+}
+.bilibili {
+  position: relative;
+  width: 100%;
+}
+@media only screen and (max-width: 767px) {
+  .bilibili {
+    height: 15em;
+    max-width: 25em;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .bilibili {
+    height: 20em;
+    max-width: 30em;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .bilibili {
+    height: 30em;
+    max-width: 40em;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .bilibili {
+    height: 40em;
+    max-width: 50em;
   }
 }
