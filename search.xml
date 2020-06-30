@@ -233,7 +233,7 @@
 
 <p><code>哈哈嘻嘻</code></p>
 <blockquote>
-<p>我的内容是引用的</p>
+<p>我的内容是引用的哈哈</p>
 </blockquote>
 <p><code>在视频连接中插入 class=&quot;bilibili&quot;</code></p>
 <iframe class="bilibili" src="//player.bilibili.com/player.html?aid=286039785&bvid=BV1mf4y1y7pp&cid=202160057&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>]]></content>
@@ -316,6 +316,74 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
       <tags>
         <tag>javascript</tag>
         <tag>闭包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node中http请求与响应处理</title>
+    <url>/MyBlog/2020/06/30/Node%E4%B8%ADhttp%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<p>首先，我们先来创建一个网站服务器</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/node%E5%88%9B%E5%BB%BA%E7%BD%91%E7%AB%99%E6%9C%8D%E5%8A%A1%E5%99%A8.png" alt=""></p>
+<p>其中，当有请求来的时候，会触发request这个事件，然后执行后面的事件处理函数。我们可以通过res.end对客户端进行响应</p>
+<h1 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h1><h2 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h2><ul>
+<li>Get请求数据</li>
+<li>Post请求数据<h2 id="请求地址"><a href="#请求地址" class="headerlink" title="请求地址"></a>请求地址</h2><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E8%AF%B7%E6%B1%82%E5%9C%B0%E5%9D%80.png" alt=""><br>我们可以通过<code>req.url</code>来获取客户端请求地址，通过<code>req.headers</code>获取请求报文，<code>req.methods</code>获取请求方法(get/post)</li>
+</ul>
+<h1 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h1><h2 id="http状态码"><a href="#http状态码" class="headerlink" title="http状态码"></a>http状态码</h2><ul>
+<li>200请求成功</li>
+<li>404请求的资源没有被找到</li>
+<li>500 服务器端错误</li>
+<li>400客户端请求有语法错误<h2 id="响应内容类型"><a href="#响应内容类型" class="headerlink" title="响应内容类型"></a>响应内容类型</h2></li>
+<li>text/html</li>
+<li>text/css</li>
+<li>application/javascript</li>
+<li>image/jpeg</li>
+<li>application/json</li>
+</ul>
+<h1 id="请求参数"><a href="#请求参数" class="headerlink" title="请求参数"></a>请求参数</h1><p>客户端向服务器端发送请求时，有时需要携带一些客户信息, 客户信息需要通过请求参数的形式传递到服务器端，比如登录操作。</p>
+<h2 id="get请求参数"><a href="#get请求参数" class="headerlink" title="get请求参数"></a>get请求参数</h2><ul>
+<li>参数被放置在浏览器地址栏中，例如: <a href="http://localhost:3000/?name=" target="_blank" rel="noopener">http://localhost:3000/?name=</a> zhangsan&amp;age= 20</li>
+</ul>
+<p>那么怎么拿到get的参数呢？<br>node为我们提供了一个内置模块</p>
+<blockquote>
+<p>const url = require(‘url)</p>
+</blockquote>
+<p>在url模块中，有一个parse()方法可以处理url，我们只需要将想解析的url传给url.parse()方法进行解析，最终，这个方法会返回一个对象。我们来console.log一下<code>url.parse(req.url)</code></p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/urlparse%E6%96%B9%E6%B3%95.png" alt=""></p>
+<p>现在，我们把查询参数转换成对象。</p>
+<blockquote>
+<p>url.parse(req.url,true)</p>
+</blockquote>
+<ul>
+<li>第一个参数是要解析的url地址</li>
+<li>第二个参数表示把查询参数解析成对象形式。</li>
+</ul>
+<p>此时，url.paesr中的query参数会变成一个对象 <code>query:&#39;name=zhangsan ,age=&#39;20&#39;</code><br>这个时候，我们就可以通过<code>url.parse(res.url,true).query</code>拿到这个对象</p>
+<blockquote>
+<p>let params = url.parse(res.url,true).query</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">cocnsole.log(params.name)<span class="comment">//zhangsan</span></span><br><span class="line">cocnsole.log(params.age)<span class="comment">//20</span></span><br></pre></td></tr></table></figure>
+<p>在parse()方法中，还有一个pathname属性可以帮我们获取到不包含请求参数的请求地址。这样，我们就可以通过对象结解构的方式拿到query和pathname</p>
+<blockquote>
+<p>let {query, pathname} = url.parse(res.url,true)</p>
+</blockquote>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/parse%E6%96%B9%E6%B3%95.png" alt=""></p>
+<h2 id="post请求参数"><a href="#post请求参数" class="headerlink" title="post请求参数"></a>post请求参数</h2><p>我们可以通过表单方式提交一个post请求，post方式是通过事件的方式接收的。<strong>当请求传递参数时触发data事件</strong>，<strong>当传递完成时触发end事件</strong></p>
+<p>我们通过querystring这个内置模块来处理post的请求参数</p>
+<blockquote>
+<p>const querystring = require(‘querystring’);</p>
+</blockquote>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/querystring%E6%96%B9%E6%B3%95%E5%A4%84%E7%90%86post.png" alt=""></p>
+<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1><p><a href="http://localhost:3000/index" target="_blank" rel="noopener">http://localhost:3000/index</a></p>
+<p><a href="http://localhost:3000/login" target="_blank" rel="noopener">http://localhost:3000/login</a></p>
+<p>路由是指客户端请求地址与服务器端程序代码的对应关系。简单的说，就是请求什么响应什么。</p>
+<p>实现路由的核心代码</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>Node</category>
+      </categories>
+      <tags>
+        <tag>Node</tag>
       </tags>
   </entry>
 </search>
