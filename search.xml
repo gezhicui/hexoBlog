@@ -547,4 +547,105 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
         <tag>React</tag>
       </tags>
   </entry>
+  <entry>
+    <title>React学习笔记（三）脚手架</title>
+    <url>/MyBlog/2020/07/03/React%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+    <content><![CDATA[<p>create-react-app是facebook官方退出的一款react的脚手架，安装前确保电脑有node环境并安装到最新版本</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><blockquote>
+<p>npm install -g create-react-app</p>
+</blockquote>
+<p>等待安装，安装结束执行</p>
+<blockquote>
+<p>create-react-app –version</p>
+</blockquote>
+<p>可查看版本<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E6%9F%A5%E7%9C%8B%E8%84%9A%E6%89%8B%E6%9E%B6%E7%89%88%E6%9C%AC.png" alt=""></p>
+<p>cd到项目文件夹中，执行代码新建一个项目</p>
+<blockquote>
+<p>create-react-app 项目名</p>
+</blockquote>
+<p>然后执行npm start启动项目</p>
+<blockquote>
+<p>npm start</p>
+</blockquote>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/start%E6%88%90%E5%8A%9F.png" alt=""></p>
+<a id="more"></a>
+
+<h1 id="文件夹目录"><a href="#文件夹目录" class="headerlink" title="文件夹目录"></a>文件夹目录</h1><p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9B%AE%E5%BD%95.png" alt=""></p>
+<ul>
+<li>public 静态资源文件</li>
+<li>src 代码文件</li>
+</ul>
+<p>我们在src中创建components文件夹来存放自己写的组件</p>
+<h1 id="快速使用组件"><a href="#快速使用组件" class="headerlink" title="快速使用组件"></a>快速使用组件</h1><p>现在我们想快速创建一个组件，来到vscode插件市场中，搜索ES7</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/react%E6%8F%92%E4%BB%B6.png" alt=""></p>
+<p>下载安装，此时，我们用<code>rcc</code>就可以快速创建一个组件模板<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/rcc.png" alt=""></p>
+<p>然后来到<code>App.js</code>文件下，把该删除的都删干净，导入自己写的组件文件</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/app.js.png" alt=""></p>
+<p>点击运行，自己写的组件就正常调用了</p>
+<h1 id="导入本地图片"><a href="#导入本地图片" class="headerlink" title="导入本地图片"></a>导入本地图片</h1><p>导入本地图片有三种方法</p>
+<h2 id="第一种导入图片路径"><a href="#第一种导入图片路径" class="headerlink" title="第一种导入图片路径"></a>第一种导入图片路径</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Img <span class="keyword">from</span> <span class="string">"./images/1.png"</span></span><br><span class="line">&lt;img src=&#123;Img&#125; alt=<span class="string">""</span>/&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="第二种直接获取图片"><a href="#第二种直接获取图片" class="headerlink" title="第二种直接获取图片"></a>第二种直接获取图片</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;img src=&#123;<span class="built_in">require</span>(<span class="string">"./images/1.png"</span>)&#125; alt=<span class="string">""</span>/&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="如果是背景图的话操作style"><a href="#如果是背景图的话操作style" class="headerlink" title="如果是背景图的话操作style"></a>如果是背景图的话操作style</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">style=&#123;&#123;<span class="attr">background</span>:<span class="string">`url(<span class="subst">$&#123;<span class="built_in">require</span>(<span class="string">"./images/1.png"</span>)&#125;</span>)`</span> &#125;&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>${} 为字符串模板,要用反引号``</p>
+</blockquote>
+<h1 id="脚手架-props与state"><a href="#脚手架-props与state" class="headerlink" title="脚手架 props与state"></a>脚手架 props与state</h1><h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><p>我们先来创建一个 <code>News.js</code>组件当做<code>Home.js</code>组件的子组件</p>
+<p>在home组件中引入News.js<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/home%E5%BC%95%E5%85%A5news.png" alt=""></p>
+<p>此时，想在home组件给news组件传一个值，那么，<strong>News</strong>组件就要接收这个值</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//News组件</span></span><br><span class="line">News---&#123;<span class="keyword">this</span>.props.text&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Home组件</span></span><br><span class="line">&lt;News text = <span class="string">"我是父组件传过来的值"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="state"><a href="#state" class="headerlink" title="state"></a>state</h1><p>和本地模式一样，详见<strong><a href="http://yang_yu_xiang.gitee.io/myblog/2020/07/02/React%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/#more" target="_blank" rel="noopener">React学习笔记（二）</a></strong></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React学习笔记（四）json-server与axios、跨域请求</title>
+    <url>/MyBlog/2020/07/03/React%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="json-server"><a href="#json-server" class="headerlink" title="json-server"></a>json-server</h1><p>json-server可以开启一个端口模拟服务端的数据</p>
+<h2 id="安装json-server"><a href="#安装json-server" class="headerlink" title="安装json-server"></a>安装json-server</h2><blockquote>
+<p>npm install json-server -g</p>
+</blockquote>
+<p>安装完成后，我们来创建一个data.json文件放在mock文件夹中<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/datejson.png" alt=""></p>
+<a id="more"></a>
+<p>cd到mock文件夹下，启动json-server</p>
+<blockquote>
+<p>json-server json数据名字 –port 5000</p>
+</blockquote>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/datajson%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png" alt=""><br>启动成功，我们进到浏览器或者用postman测试接口<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E6%B5%8B%E8%AF%95jsonserver.png" alt=""></p>
+<h1 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h1><p>安装</p>
+<blockquote>
+<p>npm install –save axios</p>
+</blockquote>
+<p>引入axios</p>
+<blockquote>
+<p>import axios from ‘axios’</p>
+</blockquote>
+<p>在钩子函数componentDidMount()中使用axios</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/axios%E5%AF%BC%E5%85%A5%E5%B9%B6%E4%BD%BF%E7%94%A8.png" alt=""><br>请求成功！<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/axios%E8%AF%B7%E6%B1%82%E6%88%90%E5%8A%9F.png" alt=""></p>
+<h1 id="解决跨域"><a href="#解决跨域" class="headerlink" title="解决跨域"></a>解决跨域</h1><ul>
+<li>1、正向代理–开发环境</li>
+</ul>
+<p>&emsp;&emsp;一个位于客户端和目标服务器之间的代理服务器。为了获取到目标服务器的内容，客户端向代理服务器发送一个请求，代理服务器帮助我们去目标服务器里面获取数据且并返回给我们</p>
+<ul>
+<li>2、反向代理–上线环境</li>
+</ul>
+<p>&emsp;&emsp;可以通过代理服务器来接受网络上的请求连接，然后将这个请求转发给内部的网络服务器上并且把这个服务器上得到的数据返回给网络请求的客户端。这个时候代理服务器对外的表现就是一个反向代理</p>
+<p>模拟请求真实的网络接口:中国天气网中的数据<br>找到文件项目\node modules\react-scripts\config\webpackDevServer.config.js</p>
+<p>找到proxy进行修改：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">proxy:&#123;</span><br><span class="line">    <span class="string">"/api"</span>:&#123;</span><br><span class="line">    target:<span class="string">"http://www.weather.com.cn/data/cityinfo"</span>,</span><br><span class="line">    changeOrigin: <span class="literal">true</span> ,</span><br><span class="line">    <span class="string">"pathRewrite"</span>:&#123;</span><br><span class="line">    <span class="string">"^/api"</span>:<span class="string">"/"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>在需要的axios请求中：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.get(<span class="string">"/api/161320101.html"</span>).then(<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端</category>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
 </search>
