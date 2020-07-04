@@ -727,7 +727,6 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
 
 
 
-
 <h1 id="高阶组件withRouter"><a href="#高阶组件withRouter" class="headerlink" title="高阶组件withRouter"></a>高阶组件withRouter</h1><p>&emsp;&emsp;参数是一个组件，同时返回的也是一个组件。这类组件我们成为高阶组件(HOC)</p>
 <p>&emsp;&emsp;withRouter作用：让不是路由切换的组件将react-router 的 history、location、match 三个对象传入props对象上</p>
 <p>&emsp;&emsp;默认情况下必须是经过路由匹配渲染的组件才存在this.props，才拥有路由参数，才能使用编程式导航的写法，执行this.props.history.push(‘/detail’)跳转到对应路由的页面</p>
@@ -758,6 +757,71 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
 <li>2.直接发送数据</li>
 <li>3.使用 this.props.location.query.xxx<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 传递方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/phone",query:&#123;name:"小明"&#125;)&#125;&#125;&gt;点我去phone<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/user",query:&#123;name:"小刚"&#125;)&#125;&#125;&gt;点我去user<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 子路由中接受 --&gt;</span></span><br><span class="line">let name = this.props.location.query.name</span><br></pre></td></tr></table></figure></li>
 </ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React学习笔记（六）hook、redux</title>
+    <url>/MyBlog/2020/07/04/React%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="hook"><a href="#hook" class="headerlink" title="hook"></a>hook</h1><p>Hook是react中16.7新增的一个特性，主要是用来让无状态组件可以使用状态。在react开发中状态的管理是必不可少的，以前 为了进行状态管理，需要使用类组件或省redux等来管理</p>
+<h2 id="在类组件中使用状态："><a href="#在类组件中使用状态：" class="headerlink" title="在类组件中使用状态："></a>在类组件中使用状态：</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">    <span class="keyword">this</span>.state=&#123;</span><br><span class="line">        text:<span class="string">"我是状态数据"</span></span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="keyword">return</span>(</span><br><span class="line">            <span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">            hel1o----&#123;this.state.text&#125;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;`</span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="在无状态组件中使用状态："><a href="#在无状态组件中使用状态：" class="headerlink" title="在无状态组件中使用状态："></a>在无状态组件中使用状态：</h2><p>可以使用react Hook 中的useState来进行实现</p>
+<ul>
+<li>useState是来定义一个状态的，他与类组件的状态不同，函数组件的状态可以是对象也可以是基础类型数据。</li>
+<li>useState返回的是一个<strong>数组</strong>。第一个参数是<strong>当前的状态值</strong>。第二个参数是对象，表明<strong>用于更改状态的函数</strong>(类似于setstate )</li>
+</ul>
+<p>1、先来导包</p>
+<blockquote>
+<p>import {useState} from ‘react’</p>
+</blockquote>
+<p>2、具体用法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> [val, setVal] = useState(<span class="number">0</span>)</span><br><span class="line">    <span class="comment">//解构赋值到val，setVal上</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="string">`&lt;div className= "App"&gt; </span></span><br><span class="line"><span class="string">            &lt;div&gt;</span></span><br><span class="line"><span class="string">            使用数据:&#123;val&#125;</span></span><br><span class="line"><span class="string">            &lt;button onClick=&#123;()=&gt;&#123;setVal(val+1)&#125;&#125;&gt;点我进行数据的修改&lt;/button&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;`</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、如果有多个状态怎么办？</p>
+<ul>
+<li>1.声明对象类型的状态</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> [val, setVal] = useState(&#123;</span><br><span class="line">        vala:<span class="number">1</span>,</span><br><span class="line">        valb:<span class="number">2</span>,</span><br><span class="line">        valc:<span class="number">3</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="string">`&lt;div className= "App"&gt; </span></span><br><span class="line"><span class="string">            &lt;div&gt;</span></span><br><span class="line"><span class="string">            使用数据:&#123;val.vala&#125;---&#123;val.valb&#125;---&#123;val.valc&#125;</span></span><br><span class="line"><span class="string">            &lt;button onClick=&#123;()=&gt;&#123;setVal(val+1)&#125;&#125;&gt;点我进行数据的修改&lt;/button&gt;</span></span><br><span class="line"><span class="string">            // 至于修改，要用其他方式</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;`</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2.多次声明</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> [vala, setVala] = useState(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">let</span> [valb, setValb] = useState(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">let</span> [valc, setValc] = useState(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="string">`&lt;div className= "App"&gt; </span></span><br><span class="line"><span class="string">            &lt;div&gt;</span></span><br><span class="line"><span class="string">            使用数据:&#123;val.vala&#125;---&#123;val.valb&#125;---&#123;val.valc&#125;</span></span><br><span class="line"><span class="string">            &lt;button onClick=&#123;()=&gt;&#123;setVal(val+1)&#125;&#125;&gt;点我进行数据的修改&lt;/button&gt;</span></span><br><span class="line"><span class="string">            // 至于修改，要用其他方式</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;`</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="redux"><a href="#redux" class="headerlink" title="redux"></a>redux</h1><p>&emsp;&emsp;redux 是javascript提供的一个可预测性<code>(我们给个固定的输入 那么必定可以等到一个结果)</code>的状态容器。redux是个专门的状态管理库，并不是react独有的。在vue等当中也可以使用 但是在react中会比较多。</p>
+<p>&emsp;&emsp;redux的作用就是集中的管理react中多个组件的状态</p>
+<h2 id="需求场景："><a href="#需求场景：" class="headerlink" title="需求场景："></a>需求场景：</h2><ul>
+<li>某个组件的状态需要共享的时候</li>
+<li>个组件需要改变另外一个组件状态的时候</li>
+<li>组件中的状态需要在任何地方都可以拿到<h2 id="三大原则"><a href="#三大原则" class="headerlink" title="三大原则"></a>三大原则</h2></li>
+</ul>
+<p><strong>1.单一数据源</strong> </p>
+<p>&emsp;&emsp;整个react中的状态都会被统一的管理到store</p>
+<p><strong>2.state是只读的</strong></p>
+<p>&emsp;&emsp;我们不能够直接改变state而是要通过触发redux中的特定方法来进行修改</p>
+<p><strong>3.使用纯函数来执行修改操作</strong> </p>
+<p>&emsp;&emsp;我们要用action来改变redux中的state</p>
+<h2 id="redux的使用"><a href="#redux的使用" class="headerlink" title="redux的使用"></a>redux的使用</h2><p>1、下载</p>
+<blockquote>
+<p>npm install –save redux</p>
+</blockquote>
+<p>2、首先在src下新建一个redux目录，在该目录下创建一个reducer.js文件</p>
+<p>&emsp;&emsp;它有点像一个指挥中心，根据传进来的类型分配任务。它负责接收组件传递的action，根据action的类型来进行数据的修改，函数接收两个参数，第一个state为store存储的状态，可以给它赋初始值，第二个为action（动作）,action是一个对象，可以传递type和其他的值进去</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/reducer.png" alt=""></p>
+<p>3、在redux下新建一个store文件，导入刚刚的reducer文件。</p>
+<p>&emsp;&emsp;store.js接收reducer的导出为参数并使用redux提供的createStore方法创建一个数据源store，在store.js中写代码：<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/store.png" alt=""></p>
+<p>4、在components下的Home.js组件中使用store中的值<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/store%E7%9A%84%E4%BD%BF%E7%94%A8.png" alt=""></p>
+<p><strong>修改操作</strong><br>1、所有的修改操作都要调用一个action，所以，我们在redux文件夹下新建一个文件action.js</p>
+<p>2、设置操作</p>
+<p>在action.js中定义两个如下操作</p>
+<p>&emsp;&emsp;action.js中定义一些方法用于Home组件的动作分发(dispatch)，这里的type其实就是对应reducer的action.typ<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/action.js.png" alt=""></p>
+<p>3、回到reducer.js文件添加对action的判断<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E4%BF%AE%E6%94%B9reducer.js.png" alt=""></p>
+<p>4、在组件中调用dispatch()更新方法来进行data数据的修改<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/action%E8%B0%83%E7%94%A8%E6%88%90%E5%8A%9F.png" alt=""><br>dispatch作用：发送用户请求并去更新state</p>
 ]]></content>
       <categories>
         <category>前端</category>

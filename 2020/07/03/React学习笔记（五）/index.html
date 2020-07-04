@@ -94,7 +94,7 @@
 <meta property="og:description" content="路由根据url的不同来切换对应的组件实现spa(单页面应用)在页面切换的时候不会刷新，更加接近原生体验 路由的下载下载  npm install –save react-router-dom   router-router    只提供了一些核心的API router-router-dom    提供更多的一些选项  路由模式:  hash HashRouter (hash模式带#号，刷新的时候页">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/routerLink.png">
 <meta property="article:published_time" content="2020-07-03T12:27:47.000Z">
-<meta property="article:modified_time" content="2020-07-04T04:33:06.697Z">
+<meta property="article:modified_time" content="2020-07-04T05:58:14.377Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -518,7 +518,6 @@
 
 
 
-
 <h1 id="高阶组件withRouter"><a href="#高阶组件withRouter" class="headerlink" title="高阶组件withRouter"></a>高阶组件withRouter</h1><p>&emsp;&emsp;参数是一个组件，同时返回的也是一个组件。这类组件我们成为高阶组件(HOC)</p>
 <p>&emsp;&emsp;withRouter作用：让不是路由切换的组件将react-router 的 history、location、match 三个对象传入props对象上</p>
 <p>&emsp;&emsp;默认情况下必须是经过路由匹配渲染的组件才存在this.props，才拥有路由参数，才能使用编程式导航的写法，执行this.props.history.push(‘/detail’)跳转到对应路由的页面</p>
@@ -588,6 +587,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/MyBlog/2020/07/04/React%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/" rel="prev" title="React学习笔记（六）hook、redux">
+                React学习笔记（六）hook、redux <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -671,7 +674,7 @@
               
                <a href="/MyBlog/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
