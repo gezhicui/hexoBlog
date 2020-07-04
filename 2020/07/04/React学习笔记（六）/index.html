@@ -86,12 +86,12 @@
 
 
 
-<meta name="description" content="hookHook是react中16.7新增的一个特性，主要是用来让无状态组件可以使用状态。在react开发中状态的管理是必不可少的，以前 为了进行状态管理，需要使用类组件或省redux等来管理 在类组件中使用状态：1234567891011121314class App extends React.Component&amp;#123;    constructor(props)&amp;#123;    sup">
+<meta name="description" content="hookHook是react中16.7新增的一个特性，主要是用来让无状态组件可以使用状态。在react开发中状态的管理是必不可少的，以前 为了进行状态管理，需要使用类组件或者redux等来管理 在类组件中使用状态：1234567891011121314class App extends React.Component&amp;#123;    constructor(props)&amp;#123;    sup">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React学习笔记（六）hook、redux">
 <meta property="og:url" content="https://gitee.com/yang_yu_xiang/MyBlog/2020/07/04/React%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/index.html">
 <meta property="og:site_name" content="Yang&#39;s Blog">
-<meta property="og:description" content="hookHook是react中16.7新增的一个特性，主要是用来让无状态组件可以使用状态。在react开发中状态的管理是必不可少的，以前 为了进行状态管理，需要使用类组件或省redux等来管理 在类组件中使用状态：1234567891011121314class App extends React.Component&amp;#123;    constructor(props)&amp;#123;    sup">
+<meta property="og:description" content="hookHook是react中16.7新增的一个特性，主要是用来让无状态组件可以使用状态。在react开发中状态的管理是必不可少的，以前 为了进行状态管理，需要使用类组件或者redux等来管理 在类组件中使用状态：1234567891011121314class App extends React.Component&amp;#123;    constructor(props)&amp;#123;    sup">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/reducer.png">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/store.png">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/store%E7%9A%84%E4%BD%BF%E7%94%A8.png">
@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E4%BF%AE%E6%94%B9reducer.js.png">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/action%E8%B0%83%E7%94%A8%E6%88%90%E5%8A%9F.png">
 <meta property="article:published_time" content="2020-07-04T09:32:15.000Z">
-<meta property="article:modified_time" content="2020-07-04T11:56:59.917Z">
+<meta property="article:modified_time" content="2020-07-04T12:06:19.462Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -447,13 +447,13 @@
       
 
       
-        <h1 id="hook"><a href="#hook" class="headerlink" title="hook"></a>hook</h1><p>Hook是react中16.7新增的一个特性，主要是用来让无状态组件可以使用状态。在react开发中状态的管理是必不可少的，以前 为了进行状态管理，需要使用类组件或省redux等来管理</p>
+        <h1 id="hook"><a href="#hook" class="headerlink" title="hook"></a>hook</h1><p>Hook是react中16.7新增的一个特性，主要是用来让无状态组件可以使用状态。在react开发中状态的管理是必不可少的，以前 为了进行状态管理，需要使用类组件或者redux等来管理</p>
 <h2 id="在类组件中使用状态："><a href="#在类组件中使用状态：" class="headerlink" title="在类组件中使用状态："></a>在类组件中使用状态：</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">    <span class="keyword">this</span>.state=&#123;</span><br><span class="line">        text:<span class="string">"我是状态数据"</span></span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="keyword">return</span>(</span><br><span class="line">            <span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">            hel1o----&#123;this.state.text&#125;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;`</span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="在无状态组件中使用状态："><a href="#在无状态组件中使用状态：" class="headerlink" title="在无状态组件中使用状态："></a>在无状态组件中使用状态：</h2><p>可以使用react Hook 中的useState来进行实现</p>
+<h2 id="在无状态组件中使用状态："><a href="#在无状态组件中使用状态：" class="headerlink" title="在无状态组件中使用状态："></a>在无状态组件中使用状态：</h2><p>可以使用react Hook 中的<code>useState</code>来进行实现</p>
 <ul>
-<li>useState是来定义一个状态的，他与类组件的状态不同，函数组件的状态可以是对象也可以是基础类型数据。</li>
-<li>useState返回的是一个<strong>数组</strong>。第一个参数是<strong>当前的状态值</strong>。第二个参数是对象，表明<strong>用于更改状态的函数</strong>(类似于setstate )</li>
+<li><code>useState</code>是来定义一个状态的，他与类组件的状态不同，函数组件的状态可以是对象也可以是基础类型数据。</li>
+<li><code>useState</code>返回的是一个<strong>数组</strong>。第一个参数是<strong>当前的状态值</strong>。第二个参数是对象，表明<strong>用于更改状态的函数</strong>(类似于setstate )</li>
 </ul>
 <p>1、先来导包</p>
 <blockquote>
@@ -471,33 +471,33 @@
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> [vala, setVala] = useState(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">let</span> [valb, setValb] = useState(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">let</span> [valc, setValc] = useState(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="string">`&lt;div className= "App"&gt; </span></span><br><span class="line"><span class="string">            &lt;div&gt;</span></span><br><span class="line"><span class="string">            使用数据:&#123;val.vala&#125;---&#123;val.valb&#125;---&#123;val.valc&#125;</span></span><br><span class="line"><span class="string">            &lt;button onClick=&#123;()=&gt;&#123;setVal(val+1)&#125;&#125;&gt;点我进行数据的修改&lt;/button&gt;</span></span><br><span class="line"><span class="string">            // 至于修改，要用其他方式</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;`</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="redux"><a href="#redux" class="headerlink" title="redux"></a>redux</h1><p>&emsp;&emsp;redux 是javascript提供的一个可预测性<code>(我们给个固定的输入 那么必定可以等到一个结果)</code>的状态容器。redux是个专门的状态管理库，并不是react独有的。在vue等当中也可以使用 但是在react中会比较多。</p>
-<p>&emsp;&emsp;redux的作用就是集中的管理react中多个组件的状态</p>
+<h1 id="redux"><a href="#redux" class="headerlink" title="redux"></a>redux</h1><p>&emsp;&emsp;<code>redux</code> 是javascript提供的一个可预测性<code>(我们给个固定的输入 那么必定可以等到一个结果)</code>的状态容器。<code>redux</code>是个专门的状态管理库，并不是react独有的。在vue等当中也可以使用 但是在react中会比较多。</p>
+<p>&emsp;&emsp;<code>redux</code>的作用就是集中的管理react中多个组件的状态</p>
 <h2 id="需求场景："><a href="#需求场景：" class="headerlink" title="需求场景："></a>需求场景：</h2><ul>
 <li>某个组件的状态需要共享的时候</li>
 <li>个组件需要改变另外一个组件状态的时候</li>
 <li>组件中的状态需要在任何地方都可以拿到<h2 id="三大原则"><a href="#三大原则" class="headerlink" title="三大原则"></a>三大原则</h2></li>
 </ul>
 <p><strong>1.单一数据源</strong> </p>
-<p>&emsp;&emsp;整个react中的状态都会被统一的管理到store</p>
+<p>&emsp;&emsp;整个react中的状态都会被统一的管理到<code>store</code></p>
 <p><strong>2.state是只读的</strong></p>
-<p>&emsp;&emsp;我们不能够直接改变state而是要通过触发redux中的特定方法来进行修改</p>
+<p>&emsp;&emsp;我们不能够直接改变<code>state</code>而是要通过触发<code>redux</code>中的特定方法来进行修改</p>
 <p><strong>3.使用纯函数来执行修改操作</strong> </p>
-<p>&emsp;&emsp;我们要用action来改变redux中的state</p>
+<p>&emsp;&emsp;我们要用<code>action</code>来改变redux中的state</p>
 <h2 id="redux的使用"><a href="#redux的使用" class="headerlink" title="redux的使用"></a>redux的使用</h2><p>1、下载</p>
 <blockquote>
 <p>npm install –save redux</p>
 </blockquote>
-<p>2、首先在src下新建一个redux目录，在该目录下创建一个reducer.js文件</p>
-<p>&emsp;&emsp;它有点像一个指挥中心，根据传进来的类型分配任务。它负责接收组件传递的action，根据action的类型来进行数据的修改，函数接收两个参数，第一个state为store存储的状态，可以给它赋初始值，第二个为action（动作）,action是一个对象，可以传递type和其他的值进去</p>
+<p>2、首先在src下新建一个<code>redux</code>目录，在该目录下创建一个<code>reducer.js</code>文件</p>
+<p>&emsp;&emsp;它有点像一个指挥中心，根据传进来的类型分配任务。它负责接收组件传递的<code>action</code>，根据<code>action</code>的类型来进行数据的修改，函数接收两个参数，第一个<code>state</code>,为store存储的状态，可以给它赋初始值，第二个为<code>action</code>（动作）,action是一个对象，可以传递type和其他的值进去</p>
 <p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/reducer.png" alt=""></p>
-<p>3、在redux下新建一个store文件，导入刚刚的reducer文件。</p>
-<p>&emsp;&emsp;store.js接收reducer的导出为参数并使用redux提供的createStore方法创建一个数据源store，在store.js中写代码：<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/store.png" alt=""></p>
-<p>4、在components下的Home.js组件中使用store中的值<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/store%E7%9A%84%E4%BD%BF%E7%94%A8.png" alt=""></p>
-<p><strong>修改操作</strong><br>1、所有的修改操作都要调用一个action，所以，我们在redux文件夹下新建一个文件action.js</p>
+<p>3、在redux文件夹下新建一个<code>store.js</code>文件，导入刚刚的<code>reducer,js</code>文件。</p>
+<p>&emsp;&emsp;<code>store.js</code>接收<code>reducer.js</code>的导出为参数并使用redux提供的<code>createStore()</code>方法创建一个数据源<code>store</code>，在<code>store.js</code>中写代码：<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/store.png" alt=""></p>
+<p>4、在components文件夹下的<code>Home.js</code>组件中使用store中的值<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/store%E7%9A%84%E4%BD%BF%E7%94%A8.png" alt=""></p>
+<p><strong>修改操作</strong><br>1、所有的修改操作都要调用一个action，所以，我们在redux文件夹下新建一个文件<code>action.js</code></p>
 <p>2、设置操作</p>
-<p>在action.js中定义两个如下操作</p>
-<p>&emsp;&emsp;action.js中定义一些方法用于Home组件的动作分发(dispatch)，这里的type其实就是对应reducer的action.typ<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/action.js.png" alt=""></p>
+<p>在<code>action.js</code>中定义两个如下操作</p>
+<p>&emsp;&emsp;<code>action.js</code>中定义一些方法用于Home组件的动作分发(<code>dispatch()</code>)，这里的<code>type</code>其实就是对应<code>reducer.js</code>的<code>action.type</code><br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/action.js.png" alt=""></p>
 <p>3、回到reducer.js文件添加对action的判断<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E4%BF%AE%E6%94%B9reducer.js.png" alt=""></p>
 <p>4、在组件中调用dispatch()更新方法来进行data数据的修改<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/action%E8%B0%83%E7%94%A8%E6%88%90%E5%8A%9F.png" alt=""><br>dispatch作用：发送用户请求并去更新state</p>
 
