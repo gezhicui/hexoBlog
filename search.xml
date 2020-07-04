@@ -648,4 +648,123 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
         <tag>React</tag>
       </tags>
   </entry>
+  <entry>
+    <title>React学习笔记（五）React router dom路由基础</title>
+    <url>/MyBlog/2020/07/03/React%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1><p>根据url的不同来切换对应的组件实现spa(单页面应用)在页面切换的时候不会刷新，更加接近原生体验</p>
+<h2 id="路由的下载"><a href="#路由的下载" class="headerlink" title="路由的下载"></a>路由的下载</h2><p>下载</p>
+<blockquote>
+<p>npm install –save react-router-dom</p>
+</blockquote>
+<ul>
+<li>router-router    只提供了一些核心的API</li>
+<li>router-router-dom    提供更多的一些选项</li>
+</ul>
+<p>路由模式:</p>
+<ul>
+<li>hash HashRouter (hash模式带#号，刷新的时候页面不会丢失)</li>
+<li>browser BrowserRouter 历史记录模式，没有#号，他是通过历史记录api来进行路由切换的。刷新会丢失，本地模式不会<a id="more"></a>
+
+</li>
+</ul>
+<h2 id="引用路由"><a href="#引用路由" class="headerlink" title="引用路由"></a>引用路由</h2><p>在index.js中导入包</p>
+<blockquote>
+<p>import {BrowserRouter} from ‘react-router-dom’</p>
+</blockquote>
+<p>路由模式包裹根组件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在index.js中</span></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;BrowserRouter&gt;</span><br><span class="line">    &lt;App /&gt;</span><br><span class="line">  &lt;<span class="regexp">/BrowserRouter&gt;,</span></span><br><span class="line"><span class="regexp">  document.getElementById('root')</span></span><br><span class="line"><span class="regexp">);</span></span><br></pre></td></tr></table></figure>
+<p>在App.js中导入包</p>
+<blockquote>
+<p>import {Route,Link} from ‘react-router-dom’<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/routerLink.png" alt=""></p>
+</blockquote>
+<p>除了Link的方法，还有一个<code>NavLink</code>，可以动态设置类名，当路由被激活时，被激活的路由会被添加一个<code>class=&quot;active&quot;</code>的类名</p>
+<h2 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h2><p>在导入的包中加上Redirect</p>
+<blockquote>
+<p>import {Route,Link,Redirect} from ‘react-router-dom’</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Redirect</span> <span class="attr">from</span>=<span class="string">"/"</span> <span class="attr">to</span> "/<span class="attr">home</span>" <span class="attr">exact</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;关于Route的exact,加上exact代表当前路由path的路径采用精确匹配，比如说Home的path如果不加上exact,那么path=”/home”将会匹配他自己与path=”/“这两个，所以一般path=”/“这个路由一般会加上exact</p>
+<h1 id="history、location、match"><a href="#history、location、match" class="headerlink" title="history、location、match"></a>history、location、match</h1><h2 id="history"><a href="#history" class="headerlink" title="history"></a>history</h2><p>来介绍一下如何使用history插件管理浏览记录</p>
+<p>React Router中很重要的一部分就是history package，他给react router提供了主要的功能。首先需要安装</p>
+<blockquote>
+<p>npm install –save history</p>
+</blockquote>
+<p>&emsp;&emsp;History能够确保SPA Project在<code>client-side</code>方便的添加基于位置的导航。一个 history 知道如何去监听浏览器地址栏的变化， 并解析这个 URL 转化为 location 对象， 然后 router 使用它匹配到路由，最后正确地渲染对应的组件。</p>
+<p>&emsp;&emsp;在React Router中一共有三种类型的history，分别是<code>BrowserHistory</code> <code>HashHistory</code> <code>MemoryHistory</code>，React Router会自动的帮你创建这些history。<br><strong>What Is History?</strong></p>
+<p>&emsp;&emsp;History可以是一个Object，不论是哪一种类型的history，产生的history object包含的属性都是一样的。Object 中要分成两部分：</p>
+<ul>
+<li>Location properties(下一小节)</li>
+<li>Navigation(导航) Method</li>
+</ul>
+<p>&emsp;&emsp;History记录了整个访问历史中所有的location，维护了一个location的数组，并且还有一个index指向数组中当前的location。但是为了安全性你无法获取到这个location的数组，只能访问到当前的location。</p>
+<ul>
+<li><code>push</code>：这个方法允许你jump到一个新的location。这时候会push一个新的location到history数组。</li>
+</ul>
+<p>&emsp;&emsp;<code>history.push({ pathname: &#39;/new-place&#39; })</code>参数可以是location object也可以是一个url但是只有前者可以传数据。</p>
+<p>&emsp;&emsp;当你click on a <Link> 将会使用<code>history.push</code>做navigation。</p>
+<p>&emsp;&emsp;除此之外还有<code>Replace({ pathname: &#39;/go-here-instead&#39; });</code>,<code>goBack()</code>, <code>goForward()</code>, <code>go(-3)</code> 等Navigation的方式。</p>
+<h2 id="location"><a href="#location" class="headerlink" title="location"></a>location</h2><p>Location是一个Object，描述的是当你的spa停留的位置。Location Object是一个形如：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//location对象表示当前的路由位置信息，主要包含如下属性</span></span><br><span class="line">&#123;</span><br><span class="line">  pathname: <span class="string">'/here'</span>,</span><br><span class="line">  search: <span class="string">'?key=value'</span>,</span><br><span class="line">  hash: <span class="string">'#extra-information'</span>,</span><br><span class="line">  state: &#123; <span class="attr">modal</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">  key: <span class="string">'abc123'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;<code>pathname</code> <code>search</code> <code>hash</code> 这三个都从URL中获取到的，注意为了安全性，history5 api只能获取到当前页面所在的location信息。</p>
+<p>&emsp;&emsp;key：每一个Location都会有一个独一无二的key，唯一的代表一个Location，也用于存储数据到某一个对应的location。</p>
+<p>&emsp;&emsp;state：想要传递数据给一个Location除了使用query将数据放在URL中带过来，也可以使用state，这个state相当于是放在这个location上的数据，这些数据不会出现在URL中。</p>
+<h2 id="match"><a href="#match" class="headerlink" title="match"></a>match</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//match对象表示当前的路由地址是怎么跳转过来的，包含的属性如下</span></span><br><span class="line">&#123;</span><br><span class="line">    isExact: <span class="literal">true</span>, <span class="comment">// 表示匹配到当前路径是否是完全匹配</span></span><br><span class="line">    params: &#123;&#125;, <span class="comment">// 表示路径的动态参数值</span></span><br><span class="line">    path: <span class="string">'/c'</span>, <span class="comment">// 匹配到的原始路径</span></span><br><span class="line">    url: <span class="string">'/c'</span> <span class="comment">// 匹配到的实际路径</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="高阶组件withRouter"><a href="#高阶组件withRouter" class="headerlink" title="高阶组件withRouter"></a>高阶组件withRouter</h1><p>&emsp;&emsp;参数是一个组件，同时返回的也是一个组件。这类组件我们成为高阶组件(HOC)</p>
+<p>&emsp;&emsp;withRouter作用：让不是路由切换的组件将react-router 的 history、location、match 三个对象传入props对象上</p>
+<p>&emsp;&emsp;默认情况下必须是经过路由匹配渲染的组件才存在this.props，才拥有路由参数，才能使用编程式导航的写法，执行this.props.history.push(‘/detail’)跳转到对应路由的页面</p>
+<p>&emsp;&emsp;然而不是所有组件都直接与路由相连（通过路由跳转到此组件）的，当这些组件需要路由参数时，使用withRouter就可以给此组件传入路由参数，此时就可以使用this.props</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>&emsp;&emsp;比如app.js这个组件，一般是首页，不是通过路由跳转过来的，而是直接从浏览器中输入地址打开的，如果不使用withRouter此组件的this.props为空，没法调用props中的<code>history</code>、<code>location</code>、<code>match</code>等属性。</p>
+<p>设置withRouter很简单只需要两步：</p>
+<ul>
+<li>1.引入 </li>
+<li>2.将App组件 withRouter() 一下</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React,&#123;Component&#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123;Switch,Route,NavLink,Redirect,withRouter&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span> <span class="comment">//引入withRouter</span></span><br><span class="line"><span class="keyword">import</span> One <span class="keyword">from</span> <span class="string">'./One'</span></span><br><span class="line"><span class="keyword">import</span> NotFound <span class="keyword">from</span> <span class="string">'./NotFound'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">    <span class="comment">//此时才能获取this.props,包含（history, match, location）三个对象</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.props);  <span class="comment">//输出&#123;match: &#123;…&#125;, location: &#123;…&#125;, history: &#123;…&#125;, 等&#125;</span></span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">        <span class="string">`&lt;div className='app'&gt;</span></span><br><span class="line"><span class="string">            &lt;NavLink to='/one/users'&gt;用户列表&lt;/NavLink&gt;</span></span><br><span class="line"><span class="string">            &lt;NavLink to='/one/companies'&gt;公司列表&lt;/NavLink&gt;</span></span><br><span class="line"><span class="string">            &lt;Switch&gt;</span></span><br><span class="line"><span class="string">                &lt;Route path='/one/:type?' component=&#123;One&#125; /&gt;</span></span><br><span class="line"><span class="string">                &lt;Redirect from='/' to='/one' exact /&gt;</span></span><br><span class="line"><span class="string">                &lt;Route component=&#123;NotFound&#125; /&gt;</span></span><br><span class="line"><span class="string">            &lt;/Switch&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;`</span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withRouter(App);  <span class="comment">//这里要执行一下WithRouter</span></span><br></pre></td></tr></table></figure>
+<h2 id="介绍一个简单应用"><a href="#介绍一个简单应用" class="headerlink" title="介绍一个简单应用"></a>介绍一个简单应用</h2><p>可以根据路由切换浏览器的title属性，对props.history进行监听，切换路由的时候获取当前的路由路径，同时可以根据不同的路由设置不同的浏览器title标题。</p>
+<p>仍然是App.js组件：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React,&#123;Component&#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123;Switch,Route,NavLink,Redirect,withRouter&#125; <span class="keyword">from</span>  <span class="string">'react-router-dom'</span></span><br><span class="line"><span class="keyword">import</span> One <span class="keyword">from</span> <span class="string">'./One'</span></span><br><span class="line"><span class="keyword">import</span> NotFound <span class="keyword">from</span> <span class="string">'./NotFound'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">        <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">                <span class="keyword">super</span>(props);</span><br><span class="line">                props.history.listen(<span class="function">(<span class="params">location</span>)=&gt;</span>&#123;  <span class="comment">//在这里监听location对象</span></span><br><span class="line">                        <span class="built_in">console</span>.log(location.pathname);  <span class="comment">//切换路由的时候输出"/one/users"和"/one/companies"</span></span><br><span class="line">                        <span class="keyword">switch</span>(location.pathname)&#123;   <span class="comment">//根据路径不同切换不同的浏览器title</span></span><br><span class="line">                                <span class="keyword">case</span> <span class="string">'/one/users'</span> : <span class="built_in">document</span>.title = <span class="string">'用户列表'</span>; <span class="keyword">break</span>;</span><br><span class="line">                                <span class="keyword">case</span> <span class="string">'/one/companies'</span> : <span class="built_in">document</span>.title = <span class="string">'公司列表'</span>; <span class="keyword">break</span>;</span><br><span class="line">                                <span class="keyword">default</span> : <span class="keyword">break</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        render()&#123;</span><br><span class="line">                <span class="keyword">return</span> (</span><br><span class="line">                    <span class="string">`&lt;div className='app'&gt;</span></span><br><span class="line"><span class="string">                        &lt;NavLink to='/one/users'&gt;用户列表&lt;/NavLink&gt;</span></span><br><span class="line"><span class="string">                        &lt;NavLink to='/one/companies'&gt;公司列表&lt;/NavLink&gt;</span></span><br><span class="line"><span class="string">                        &lt;Switch&gt;</span></span><br><span class="line"><span class="string">                                &lt;Route path='/one/:type?'  component=&#123;One&#125; /&gt;</span></span><br><span class="line"><span class="string">                                &lt;Redirect from='/' to='/one' exact /&gt;</span></span><br><span class="line"><span class="string">                                &lt;Route component=&#123;NotFound&#125; /&gt;</span></span><br><span class="line"><span class="string">                        &lt;/Switch&gt;</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;`</span></span><br><span class="line">                )</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withRouter(App);</span><br></pre></td></tr></table></figure>
+<p>同时，我们可以进行编程式导航：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/home")&#125;&#125;&gt;点我去home<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/phone")&#125;&#125;&gt;点我去phone<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/user")&#125;&#125;&gt;点我去user<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h1><h2 id="params方式进行传参"><a href="#params方式进行传参" class="headerlink" title="params方式进行传参"></a>params方式进行传参</h2><ul>
+<li>1.需要在路由规则中设置传递的接受参数   :xxx</li>
+<li>2.发送参数,直接在跳转路径后进行编写</li>
+<li>3.接受:props.match.params.参数名</li>
+</ul>
+<p><strong>优势:刷新地址,参数依然存在</strong></p>
+<p><strong>缺点:只能传递字符中,并且参数过多的时候url会变得比较丑陋</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 传递方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/phone/:id")&#125;&#125;&gt;点我去phone<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/user/我是参数")&#125;&#125;&gt;点我去user<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 子路由中接受 --&gt;</span></span><br><span class="line">let id = this.props.match.params</span><br></pre></td></tr></table></figure>
+<h2 id="query方式进行传参"><a href="#query方式进行传参" class="headerlink" title="query方式进行传参"></a>query方式进行传参</h2><ul>
+<li>1.不需要再路由规则中进行传递参数的配置</li>
+<li>2.直接发送数据</li>
+<li>3.使用 this.props.location.query.xxx<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 传递方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/phone",query:&#123;name:"小明"&#125;)&#125;&#125;&gt;点我去phone<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/user",query:&#123;name:"小刚"&#125;)&#125;&#125;&gt;点我去user<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 子路由中接受 --&gt;</span></span><br><span class="line">let name = this.props.location.query.name</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
 </search>
