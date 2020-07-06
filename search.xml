@@ -638,7 +638,7 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
 <p>模拟请求真实的网络接口:中国天气网中的数据<br>找到文件项目\node modules\react-scripts\config\webpackDevServer.config.js</p>
 <p>找到proxy进行修改：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">proxy:&#123;</span><br><span class="line">    <span class="string">"/api"</span>:&#123;</span><br><span class="line">    target:<span class="string">"http://www.weather.com.cn/data/cityinfo"</span>,</span><br><span class="line">    changeOrigin: <span class="literal">true</span> ,</span><br><span class="line">    <span class="string">"pathRewrite"</span>:&#123;</span><br><span class="line">    <span class="string">"^/api"</span>:<span class="string">"/"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>在需要的axios请求中：</p>
+<p>在需要的axios请求中:</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.get(<span class="string">"/api/161320101.html"</span>).then(<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端</category>
