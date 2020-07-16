@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E4%BF%AE%E6%94%B9reducer.js.png">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/action%E8%B0%83%E7%94%A8%E6%88%90%E5%8A%9F.png">
 <meta property="article:published_time" content="2020-07-04T09:32:15.000Z">
-<meta property="article:modified_time" content="2020-07-05T07:20:48.846Z">
+<meta property="article:modified_time" content="2020-07-16T14:10:56.249Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -491,7 +491,7 @@
 <p>2、首先在src下新建一个<code>redux</code>目录，在该目录下创建一个<code>reducer.js</code>文件</p>
 <p>&emsp;&emsp;它有点像一个指挥中心，根据传进来的类型分配任务。它负责接收组件传递的<code>action</code>，根据<code>action</code>的类型来进行数据的修改，函数接收两个参数，第一个<code>state</code>,为store存储的状态，可以给它赋初始值，第二个为<code>action</code>（动作）,action是一个对象，可以传递type和其他的值进去</p>
 <p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/reducer.png" alt=""></p>
-<p>3、在redux文件夹下新建一个<code>store.js</code>文件，导入刚刚的<code>reducer,js</code>文件。</p>
+<p>3、在redux文件夹下新建一个<code>store.js</code>文件，导入刚刚的<code>reducer.js</code>文件。</p>
 <p>&emsp;&emsp;<code>store.js</code>接收<code>reducer.js</code>的导出为参数并使用redux提供的<code>createStore()</code>方法创建一个数据源<code>store</code>，在<code>store.js</code>中写代码：<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/store.png" alt=""></p>
 <p>4、在components文件夹下的<code>Home.js</code>组件中使用store中的值<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/store%E7%9A%84%E4%BD%BF%E7%94%A8.png" alt=""></p>
 <p><strong>修改操作</strong><br>1、所有的修改操作都要调用一个action，所以，我们在redux文件夹下新建一个文件<code>action.js</code></p>
