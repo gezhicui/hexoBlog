@@ -831,4 +831,81 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
         <tag>React</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MongoDB数据库的学习使用（一） 安装及环境配置</title>
+    <url>/MyBlog/2020/07/18/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="MongoDB数据库和可视化软件的下载"><a href="#MongoDB数据库和可视化软件的下载" class="headerlink" title="MongoDB数据库和可视化软件的下载"></a>MongoDB数据库和可视化软件的下载</h2><ul>
+<li>下载地址: <a href="https://www.mongodb.com/download-center/community" target="_blank" rel="noopener">https://www.mongodb.com/download-center/community</a></li>
+</ul>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/mongodb%E5%AE%98%E7%BD%91.png" alt=""></p>
+<a id="more"></a>
+<p>按照这个下载，然后再来下载mongodb可视化软件</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/mongodb%E5%8F%AF%E8%A7%86%E5%8C%96%E8%BD%AF%E4%BB%B6.png" alt=""></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>1、mongodb的安装</p>
+<p>在这我们选择自定义安装，一路next<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/momgodb%E5%AE%89%E8%A3%85.png" alt=""></p>
+<p>在这里选择默认值，让他作为服务去运行就行了</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/mongodb%E5%AE%89%E8%A3%852.png" alt=""></p>
+<p>由于我们已经下载过可视化软件，这里就不下载了</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/mongodb%E5%AE%89%E8%A3%853.png" alt=""></p>
+<p>安装完成</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90.png" alt=""></p>
+<p>2、可视化软件的安装</p>
+<p>下载之后直接打开就已经安装完成了，点击Star Using Compass开始使用<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AE%89%E8%A3%85.png" alt=""></p>
+<h1 id="MongoDB的使用"><a href="#MongoDB的使用" class="headerlink" title="MongoDB的使用"></a>MongoDB的使用</h1><h2 id="下载MongoDB第三方包"><a href="#下载MongoDB第三方包" class="headerlink" title="下载MongoDB第三方包"></a>下载MongoDB第三方包</h2><ul>
+<li>使用Node.js操作MongoDB数据库需要依赖Node.js第三方包mongoose</li>
+<li>使用<code>npm install mongoose</code>命令下载<h2 id="在node环境中使用"><a href="#在node环境中使用" class="headerlink" title="在node环境中使用"></a>在node环境中使用</h2>1、启动MongoDB</li>
+</ul>
+<p>在命令行工具中运行<code>net start mongoDB</code>即可启动MongoDB，否则MongoDB将无法连接。同时，也可以用<code>net stop mongoDB</code>停止服务</p>
+<p>2、连接MongoDB</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E8%BF%9E%E6%8E%A5MongoDB.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>RMongoDB</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>MongoDB数据库的学习使用（二） CRUD</title>
+    <url>/MyBlog/2020/07/19/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="MongoDB-CRUD操作"><a href="#MongoDB-CRUD操作" class="headerlink" title="MongoDB CRUD操作"></a>MongoDB CRUD操作</h1><p>我们先来看看MongoDB中的相关概念</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89.png" alt=""></p>
+<p>在mysql中分别对应数据库、表、行、字段</p>
+<a id="more"></a>
+<h2 id="创建集合"><a href="#创建集合" class="headerlink" title="创建集合"></a>创建集合</h2><p>&emsp;&emsp;创建集合分为两步，一是对集合设定规则，二是创建集合，创建mongoose.Schema构造函数的实例即可创建集合。</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%88%9B%E5%BB%BA%E9%9B%86%E5%90%88.png" alt=""></p>
+<h2 id="创建文档"><a href="#创建文档" class="headerlink" title="创建文档"></a>创建文档</h2><p>创建文档实际上就是<strong>向集合中插入数据。</strong><br>分为两步</p>
+<ul>
+<li>创建集合实例。</li>
+<li>调用实例对象下的save方法将数据保存到数据库中。<h3 id="创建文档方法一"><a href="#创建文档方法一" class="headerlink" title="创建文档方法一"></a>创建文档方法一</h3><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%88%9B%E5%BB%BA%E6%96%87%E6%A1%A3.png" alt=""></li>
+</ul>
+<p>此时，数据库就已经创建成功</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E6%8F%92%E5%85%A5%E7%BB%93%E6%9E%9C.png" alt=""></p>
+<h3 id="创建文档方法二"><a href="#创建文档方法二" class="headerlink" title="创建文档方法二"></a>创建文档方法二</h3><p>在集合的构造函数下有一个create方法，可以通过<code>Course.create</code>的方法创建文档</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/createCourse.png" alt=""></p>
+<p>注意：<strong>对数据库的所有操作都是异步操作</strong></p>
+<p>所以，还可以这么写：</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C.png" alt=""></p>
+<h2 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h2><h3 id="精准匹配"><a href="#精准匹配" class="headerlink" title="精准匹配"></a>精准匹配</h3><p>先来用find的基本方法查询一下所有的文档</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/find%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3.png" alt=""></p>
+<p>同时，find()中还可以传递一个对象作为参数，这个对象实际上就是查找条件</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2.png" alt=""></p>
+<p><code>.findOne()</code>方法返回一条文档，默认返回第一条</p>
+<h3 id="匹配查询"><a href="#匹配查询" class="headerlink" title="匹配查询"></a>匹配查询</h3><p>1、我们用<code>$gt</code>表示大于，<code>$lt</code>表示小于<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2.png" alt=""></p>
+<p>2、我们用<code>$in</code>表示包含<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%8C%85%E5%90%AB%E6%9F%A5%E8%AF%A2.png" alt=""></p>
+<p>3、选择要查询的字段<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E6%8C%87%E5%AE%9A%E5%AD%97%E6%AE%B5%E6%9F%A5%E8%AF%A2.png" alt=""><br>如果不想查询某个字段，只需要在该字段前面加个<code>-</code> ，如<code>select(&#39;email name -_id&#39;)</code></p>
+<p>4、排序<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E9%A1%BA%E5%BA%8F%E6%8E%92%E5%88%97.png" alt=""></p>
+<p>5、skip和limit</p>
+<ul>
+<li>skip()跳过多少条数据</li>
+<li>limit()限制查询数量</li>
+</ul>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/skip%E5%92%8Climit.png" alt=""></p>
+<h2 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//删除id为12345的数据，若匹配到多个，则删除第一个</span></span><br><span class="line">User.findOneAndDelete(&#123;<span class="attr">_id</span>:<span class="string">'12345'</span>&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span><span class="built_in">console</span>.log(res));</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除所有文档 </span></span><br><span class="line">User.deleteMany(&#123;&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span><span class="built_in">console</span>.log(res));</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除多个id为12345的文档</span></span><br><span class="line">User.deleteMany(&#123;<span class="attr">_id</span>:<span class="string">'12345'</span>&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span><span class="built_in">console</span>.log(res));</span><br></pre></td></tr></table></figure>
+
+<h2 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//更新单个 </span></span><br><span class="line"><span class="comment">//更新条件： (&#123;查询条件&#125;,&#123;更新后的值&#125;)</span></span><br><span class="line">User.updateOne(&#123;<span class="attr">name</span>:<span class="string">'李四'</span>&#125;,&#123;<span class="attr">name</span>:<span class="string">'李狗蛋'</span>&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span><span class="built_in">console</span>.log(res));</span><br><span class="line"></span><br><span class="line"><span class="comment">//更新多个 把所有的age改成65</span></span><br><span class="line">User.updateMany(&#123;&#125;,&#123;<span class="attr">age</span>:<span class="string">'65'</span>&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span><span class="built_in">console</span>.log(res));</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>RMongoDB</category>
+      </categories>
+  </entry>
 </search>
