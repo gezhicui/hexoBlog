@@ -1043,11 +1043,43 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'index'</span>(req,res,next)=&gt;&#123;</span><br><span class="line">    fs.readFile(<span class="string">'./demo.txt'</span>,<span class="string">'utf8'</span>,(err,result)=&gt;&#123;</span><br><span class="line">        <span class="keyword">if</span>(err != <span class="literal">null</span>)&#123;</span><br><span class="line">           next(err)<span class="comment">//next()没有传递参数时，是把控制权交给下一个中间件，但是传递了参数，表示要触发错误处理中间件</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            res.send(result)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义错误处理中间件</span></span><br><span class="line">app.use(<span class="function">(<span class="params">err,req,res,next</span>)=&gt;</span>&#123;</span><br><span class="line">    res.status(<span class="number">500</span>).send(err.message)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'网站服务器启动成功！'</span>)</span><br></pre></td></tr></table></figure>
 
 <h1 id="异步函数捕获错误"><a href="#异步函数捕获错误" class="headerlink" title="异步函数捕获错误"></a>异步函数捕获错误</h1><p>&emsp;&emsp;在node.js中，异步API的错误信息都是通过回调函数获取的，支持Promise对象的异步API发生错误可以通过catch方法捕获。异步函数执行如果发生错误要如何捕获错误呢?</p>
-<p>&emsp;&emsp;try catch可以捕获异步函数以及其他同步代码在执行过程中发生的错误，但是不能其他类型的API发生的错误。</p>
-<p>```js<br>const promisify = require(‘util’).promisify<br>const readFile = promisify(fs.readFile)//把readFile变成异步方法</p>
-<p>app.get(“/“,async(reg, res, next)=&gt;{<br>    try{<br>        await readFile(‘./aaa.js’)<br>    }catch(ex){<br>        next(ex);<br>    }</p>
-<p>});</p>
-<p>//定义错误处理中间件<br>app.use((err,req,res,next)=&gt;{<br>    res.status(500).send(err.message)<br>})</p>
+<p>&emsp;&emsp;try catch可以捕获异步函数以及其他同步代码在执行过程中发生的错误，但是不能其他类型的API发生的错误(如回调函数)。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> promisify = <span class="built_in">require</span>(<span class="string">'util'</span>).promisify</span><br><span class="line"><span class="keyword">const</span> readFile = promisify(fs.readFile)<span class="comment">//把readFile变成异步方法</span></span><br><span class="line"></span><br><span class="line">app.get(<span class="string">"/"</span>,<span class="keyword">async</span>(reg, res, next)=&gt;&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">await</span> readFile(<span class="string">'./aaa.js'</span>)</span><br><span class="line">    &#125;<span class="keyword">catch</span>(ex)&#123;</span><br><span class="line">        next(ex);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义错误处理中间件</span></span><br><span class="line">app.use(<span class="function">(<span class="params">err,req,res,next</span>)=&gt;</span>&#123;</span><br><span class="line">    res.status(<span class="number">500</span>).send(err.message)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Express框架（三） 请求处理</title>
+    <url>/MyBlog/2020/07/21/Express%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="创建路由的基础方法"><a href="#创建路由的基础方法" class="headerlink" title="创建路由的基础方法"></a>创建路由的基础方法</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//导包</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="comment">//创建网站服务器</span></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="comment">//创建路由对象</span></span><br><span class="line"><span class="keyword">const</span> home = express.Router();</span><br><span class="line"><span class="comment">//将路由和请求路径进行匹配，当客户端请求路径是home时，使用home这个路由对象进行处理，具体请求处理需要在二级路由中去进行</span></span><br><span class="line">app.use(<span class="string">'/home'</span>,home) ;</span><br><span class="line"><span class="comment">//在home路由下继续创建二级路由</span></span><br><span class="line">home.get(<span class="string">'/index'</span>, (req,res)=&gt;&#123;</span><br><span class="line">    <span class="comment">// /home/index</span></span><br><span class="line">    res.send (<span class="string">'欢迎来到博客展示页面'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>)<span class="comment">//端口监听</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="构建模块化路由"><a href="#构建模块化路由" class="headerlink" title="构建模块化路由"></a>构建模块化路由</h1><p>模块化路由基本实现：<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E6%A8%A1%E5%9D%97%E5%8C%96%E8%B7%AF%E7%94%B1.png" alt=""></p>
+<h1 id="GET参数的获取"><a href="#GET参数的获取" class="headerlink" title="GET参数的获取"></a>GET参数的获取</h1><p>&emsp;&emsp;Express框架中使用<code>req.query</code>即可获取GET参数，框架内部会将GET参数转换为对象并返回。我们就不需要使用原生语法中的url模块了</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//接收地址栏中问号后面的参数</span></span><br><span class="line"><span class="comment">//例如: http://localhost:3000/?name=zhangsan&amp;aqe=30</span></span><br><span class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log (req.query); <span class="comment">//&#123; "name" : "zhangsan" ，, "age" : "30"&#125;</span></span><br><span class="line">    res.send(req.query)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="POST参数的获取"><a href="#POST参数的获取" class="headerlink" title="POST参数的获取"></a>POST参数的获取</h1><p>Express中接收post请求参数需要借助第三方包<code>body-parser</code>。npm下载即可</p>
+<pre><code class="js"><span class="comment">//引入express框架</span>
+<span class="keyword">const</span> express = <span class="built_in">require</span>( <span class="string">'express'</span>);
+<span class="keyword">const</span> bodyParser = <span class="built_in">require</span>( <span class="string">'body-parser'</span>);
+<span class="comment">//创建网站服务器</span>
+<span class="keyword">const</span> app = express();
+
+<span class="comment">//拦截所有请求</span>
+<span class="comment">// extended: false方法内部使用querystring模块处理请求参数的格式</span>
+<span class="comment">// extended: true方法内部使用第三方模块qs处理请求参数的格式</span>
+app.use(bodyParser.urlencoded({<span class="attr">extended</span>: <span class="literal">false</span>})
+
+app.post(<span class="string">'/add'</span>,(req,res)=&gt;{
+    <span class="comment">//body属性是bodyParser在req中添加的属性，值为post请求参数</span>
+    res.send(req.body)
+})
+<span class="comment">//端口监听</span>
+app.listen(<span class="number">3000</span>);
+</code></pre>
 ]]></content>
       <categories>
         <category>Node.js</category>
