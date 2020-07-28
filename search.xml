@@ -1253,4 +1253,40 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
         <tag>Vue</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Vue路由传参param与query两种方式的区别</title>
+    <url>/MyBlog/2020/07/28/Vue%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82param%E4%B8%8Equery%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<h1 id="基本说明"><a href="#基本说明" class="headerlink" title="基本说明"></a>基本说明</h1><p>路由配置：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">path</span>:<span class="string">'/login'</span>,<span class="attr">name</span>:<span class="string">'Login'</span>,<span class="attr">component</span>:Login&#125;,</span><br></pre></td></tr></table></figure>
+<p>1.页面携带query参数跳转(path,name指定跳转到Login时都可以携带query参数)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$router.push(&#123; <span class="attr">path</span>:<span class="string">'/login'</span>,<span class="attr">name</span>:<span class="string">'Login'</span>, <span class="attr">query</span>: &#123; <span class="attr">id</span>: <span class="keyword">this</span>.id &#125; )</span><br></pre></td></tr></table></figure>
+<p>query相当与发送了一次get请求，请求参数会显示在浏览器地址栏中</p>
+<p>2.页面携带params参数跳转(携带params参数跳转时只能使用name指定)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$router.push(&#123; <span class="attr">name</span>:<span class="string">'Login'</span>, <span class="attr">params</span>: &#123; <span class="attr">id</span>: <span class="keyword">this</span>.id &#125; )</span><br></pre></td></tr></table></figure>
+<p>params相当与发送了一次post请求，请求参数则不会显示，并且刷新页面之后参数会消失</p>
+<a id="more"></a>
+<p>当路由配置更改为</p>
+<p>路由配置：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">path</span>:<span class="string">'/login/:id'</span>,<span class="attr">name</span>:<span class="string">'Login'</span>,<span class="attr">component</span>:Login&#125;</span><br></pre></td></tr></table></figure>
+
+<p>并且再次发送请求，请求数据不会随着页面的刷新而消失</p>
+<p>获取请求参数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$route.params.id</span><br><span class="line"><span class="keyword">this</span>.$route.query.id</span><br></pre></td></tr></table></figure>
+<p>注: </p>
+<p>&emsp;&emsp;<code>router</code>是<code>VueRoute</code>r的一个对象，通过<code>Vue.use(VueRouter)</code>和<code>VueRouter</code>构造函数得到一个<code>router</code>的实例对象，这个对象中是一个全局的对象，他包含了所有的路由包含了许多关键的对象和属性。</p>
+<p>&emsp;&emsp;<code>$router.push({path:&#39;login&#39;})</code>;本质是向<code>history</code>栈中添加一个路由，在我们看来是 切换路由，但本质是在添加一个<code>history</code>记录;</p>
+<p>&emsp;&emsp;而<code>route</code>是一个跳转的路由对象，每一个路由都会有一个<code>route</code>对象，是一个局部的对象，可以获取对应的<code>name,path,params,query</code>等</p>
+<h1 id="两者差别"><a href="#两者差别" class="headerlink" title="两者差别"></a>两者差别</h1><h2 id="用法上的"><a href="#用法上的" class="headerlink" title="用法上的"></a>用法上的</h2><p>&emsp;&emsp;<code>query</code>要用<code>path</code>来引入，<code>params</code>要用<code>name</code>来引入，接收参数都是类似的，分别是<code>this.$route.query.name</code>和<code>this.$route.params.name</code>。</p>
+<p>注意接收参数的时候，已经是<code>$route</code>而不是<code>$router</code>了哦！！</p>
+<h2 id="展示上的"><a href="#展示上的" class="headerlink" title="展示上的"></a>展示上的</h2><p>&emsp;&emsp;query更加类似于我们ajax中get传参，params则类似于post，说的再简单一点，前者在浏览器地址栏中显示参数，后者则不显示</p>
+<p>query:<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/query%E8%B7%AF%E7%94%B1.png" alt=""><br>params:<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/params%E8%B7%AF%E7%94%B1.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
 </search>
