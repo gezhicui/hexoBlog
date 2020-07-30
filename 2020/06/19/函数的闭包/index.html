@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="Yang&#39;s Blog">
 <meta property="og:description" content="闭包变量的作用域变量根据作用域的不同分为两种:全局变量和局部变量。  1.函数内部可以使用全局变量。 2.函数外部不可以使用局部变量。 3.当函数执行完毕,本作用域内的局部变量会销毁。  什么是闭包闭包( closure )指有权访问另一个函数作用域中变量的函数。—– JavaScript 高级程序设计 通俗点说，闭包就是一个函数（一个作用域可以访问另一个函数的局部变量） 简单理解就是,一个作用域">
 <meta property="article:published_time" content="2020-06-19T03:20:43.000Z">
-<meta property="article:modified_time" content="2020-06-19T06:01:40.147Z">
+<meta property="article:modified_time" content="2020-07-29T11:22:13.866Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="javascript">
 <meta property="article:tag" content="闭包">
@@ -340,8 +340,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-19T14:01:40+08:00">
-                2020-06-19
+              <time title="更新于" itemprop="dateModified" datetime="2020-07-29T19:22:13+08:00">
+                2020-07-29
               </time>
             
           </span>
@@ -474,7 +474,7 @@
 <ul>
 <li>1.我们可以利用动态添加属性的方式<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lis = <span class="built_in">document</span>.querySelector(<span class="string">'.nav'</span> ). querySelectorAll( <span class="string">'li'</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i =<span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">    lis[i].index = i</span><br><span class="line">    lis[i] .onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span><span class="number">.1</span>og(<span class="keyword">this</span>.index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>2.利用闭包方式得到 li 索引号<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 利用 for 循环创建了4个立即执行数</span></span><br><span class="line">    <span class="comment">// 立即执行函数 也称为小闭包  因立即执函数里面的任何一个函数都可使用他 的 i量</span></span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;<span class="comment">//把当前循环到的i传入立即执行函数</span></span><br><span class="line">        <span class="comment">// console.log(i);</span></span><br><span class="line">        lis[i].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)(i);<span class="comment">//这里必须写传入的参数，函数才能获取到</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//在这个例子中，点击事件触发的函数的i是从立即执行函数中获取来的，所以这个立即执行函数是一个闭包函数</span></span><br></pre></td></tr></table></figure>
-需求更改：闭包应用-3秒钟之后，打印所有li 元素的内容<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lis = <span class="built_in">document</span>.querySelectornav<span class="string">').querySelectorAll('</span>li<span class="string">')</span></span><br><span class="line"><span class="string">for (var i = 0; i &lt; lis.length; i++) &#123;</span></span><br><span class="line"><span class="string">    (function(i) &#123;</span></span><br><span class="line"><span class="string">        setTimeout(function() &#123;</span></span><br><span class="line"><span class="string">            console.log(lis[i].innerHTML);</span></span><br><span class="line"><span class="string">        &#125;, 3000)</span></span><br><span class="line"><span class="string">    &#125;)(i);</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+需求更改：闭包应用-3秒钟之后，打印所有li 元素的内容<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lis = <span class="built_in">document</span>.querySelectornav.querySelectorAll(<span class="string">'li'</span>)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(lis[i].innerHTML);</span><br><span class="line">        &#125;, <span class="number">3000</span>)</span><br><span class="line">    &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="闭包案例2"><a href="#闭包案例2" class="headerlink" title="闭包案例2"></a>闭包案例2</h1></li>
 <li>闭包应用-计算打车价格</li>
 <li>打车起步价13（3公里内），之后每多一公里增加5块钱.用户输入公里数就可以计算打车价格</li>
@@ -649,7 +649,7 @@ var jiathis_config={
               
                <a href="/MyBlog/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -660,7 +660,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/MyBlog/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -671,7 +671,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/MyBlog/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -780,7 +780,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">24.6k</span>
+    <span title="站点总字数">26.5k</span>
   
 </div>
 

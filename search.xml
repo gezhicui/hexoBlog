@@ -1118,7 +1118,7 @@ Post.find()<span class="comment">//查询post信息</span>
 <ul>
 <li>1.我们可以利用动态添加属性的方式<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> lis = <span class="built_in">document</span>.querySelector(<span class="string">'.nav'</span> ). querySelectorAll( <span class="string">'li'</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i =<span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">    lis[i].index = i</span><br><span class="line">    lis[i] .onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span><span class="number">.1</span>og(<span class="keyword">this</span>.index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>2.利用闭包方式得到 li 索引号<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 利用 for 循环创建了4个立即执行数</span></span><br><span class="line">    <span class="comment">// 立即执行函数 也称为小闭包  因立即执函数里面的任何一个函数都可使用他 的 i量</span></span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;<span class="comment">//把当前循环到的i传入立即执行函数</span></span><br><span class="line">        <span class="comment">// console.log(i);</span></span><br><span class="line">        lis[i].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)(i);<span class="comment">//这里必须写传入的参数，函数才能获取到</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//在这个例子中，点击事件触发的函数的i是从立即执行函数中获取来的，所以这个立即执行函数是一个闭包函数</span></span><br></pre></td></tr></table></figure>
-需求更改：闭包应用-3秒钟之后，打印所有li 元素的内容<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> lis = <span class="built_in">document</span>.querySelectornav<span class="string">').querySelectorAll('</span>li<span class="string">')</span></span><br><span class="line"><span class="string">for (var i = 0; i &lt; lis.length; i++) &#123;</span></span><br><span class="line"><span class="string">    (function(i) &#123;</span></span><br><span class="line"><span class="string">        setTimeout(function() &#123;</span></span><br><span class="line"><span class="string">            console.log(lis[i].innerHTML);</span></span><br><span class="line"><span class="string">        &#125;, 3000)</span></span><br><span class="line"><span class="string">    &#125;)(i);</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+需求更改：闭包应用-3秒钟之后，打印所有li 元素的内容<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> lis = <span class="built_in">document</span>.querySelectornav.querySelectorAll(<span class="string">'li'</span>)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(lis[i].innerHTML);</span><br><span class="line">        &#125;, <span class="number">3000</span>)</span><br><span class="line">    &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="闭包案例2"><a href="#闭包案例2" class="headerlink" title="闭包案例2"></a>闭包案例2</h1></li>
 <li>闭包应用-计算打车价格</li>
 <li>打车起步价13（3公里内），之后每多一公里增加5块钱.用户输入公里数就可以计算打车价格</li>
@@ -1318,6 +1318,122 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
       </categories>
       <tags>
         <tag>模块化规范</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Webpack（一）</title>
+    <url>/MyBlog/2020/07/30/Webpack%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="什么是Webpack"><a href="#什么是Webpack" class="headerlink" title="什么是Webpack"></a>什么是Webpack</h1><p>来看看官方的解释：</p>
+<p>&emsp;&emsp;At its core, webpack is a static module bundler for modern JavaScript applications.</p>
+<p>&emsp;&emsp;从本质上来讲，webpack是一个现代的JavgScript应用的静态<strong>模块打包</strong>工具。</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/webpack.png" alt=""></p>
+<p>&emsp;&emsp;他把所有资源打包压缩成浏览器认识的语法，从而更好的放在服务器上部署，按我的理解就是：大概webpack类似于一个翻译软件，但是它内部是用google翻译（即node）进行翻译的。<br>翻译是为了让我们写的代码能被计算机所识别。</p>
+<a id="more"></a>
+
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><strong>！Webpack为了可以正常运行，必须依赖node环境</strong></p>
+<h2 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h2><blockquote>
+<p>npm install webpack -g</p>
+</blockquote>
+<p>指定版本：</p>
+<blockquote>
+<p>npm install <a href="mailto:webpack@4.42.0">webpack@4.42.0</a> -g</p>
+</blockquote>
+<h2 id="局部安装"><a href="#局部安装" class="headerlink" title="局部安装"></a>局部安装</h2><p>–save-dev是开发时依赖，项目打包后不需要继续使用的。</p>
+<blockquote>
+<p>npm install webpack –save-dev</p>
+</blockquote>
+<h1 id="Webpack的基本使用规则"><a href="#Webpack的基本使用规则" class="headerlink" title="Webpack的基本使用规则"></a>Webpack的基本使用规则</h1><p>&emsp;&emsp;在浏览器中，浏览器并不认识commonjs的模块化规范，只认识ES6模块化规范，这个时候，我们就可以用webpack打包模块，让浏览器可以识别。另外，在真实项目中当有许多这样的js文件时，我们一个个引用非常麻烦，并且后期非常不方便对它们进行管理。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//mathutil.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">num1,num2</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mul</span>(<span class="params">num1,num2</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 *num2</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    add,</span><br><span class="line">    mul</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//main.js</span></span><br><span class="line"><span class="keyword">const</span> &#123;add,mul&#125; =reguire(<span class="string">'./mathutils.js'</span>)l</span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">20</span>，<span class="number">30</span>));</span><br><span class="line"><span class="built_in">console</span>.log(mul(<span class="number">20</span>，<span class="number">30</span>));</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;在HTML文件中引入main.js部署到服务器上时，浏览器无法解析commonjs的module.exports，这个时候我们需要通过webpack打包</p>
+<blockquote>
+<p>webpack ./src/main.js -o ./dist/bundle.js –mode development</p>
+</blockquote>
+<p>&emsp;&emsp;这时，我们在index.html中引入./dist/bundle.js  就可以访问到这两个方法并使用了</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./dist/bundle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Webpack的配置"><a href="#Webpack的配置" class="headerlink" title="Webpack的配置"></a>Webpack的配置</h1><p>&emsp;&emsp;为了更方便的使用webpack，我们可以定义一个<code>webpack.config.js</code>文件来管理我们需要的命令</p>
+<p>&emsp;&emsp;在任何项目中，当需要运用到node环境时，我们都需要执行下面的命令来初始化node的配置</p>
+<blockquote>
+<p>npm init  || npm init -y<br>就会生成 <code>package.json</code>这个文件，这个文件主要描述了当前项目里的一些信息</p>
+</blockquote>
+<p>然后，我们就可以在<code>webpack.config.js</code>中配置打包文件的入口和出口</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//引入path模块，使用__dirname来拼接绝对路径</span></span><br><span class="line"><span class="keyword">const</span> path = reguire(<span class="string">'path'</span>)</span><br><span class="line"><span class="built_in">module</span>.exports =&#123;</span><br><span class="line">    <span class="comment">//入口文件  即需要打包的文件</span></span><br><span class="line">    entry:<span class="string">'./src/main.js'</span>,</span><br><span class="line">    <span class="comment">//出口文件 即打包好的文件路径和文件名</span></span><br><span class="line">    output: &#123;</span><br><span class="line">        path:path.resolve(__dirname,<span class="string">'dist'</span>),</span><br><span class="line">        filename:<span class="string">'bundle.js'</span></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="package-json中自定义启动"><a href="#package-json中自定义启动" class="headerlink" title="package.json中自定义启动"></a>package.json中自定义启动</h1><p>来看一个package.json 配置</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>:<span class="string">"meetwebpack"</span>,</span><br><span class="line">    <span class="attr">"version"</span>:<span class="string">"1.0.0"</span>,</span><br><span class="line">    <span class="attr">"description"</span>:<span class="string">""</span>,</span><br><span class="line">    <span class="attr">"main"</span>:<span class="string">"index.js"</span>,</span><br><span class="line">    <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"build"</span>:<span class="string">"webpack"</span></span><br><span class="line">&#125;,</span><br><span class="line">    <span class="attr">"author"</span>:<span class="string">""</span>,</span><br><span class="line">    <span class="attr">"license"</span>:<span class="string">"ISC"</span>,</span><br><span class="line">    <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">        <span class="attr">"webpack"</span>:<span class="string">"^3.6.0"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;每次执行都敲这么一长串webpack命令很不方便。OK，我们可以在package.json的scripts中定义自己的执行脚本。</p>
+<p>&emsp;&emsp;package.json中的scripts的脚本在执行时，会按照一定的顺序寻找命令对应的位置。</p>
+<ul>
+<li><p>首先，会寻找本地的node_modules/.bin路径中对应的命令。</p>
+</li>
+<li><p>如果没有找到，会去全局的环境变量中寻找。</p>
+</li>
+<li><p>如何执行我们的build指令呢?</p>
+<blockquote>
+<p>npm run build</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h1><p>&emsp;&emsp;<code>loader</code>是webpack中一个非常核心的概念。</p>
+<p>&emsp;&emsp;在我们上面的实例中，我们主要是用webpack来处理我们写的js代码，并且webpack会自动处理js之间相关的依赖。</p>
+<p>&emsp;&emsp;但是，在开发中我们不仅仅有基本的js代码处理，我们也需要加载css、图片，也包括一些高级的将ES6转成ES5代码，将TypeScript转成ES5代码，将scss、less转成css，将.jsx、.vue文件转成js文件等等。</p>
+<p>&emsp;&emsp;对于webpack本身的能力来说，对于这些转化是不支持的。那怎么办呢?给webpack扩展对应的loader就可以啦。</p>
+<p>loader使用过程∶</p>
+<ul>
+<li>步骤一︰通过npm安装需要使用的loader</li>
+<li>步骤二︰在webpack.config.js中的modules关键字下进行配置</li>
+</ul>
+<p>大部分loader我们都可以在<strong>webpack的官网</strong>中找到，并且学习对应的用法。</p>
+<h2 id="webpack中使用css文件的配置"><a href="#webpack中使用css文件的配置" class="headerlink" title="webpack中使用css文件的配置"></a>webpack中使用css文件的配置</h2><p>&emsp;&emsp;我们想把所有的js/css文件都打包在bundle.js中，我们就需要在入口文件中添加相关的依赖。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//main.js中添加</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./css/index.css'</span>)</span><br></pre></td></tr></table></figure>
+<p>安装css-loader: 解析 CSS 文件后，使用 import 加载，并且返回 CSS 代码</p>
+<blockquote>
+<p>npm install –save-dev css-loader</p>
+</blockquote>
+<p>安装style-loader: 将模块的导出作为样式添加到 DOM 中</p>
+<blockquote>
+<p>npm install –save-dev style-loader</p>
+</blockquote>
+<p>在<code>webpack.config.json</code> 的<code>module.exports</code>中添加如下配置</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//引入path模块，使用__dirname来拼接绝对路径</span></span><br><span class="line"><span class="keyword">const</span> path = reguire(<span class="string">'path'</span>)</span><br><span class="line"><span class="built_in">module</span>.exports =&#123;</span><br><span class="line">    entry:<span class="string">'./src/main.js'</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">        path:path.resolve(__dirname,<span class="string">'dist'</span>),</span><br><span class="line">        filename:<span class="string">'bundle.js'</span></span><br><span class="line">    &#125;,  </span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            <span class="comment">//css-loader只负责将css文件进行加裁</span></span><br><span class="line">            &#123;   <span class="comment">//匹配所有的css文件</span></span><br><span class="line">                test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">                <span class="comment">//css-loader只负责将css文件进行加载  style-loader将样式添加到 DOM 中</span></span><br><span class="line">                <span class="comment">//使用多个loader时，是从右向左，所以先加载css文件，css-loader写在右边</span></span><br><span class="line">                use: [<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>] </span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;如果在<code>package.json</code>中定义了<code>build</code>，那么现在就可以运行 <code>npm run build</code>进行打包了</p>
+<h2 id="webpack中使用less文件的配置"><a href="#webpack中使用less文件的配置" class="headerlink" title="webpack中使用less文件的配置"></a>webpack中使用less文件的配置</h2><p>&emsp;&emsp;如果我们希望在项目中使Hess、scss.stylus来写样式，webpack是否可以帮助我们处理呢?</p>
+<p>&emsp;&emsp;我们这里以less为例，其他也是一样的。</p>
+<p>我们还是先创建一个less文件index.less，依然放在css文件夹中</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* index.less */</span></span><br><span class="line">@fontsize:50px;</span><br><span class="line">@fontColor:orange;</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>:@fontsize;</span><br><span class="line">    <span class="attribute">color</span>: @fontcolor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在入口文件main.js中添加依赖</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//main.js中添加</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./css/index.less'</span>)</span><br></pre></td></tr></table></figure>
+<p>安装less-roader</p>
+<blockquote>
+<p>npm install less-loader –save-dev</p>
+</blockquote>
+<p>在<code>webpack.config.js</code>的<code>module</code>的<code>rules</code>中添加：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">rules: [</span><br><span class="line">    &#123;</span><br><span class="line">        test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: [<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>] </span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        test: <span class="regexp">/\.less$/</span>,</span><br><span class="line">         use: [<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'less-loader'</span>] </span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="图片文件的处理"><a href="#图片文件的处理" class="headerlink" title="图片文件的处理"></a>图片文件的处理</h2><p>我们在index.css中引入一张图片</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">    <span class="attribute">background</span>:<span class="built_in">url</span>(<span class="string">"../img/test.jpg"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于我们采用url引入的图片，所以我们用url-roader</p>
+<p>安装</p>
+<blockquote>
+<p>npm install url-loader –save-dev</p>
+</blockquote>
+<p>在<code>webpack.config.js</code>的<code>module</code>的<code>rules</code>中添加：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  test: <span class="regexp">/\.(png|jpg|gif)$/i</span>,</span><br><span class="line">  use: [</span><br><span class="line">    <span class="comment">//可以一个loader写成一个对象形式，这样方便我们添加参数如options</span></span><br><span class="line">    &#123;</span><br><span class="line">      loader: <span class="string">'url-loader'</span>,</span><br><span class="line">      options: &#123;</span><br><span class="line">        <span class="comment">///当加载的图片，小于limit时，会将图片编译成base64字符串形式.limit可自行修改</span></span><br><span class="line">        <span class="comment">//当加载的图片，大于limit时，需要使用file-loader模块进行加载.npm安装就行，不需要配置</span></span><br><span class="line">        limit: <span class="number">8192</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;我们发现webpack在dist文件夹下自动帮助我们生成一个非常长的名字,这是一个32位hash值，目的是防止名字重复<br>&emsp;&emsp;但是，真实开发中，我们可能对打包的图片名字有一定的要求<br>&emsp;&emsp;比如，将所有的图片放在一个文件夹中，跟上图片原来的名称，同时也要防止重复</p>
+<p>所以，我们可以在options中添加上如下选项:</p>
+<ul>
+<li>img :文件要打包到的文件夹</li>
+<li>name:获取图片原来的名字，放在该位置</li>
+<li>hash:8:为了防止图片名称冲突，依然使用hash，但是我们只保留8位</li>
+<li>ext:使用图片原来的扩展名<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">options: &#123;</span><br><span class="line">  limit: <span class="number">8192</span>,</span><br><span class="line">  name:<span class="string">'images/[name].[hash:8].[ext]'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+运行<code>npm run build</code>。现在，我们就在dist下有一个images文件夹存放着我们刚刚打包的图片了</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Webpack</category>
+      </categories>
+      <tags>
+        <tag>Webpack</tag>
       </tags>
   </entry>
 </search>
