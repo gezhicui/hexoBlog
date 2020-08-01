@@ -1480,4 +1480,36 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
         <tag>Webpack</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Vue脚手架</title>
+    <url>/MyBlog/2020/07/30/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/</url>
+    <content><![CDATA[<h1 id="VueCLI"><a href="#VueCLI" class="headerlink" title="VueCLI"></a>VueCLI</h1><p>CLI是什么意思?</p>
+<p>&emsp;&emsp;CLI是Command-Line Interface,翻译为命令行界面,但是俗称脚手架.Vue CLI是一个官方发布vue.js项目脚手架<br>&emsp;&emsp;使用vue-cli可以快速搭建Vue开发环境以及对应的webpack配置.</p>
+<p><strong>！VueCLI使用前必须安装node环境和webpack</strong></p>
+<h2 id="node安装"><a href="#node安装" class="headerlink" title="node安装"></a>node安装</h2><p>可以直接在官方网站中下载安装。网址: <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a></p>
+<h2 id="webpack安装"><a href="#webpack安装" class="headerlink" title="webpack安装"></a>webpack安装</h2><blockquote>
+<p>npm install webpack -g</p>
+</blockquote>
+<h2 id="VueCLI的安装"><a href="#VueCLI的安装" class="headerlink" title="VueCLI的安装"></a>VueCLI的安装</h2><p>安装vue脚手架：(全局安装)</p>
+<blockquote>
+<p>npm install -g @vue/cli</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="VueCLI的使用"><a href="#VueCLI的使用" class="headerlink" title="VueCLI的使用"></a>VueCLI的使用</h1><p>初始化项目可以用两个命令：</p>
+<blockquote>
+<p>vue create 项目名称<br>vue ui 进入图形化界面</p>
+</blockquote>
+<h2 id="create创建过程"><a href="#create创建过程" class="headerlink" title="create创建过程"></a>create创建过程</h2><p> <img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E8%84%9A%E6%89%8B%E6%9E%B6create.png" alt=""></p>
+<h2 id="创建项目的文件目录"><a href="#创建项目的文件目录" class="headerlink" title="创建项目的文件目录"></a>创建项目的文件目录</h2><p> <img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E8%84%9A%E6%89%8B%E6%9E%B6%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png" alt=""></p>
+<h1 id="webpack的配置"><a href="#webpack的配置" class="headerlink" title="webpack的配置"></a>webpack的配置</h1><p>&emsp;&emsp;由于vue-cli3将webpack的基础配置全部内嵌了，这就导致我们初始化项目完成之后发现原先的webpack的config配置全部都消失不见了，那该怎么办呢？别慌，vue-cli早就考虑到了这一点，它预留了一个vue.config.js的js文件供我们对webpack进行自定义配置。</p>
+<h2 id="在项目根目录下新建vue-config-js文件与package-json同级"><a href="#在项目根目录下新建vue-config-js文件与package-json同级" class="headerlink" title="在项目根目录下新建vue.config.js文件与package.json同级"></a>在项目根目录下新建vue.config.js文件与package.json同级</h2><p>&emsp;&emsp;这里的vue.config.js会和脚手架创建的webpack合并，成为最终配置</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
 </search>
