@@ -1512,4 +1512,43 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
         <tag>Vue</tag>
       </tags>
   </entry>
+  <entry>
+    <title>axios</title>
+    <url>/MyBlog/2020/08/11/axios/</url>
+    <content><![CDATA[<p>axios(官网: <a href="https://github.com/axios/axios)是一个基于Promise用于浏览器和node.js的HTTP客户端。" target="_blank" rel="noopener">https://github.com/axios/axios)是一个基于Promise用于浏览器和node.js的HTTP客户端。</a><br>它具有以下特征:</p>
+<ul>
+<li>支持浏览器和node.js心</li>
+<li>支持promise</li>
+<li>能拦截请求和响应</li>
+<li>自动转换JSON数据</li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><blockquote>
+<p>npm install axios -S</p>
+</blockquote>
+<h1 id="axios的基本用法"><a href="#axios的基本用法" class="headerlink" title="axios的基本用法"></a>axios的基本用法</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.get(<span class="string">'/data'</span>)</span><br><span class="line">    .then (<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line"><span class="comment">// data属性名称是固定的，用于获取后台响应的数据</span></span><br><span class="line">        <span class="built_in">console</span>.log(res.data)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="axios常用API"><a href="#axios常用API" class="headerlink" title="axios常用API"></a>axios常用API</h1><ul>
+<li>get :查询数据</li>
+<li>post:添加数据</li>
+<li>put :修改数据</li>
+<li>delete:删除数据</li>
+</ul>
+<h1 id="axios的参数传递"><a href="#axios的参数传递" class="headerlink" title="axios的参数传递"></a>axios的参数传递</h1><h2 id="get参数传递"><a href="#get参数传递" class="headerlink" title="get参数传递"></a>get参数传递</h2><ul>
+<li>通过URL传递参数</li>
+<li>通过params选项传递参数<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//通过url传参(第一种)</span></span><br><span class="line">axios.get( <span class="string">'/adata?id=123'</span>)</span><br><span class="line">    .then (<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log (res.data)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//接口实现</span></span><br><span class="line">app.get(<span class="string">'/adata'</span>, (req,res)=&gt;&#123;</span><br><span class="line">    res.send(<span class="string">"axios get 传递参数"</span>+ req.query.id)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过url传参(第二种)</span></span><br><span class="line">axios.get( <span class="string">'/adata/123'</span>)</span><br><span class="line">    .then (<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log (res.data) </span><br><span class="line">    &#125;)</span><br><span class="line"><span class="comment">//接口实现</span></span><br><span class="line">app.get(<span class="string">'/adata/:id'</span>, (req，res) =&gt;&#123;</span><br><span class="line">res. send(<span class="string">'axios get (Restful）传递参数'</span>+req.params.id)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过params属性传参（params用于传递get参数）</span></span><br><span class="line">axios.get (<span class="string">'/adata'</span>,&#123;</span><br><span class="line">    params : &#123;</span><br><span class="line">        id: <span class="number">123</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (res.data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="delete参数传递"><a href="#delete参数传递" class="headerlink" title="delete参数传递"></a>delete参数传递</h2>传递方式与get类似 也是通过url和param，我这里实现一下params<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//通过params属性传参</span></span><br><span class="line">axios.delete(<span class="string">'/adata'</span>,&#123;</span><br><span class="line">    params : &#123;</span><br><span class="line">        id: <span class="number">123</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (res.data)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//接口实现</span></span><br><span class="line">app.delete(<span class="string">'/axios'</span>,(req，res)=&gt;&#123;</span><br><span class="line">    res.send(<span class="string">'axios get传递参数'</span>+req.query.id)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="post参数传递"><a href="#post参数传递" class="headerlink" title="post参数传递"></a>post参数传递</h2></li>
+<li>通过选项传递参数（默认传递的是json格式的数据）</li>
+<li>通过URLSearchParams传递参数(application/x-www-form-urlencoded)(了解就好)<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.post(<span class="string">'/adata'</span>,&#123;</span><br><span class="line">    uname: <span class="string">'tom'</span>,</span><br><span class="line">    pwd:<span class="number">123</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (res.data)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//接口实现</span></span><br><span class="line">app.post(<span class="string">"/axios"</span>, (req,res) =&gt;&#123;</span><br><span class="line">    res.send(<span class="string">'axios post传递参数'</span>+req.body.uname + <span class="string">'---'</span>+req.body.pwd)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="put参数传递"><a href="#put参数传递" class="headerlink" title="put参数传递"></a>put参数传递</h2>与post类似 但是一般会在url后面跟上具体要修改的内容的id<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.post(<span class="string">'/adata/123'</span>,&#123;<span class="comment">//123为要修改的信息的id</span></span><br><span class="line">    uname: <span class="string">'tom'</span>,<span class="comment">//要修改的对应id的信息</span></span><br><span class="line">    pwd:<span class="number">123</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (res.data)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//接口实现</span></span><br><span class="line">app.post(<span class="string">"/axios/:id"</span>, (req,res) =&gt;&#123;</span><br><span class="line">    res.send(<span class="string">'axios put传递参数'</span>+req.params.id + <span class="string">'---'</span>+req.body.uname + <span class="string">'---'</span>+req.body.pwd)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="axios的全局配置"><a href="#axios的全局配置" class="headerlink" title="axios的全局配置"></a>axios的全局配置</h1></li>
+<li>axios.defaults.timeout = 3000//超时时间</li>
+<li>axios.defaults.baseURL = ‘<a href="http://localhost:3000/app&#39;;//默认地址" target="_blank" rel="noopener">http://localhost:3000/app&#39;;//默认地址</a></li>
+<li>axios.defaults.headers[‘mytoken’]= ‘aqwerwqwerqwer2ewrwe23eresdf23’//设置请求头</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
 </search>

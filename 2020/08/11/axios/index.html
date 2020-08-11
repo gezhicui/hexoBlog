@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="javascript,闭包," />
+  <meta name="keywords" content="前端," />
 
 
 
@@ -86,17 +86,16 @@
 
 
 
-<meta name="description" content="闭包变量的作用域变量根据作用域的不同分为两种:全局变量和局部变量。  1.函数内部可以使用全局变量。 2.函数外部不可以使用局部变量。 3.当函数执行完毕,本作用域内的局部变量会销毁。  什么是闭包闭包( closure )指有权访问另一个函数作用域中变量的函数。—– JavaScript 高级程序设计 通俗点说，闭包就是一个函数（一个作用域可以访问另一个函数的局部变量） 简单理解就是,一个作用域">
+<meta name="description" content="axios(官网: https:&#x2F;&#x2F;github.com&#x2F;axios&#x2F;axios)是一个基于Promise用于浏览器和node.js的HTTP客户端。它具有以下特征:  支持浏览器和node.js心 支持promise 能拦截请求和响应 自动转换JSON数据  安装 npm install axios -S  axios的基本用法12345axios.get(&#39;&#x2F;data&#39;)    .then (">
 <meta property="og:type" content="article">
-<meta property="og:title" content="函数的闭包">
-<meta property="og:url" content="https://gitee.com/yang_yu_xiang/MyBlog/2020/06/19/%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AD%E5%8C%85/index.html">
+<meta property="og:title" content="axios">
+<meta property="og:url" content="https://gitee.com/yang_yu_xiang/MyBlog/2020/08/11/axios/index.html">
 <meta property="og:site_name" content="Yang&#39;s Blog">
-<meta property="og:description" content="闭包变量的作用域变量根据作用域的不同分为两种:全局变量和局部变量。  1.函数内部可以使用全局变量。 2.函数外部不可以使用局部变量。 3.当函数执行完毕,本作用域内的局部变量会销毁。  什么是闭包闭包( closure )指有权访问另一个函数作用域中变量的函数。—– JavaScript 高级程序设计 通俗点说，闭包就是一个函数（一个作用域可以访问另一个函数的局部变量） 简单理解就是,一个作用域">
-<meta property="article:published_time" content="2020-06-19T03:20:43.000Z">
-<meta property="article:modified_time" content="2020-07-29T11:22:13.866Z">
+<meta property="og:description" content="axios(官网: https:&#x2F;&#x2F;github.com&#x2F;axios&#x2F;axios)是一个基于Promise用于浏览器和node.js的HTTP客户端。它具有以下特征:  支持浏览器和node.js心 支持promise 能拦截请求和响应 自动转换JSON数据  安装 npm install axios -S  axios的基本用法12345axios.get(&#39;&#x2F;data&#39;)    .then (">
+<meta property="article:published_time" content="2020-08-11T08:53:41.000Z">
+<meta property="article:modified_time" content="2020-08-11T09:46:09.895Z">
 <meta property="article:author" content="杨雨翔">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="闭包">
+<meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
 
 
@@ -127,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://gitee.com/yang_yu_xiang/MyBlog/2020/06/19/函数的闭包/"/>
+  <link rel="canonical" href="https://gitee.com/yang_yu_xiang/MyBlog/2020/08/11/axios/"/>
 
 
 
 
 
-  <title>函数的闭包 | Yang's Blog</title>
+  <title>axios | Yang's Blog</title>
   
 
 
@@ -295,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/06/19/%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AD%E5%8C%85/">
+    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/08/11/axios/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="杨雨翔">
@@ -312,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">函数的闭包</h1>
+          <h1 class="post-title" itemprop="name headline">axios</h1>
         
 
         <div class="post-meta">
@@ -324,8 +323,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-19T11:20:43+08:00">
-                2020-06-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-11T16:53:41+08:00">
+                2020-08-11
               </time>
             
 
@@ -340,45 +339,12 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-07-29T19:22:13+08:00">
-                2020-07-29
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-11T17:46:09+08:00">
+                2020-08-11
               </time>
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/%E5%89%8D%E7%AB%AF/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -388,8 +354,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/MyBlog/2020/06/19/%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AD%E5%8C%85/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/06/19/%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AD%E5%8C%85/" itemprop="commentCount"></span>
+                <a href="/MyBlog/2020/08/11/axios/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/08/11/axios/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -416,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  565
                 </span>
               
 
@@ -432,7 +398,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  2
                 </span>
               
             </div>
@@ -453,39 +419,38 @@
       
 
       
-        <h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="变量的作用域"><a href="#变量的作用域" class="headerlink" title="变量的作用域"></a>变量的作用域</h2><p>变量根据作用域的不同分为两种:全局变量和局部变量。</p>
+        <p>axios(官网: <a href="https://github.com/axios/axios)是一个基于Promise用于浏览器和node.js的HTTP客户端。" target="_blank" rel="noopener">https://github.com/axios/axios)是一个基于Promise用于浏览器和node.js的HTTP客户端。</a><br>它具有以下特征:</p>
 <ul>
-<li>1.函数内部可以使用全局变量。</li>
-<li>2.函数外部不可以使用局部变量。</li>
-<li>3.当函数执行完毕,本作用域内的局部变量会销毁。</li>
+<li>支持浏览器和node.js心</li>
+<li>支持promise</li>
+<li>能拦截请求和响应</li>
+<li>自动转换JSON数据</li>
 </ul>
-<h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><p><strong>闭包( closure )</strong>指有权访问另一个函数作用域中变量的<strong>函数</strong>。—– JavaScript 高级程序设计</p>
-<p>通俗点说，闭包就是一个函数（一个作用域可以访问另一个函数的局部变量）</p>
-<p>简单理解就是,一个作用域可以访问另外一个函数内部的局部变量。<strong><em>被访问的局部变量所在的函数我们成为闭包函数</em></strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num=<span class="number">10</span>; </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span><span class="number">.1</span>og(num);<span class="comment">//fun()访问到了fn()中的局部变量，满足闭包条件，产生闭包</span></span><br><span class="line">    &#125;</span><br><span class="line">    fun(); </span><br><span class="line">&#125;</span><br><span class="line">fn();</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>让fn外面的作用域可以访问fn内部的局部变量</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num=<span class="number">10</span>; </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span><span class="number">.1</span>og(num);</span><br><span class="line">    &#125;</span><br><span class="line">    retuen fun;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> f = fn();</span><br><span class="line">f();</span><br></pre></td></tr></table></figure>
-<p>我们可以简化一下写法</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num=<span class="number">10</span>; </span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span><span class="number">.1</span>og(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> f = fn();</span><br><span class="line"><span class="comment">//相当于 var f = function()&#123;</span></span><br><span class="line">    <span class="built_in">console</span>.log(num)</span><br><span class="line">&#125;</span><br><span class="line">f();</span><br></pre></td></tr></table></figure>
-<p><strong>闭包的主要作用：延伸了变量的作用域</strong></p>
-<h1 id="闭包案例1"><a href="#闭包案例1" class="headerlink" title="闭包案例1"></a>闭包案例1</h1><p>闭包应用-点击li输出当前li的索引号</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"nav"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>大猪蹄子<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>臭豆腐<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>鲱鱼罐头<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>榴莲<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>1.我们可以利用动态添加属性的方式<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lis = <span class="built_in">document</span>.querySelector(<span class="string">'.nav'</span> ). querySelectorAll( <span class="string">'li'</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i =<span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">    lis[i].index = i</span><br><span class="line">    lis[i] .onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span><span class="number">.1</span>og(<span class="keyword">this</span>.index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>2.利用闭包方式得到 li 索引号<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 利用 for 循环创建了4个立即执行数</span></span><br><span class="line">    <span class="comment">// 立即执行函数 也称为小闭包  因立即执函数里面的任何一个函数都可使用他 的 i量</span></span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;<span class="comment">//把当前循环到的i传入立即执行函数</span></span><br><span class="line">        <span class="comment">// console.log(i);</span></span><br><span class="line">        lis[i].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)(i);<span class="comment">//这里必须写传入的参数，函数才能获取到</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//在这个例子中，点击事件触发的函数的i是从立即执行函数中获取来的，所以这个立即执行函数是一个闭包函数</span></span><br></pre></td></tr></table></figure>
-需求更改：闭包应用-3秒钟之后，打印所有li 元素的内容<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lis = <span class="built_in">document</span>.querySelectornav.querySelectorAll(<span class="string">'li'</span>)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(lis[i].innerHTML);</span><br><span class="line">        &#125;, <span class="number">3000</span>)</span><br><span class="line">    &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="闭包案例2"><a href="#闭包案例2" class="headerlink" title="闭包案例2"></a>闭包案例2</h1></li>
-<li>闭包应用-计算打车价格</li>
-<li>打车起步价13（3公里内），之后每多一公里增加5块钱.用户输入公里数就可以计算打车价格</li>
-<li>如果有拥堵情况，总价格多收取18块钱拥堵费<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> car = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> start = <span class="number">13</span>; <span class="comment">// 起步价 局部变量</span></span><br><span class="line">    <span class="keyword">var</span> total = <span class="number">0</span>; <span class="comment">// 总价 局部变量</span></span><br><span class="line">        <span class="comment">// 正常的价格</span></span><br><span class="line">        price: <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (n &lt;= <span class="number">3</span>) &#123;</span><br><span class="line">                total = start;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                total = start + (n <span class="number">3</span>) * <span class="number">5</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> total;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// 拥堵之后的价格</span></span><br><span class="line">        yd: <span class="function"><span class="keyword">function</span>(<span class="params">flag</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> flag ? total + <span class="number">1</span>: total;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="built_in">console</span>.log(car.price(<span class="number">5</span>)); <span class="comment">// 23</span></span><br><span class="line"><span class="built_in">console</span>.log(car.yd(<span class="literal">true</span>)); <span class="comment">// 33</span></span><br><span class="line"><span class="built_in">console</span>.log(car.price(<span class="number">1</span>)); <span class="comment">// 13</span></span><br><span class="line"><span class="built_in">console</span>.log(car.yd(<span class="literal">false</span>)); <span class="comment">// 13</span></span><br></pre></td></tr></table></figure>
-price和yd函数用了立即执行函数中的局部变量，所以立即执行函数是一个闭包函数</li>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><blockquote>
+<p>npm install axios -S</p>
+</blockquote>
+<h1 id="axios的基本用法"><a href="#axios的基本用法" class="headerlink" title="axios的基本用法"></a>axios的基本用法</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">axios.get(<span class="string">'/data'</span>)</span><br><span class="line">    .then (<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line"><span class="comment">// data属性名称是固定的，用于获取后台响应的数据</span></span><br><span class="line">        <span class="built_in">console</span>.log(res.data)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="axios常用API"><a href="#axios常用API" class="headerlink" title="axios常用API"></a>axios常用API</h1><ul>
+<li>get :查询数据</li>
+<li>post:添加数据</li>
+<li>put :修改数据</li>
+<li>delete:删除数据</li>
 </ul>
-<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><h2 id="1、"><a href="#1、" class="headerlink" title="1、"></a>1、</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"The Window"</span> ;</span><br><span class="line"><span class="keyword">var</span> object = &#123;</span><br><span class="line">    name: <span class="string">"My object"</span> ，</span><br><span class="line">    getNameFunc: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(object.getNameFunc()())</span><br></pre></td></tr></table></figure>
-<p>有点乱？不要急  我们来拆解一下</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f =robject.getNameFunc( );</span><br><span class="line"><span class="comment">//类似于</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">&#125;</span><br><span class="line">f(),即</span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">&#125;()<span class="comment">//这是一个立即执行函数，this指向window 那么this中的name就是window全局作用域下的name</span></span><br><span class="line"><span class="comment">//输出the window</span></span><br></pre></td></tr></table></figure>
-<p>这段代码中没有访问到局部变量，没有闭包产生</p>
-<h2 id="2、"><a href="#2、" class="headerlink" title="2、"></a>2、</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"The Window"</span> ;</span><br><span class="line"><span class="keyword">var</span> object = &#123;</span><br><span class="line">    name: <span class="string">"My object"</span> ，</span><br><span class="line">    getNameFunc: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="keyword">this</span> ;<span class="comment">//此时，this指向object，即that=object</span></span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> that.name;<span class="comment">//that用了getNameFunc的局部变量，产生了闭包，这里getNameFunc是闭包函数</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log (object.getNameFunc()())<span class="comment">//my object</span></span><br></pre></td></tr></table></figure>
+<h1 id="axios的参数传递"><a href="#axios的参数传递" class="headerlink" title="axios的参数传递"></a>axios的参数传递</h1><h2 id="get参数传递"><a href="#get参数传递" class="headerlink" title="get参数传递"></a>get参数传递</h2><ul>
+<li>通过URL传递参数</li>
+<li>通过params选项传递参数<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过url传参(第一种)</span></span><br><span class="line">axios.get( <span class="string">'/adata?id=123'</span>)</span><br><span class="line">    .then (<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log (res.data)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//接口实现</span></span><br><span class="line">app.get(<span class="string">'/adata'</span>, (req,res)=&gt;&#123;</span><br><span class="line">    res.send(<span class="string">"axios get 传递参数"</span>+ req.query.id)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过url传参(第二种)</span></span><br><span class="line">axios.get( <span class="string">'/adata/123'</span>)</span><br><span class="line">    .then (<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log (res.data) </span><br><span class="line">    &#125;)</span><br><span class="line"><span class="comment">//接口实现</span></span><br><span class="line">app.get(<span class="string">'/adata/:id'</span>, (req，res) =&gt;&#123;</span><br><span class="line">res. send(<span class="string">'axios get (Restful）传递参数'</span>+req.params.id)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过params属性传参（params用于传递get参数）</span></span><br><span class="line">axios.get (<span class="string">'/adata'</span>,&#123;</span><br><span class="line">    params : &#123;</span><br><span class="line">        id: <span class="number">123</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (res.data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="delete参数传递"><a href="#delete参数传递" class="headerlink" title="delete参数传递"></a>delete参数传递</h2>传递方式与get类似 也是通过url和param，我这里实现一下params<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过params属性传参</span></span><br><span class="line">axios.delete(<span class="string">'/adata'</span>,&#123;</span><br><span class="line">    params : &#123;</span><br><span class="line">        id: <span class="number">123</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (res.data)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//接口实现</span></span><br><span class="line">app.delete(<span class="string">'/axios'</span>,(req，res)=&gt;&#123;</span><br><span class="line">    res.send(<span class="string">'axios get传递参数'</span>+req.query.id)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="post参数传递"><a href="#post参数传递" class="headerlink" title="post参数传递"></a>post参数传递</h2></li>
+<li>通过选项传递参数（默认传递的是json格式的数据）</li>
+<li>通过URLSearchParams传递参数(application/x-www-form-urlencoded)(了解就好)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">axios.post(<span class="string">'/adata'</span>,&#123;</span><br><span class="line">    uname: <span class="string">'tom'</span>,</span><br><span class="line">    pwd:<span class="number">123</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (res.data)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//接口实现</span></span><br><span class="line">app.post(<span class="string">"/axios"</span>, (req,res) =&gt;&#123;</span><br><span class="line">    res.send(<span class="string">'axios post传递参数'</span>+req.body.uname + <span class="string">'---'</span>+req.body.pwd)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="put参数传递"><a href="#put参数传递" class="headerlink" title="put参数传递"></a>put参数传递</h2>与post类似 但是一般会在url后面跟上具体要修改的内容的id<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">axios.post(<span class="string">'/adata/123'</span>,&#123;<span class="comment">//123为要修改的信息的id</span></span><br><span class="line">    uname: <span class="string">'tom'</span>,<span class="comment">//要修改的对应id的信息</span></span><br><span class="line">    pwd:<span class="number">123</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (res.data)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//接口实现</span></span><br><span class="line">app.post(<span class="string">"/axios/:id"</span>, (req,res) =&gt;&#123;</span><br><span class="line">    res.send(<span class="string">'axios put传递参数'</span>+req.params.id + <span class="string">'---'</span>+req.body.uname + <span class="string">'---'</span>+req.body.pwd)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="axios的全局配置"><a href="#axios的全局配置" class="headerlink" title="axios的全局配置"></a>axios的全局配置</h1></li>
+<li>axios.defaults.timeout = 3000//超时时间</li>
+<li>axios.defaults.baseURL = ‘<a href="http://localhost:3000/app&#39;;//默认地址" target="_blank" rel="noopener">http://localhost:3000/app&#39;;//默认地址</a></li>
+<li>axios.defaults.headers[‘mytoken’]= ‘aqwerwqwerqwer2ewrwe23eresdf23’//设置请求头</li>
+</ul>
+
       
     </div>
     
@@ -494,6 +459,35 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
     <div>
       
         
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/MyBlog/2020/08/11/axios/">axios</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 杨雨翔 的个人博客">杨雨翔</a></p>
+  <p><span>发布时间:</span>2020年08月11日 - 16:53</p>
+  <p><span>最后更新:</span>2020年08月11日 - 17:46</p>
+  <p><span>原始链接:</span><a href="/MyBlog/2020/08/11/axios/" title="axios">https://gitee.com/yang_yu_xiang/MyBlog/2020/08/11/axios/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://gitee.com/yang_yu_xiang/MyBlog/2020/08/11/axios/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
       
     </div>
     <div style="text-align:center;color: #ccc;font-size:16px;">
@@ -510,9 +504,7 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
       
         <div class="post-tags">
           
-            <a href="/MyBlog/tags/javascript/" rel="tag"><i class="fa fa-tag"></i> javascript</a>
-          
-            <a href="/MyBlog/tags/%E9%97%AD%E5%8C%85/" rel="tag"><i class="fa fa-tag"></i> 闭包</a>
+            <a href="/MyBlog/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
           
         </div>
       
@@ -525,8 +517,8 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/MyBlog/2020/06/18/js%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" rel="next" title="js中的常用数组方法">
-                <i class="fa fa-chevron-left"></i> js中的常用数组方法
+              <a href="/MyBlog/2020/07/30/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/" rel="next" title="Vue脚手架">
+                <i class="fa fa-chevron-left"></i> Vue脚手架
               </a>
             
           </div>
@@ -534,10 +526,6 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/MyBlog/2020/06/30/Nodejs%E4%B8%ADhttp%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94%E5%A4%84%E7%90%86/" rel="prev" title="Nodejs中http请求与响应处理">
-                Nodejs中http请求与响应处理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -746,7 +734,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#闭包"><span class="nav-number">1.</span> <span class="nav-text">闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量的作用域"><span class="nav-number">1.1.</span> <span class="nav-text">变量的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是闭包"><span class="nav-number">1.2.</span> <span class="nav-text">什么是闭包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#闭包案例1"><span class="nav-number">2.</span> <span class="nav-text">闭包案例1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#闭包案例2"><span class="nav-number">3.</span> <span class="nav-text">闭包案例2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考题"><span class="nav-number">4.</span> <span class="nav-text">思考题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、"><span class="nav-number">4.1.</span> <span class="nav-text">1、</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、"><span class="nav-number">4.2.</span> <span class="nav-text">2、</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#axios的基本用法"><span class="nav-number">2.</span> <span class="nav-text">axios的基本用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#axios常用API"><span class="nav-number">3.</span> <span class="nav-text">axios常用API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#axios的参数传递"><span class="nav-number">4.</span> <span class="nav-text">axios的参数传递</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#get参数传递"><span class="nav-number">4.1.</span> <span class="nav-text">get参数传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete参数传递"><span class="nav-number">4.2.</span> <span class="nav-text">delete参数传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post参数传递"><span class="nav-number">4.3.</span> <span class="nav-text">post参数传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#put参数传递"><span class="nav-number">4.4.</span> <span class="nav-text">put参数传递</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#axios的全局配置"><span class="nav-number">5.</span> <span class="nav-text">axios的全局配置</span></a></li></ol></div>
             
 
           </div>
