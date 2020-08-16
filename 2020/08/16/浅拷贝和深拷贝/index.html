@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="导航,分享," />
+  <meta name="keywords" content="JavaScript," />
 
 
 
@@ -86,20 +86,17 @@
 
 
 
-<meta name="description" content="杨雨翔第一篇文章三级标题">
+<meta name="description" content="浅拷贝 浅拷贝只是拷贝一层,更深层次对象级别的只拷贝引用。  来看个例子： 1234567891011&#x2F;&#x2F;我们有个Object对象，我想把这个对象拷贝给另一个对象var obj &#x3D; &amp;#123;    id: 1,    name: &#39;andy&#39;&amp;#125;var o &#x3D; &amp;#123;&amp;#125;;for (var k in obj)&amp;#123;    &#x2F;&#x2F;k是属性名   obj[k]是属性值">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Markdown的学习使用">
-<meta property="og:url" content="https://gitee.com/yang_yu_xiang/MyBlog/2020/06/12/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E5%86%B2%E5%86%B2%E5%86%B2/index.html">
+<meta property="og:title" content="浅拷贝和深拷贝">
+<meta property="og:url" content="https://gitee.com/yang_yu_xiang/MyBlog/2020/08/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/index.html">
 <meta property="og:site_name" content="Yang&#39;s Blog">
-<meta property="og:description" content="杨雨翔第一篇文章三级标题">
-<meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/yunduan.png">
-<meta property="article:published_time" content="2020-06-12T12:11:06.000Z">
-<meta property="article:modified_time" content="2020-06-30T07:57:14.282Z">
+<meta property="og:description" content="浅拷贝 浅拷贝只是拷贝一层,更深层次对象级别的只拷贝引用。  来看个例子： 1234567891011&#x2F;&#x2F;我们有个Object对象，我想把这个对象拷贝给另一个对象var obj &#x3D; &amp;#123;    id: 1,    name: &#39;andy&#39;&amp;#125;var o &#x3D; &amp;#123;&amp;#125;;for (var k in obj)&amp;#123;    &#x2F;&#x2F;k是属性名   obj[k]是属性值">
+<meta property="article:published_time" content="2020-08-16T07:30:43.000Z">
+<meta property="article:modified_time" content="2020-08-16T09:15:23.619Z">
 <meta property="article:author" content="杨雨翔">
-<meta property="article:tag" content="导航">
-<meta property="article:tag" content="分享">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/yunduan.png">
 
 
 
@@ -129,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://gitee.com/yang_yu_xiang/MyBlog/2020/06/12/搭建博客冲冲冲/"/>
+  <link rel="canonical" href="https://gitee.com/yang_yu_xiang/MyBlog/2020/08/16/浅拷贝和深拷贝/"/>
 
 
 
 
 
-  <title>Markdown的学习使用 | Yang's Blog</title>
+  <title>浅拷贝和深拷贝 | Yang's Blog</title>
   
 
 
@@ -297,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/06/12/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E5%86%B2%E5%86%B2%E5%86%B2/">
+    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/08/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="杨雨翔">
@@ -314,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Markdown的学习使用</h1>
+          <h1 class="post-title" itemprop="name headline">浅拷贝和深拷贝</h1>
         
 
         <div class="post-meta">
@@ -326,8 +323,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-12T20:11:06+08:00">
-                2020-06-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-16T15:30:43+08:00">
+                2020-08-16
               </time>
             
 
@@ -342,8 +339,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-30T15:57:14+08:00">
-                2020-06-30
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-16T17:15:23+08:00">
+                2020-08-16
               </time>
             
           </span>
@@ -368,6 +365,17 @@
 
                 
                 
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/MyBlog/categories/%E5%89%8D%E7%AB%AF/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
               
             </span>
           
@@ -379,8 +387,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/MyBlog/2020/06/12/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E5%86%B2%E5%86%B2%E5%86%B2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/06/12/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E5%86%B2%E5%86%B2%E5%86%B2/" itemprop="commentCount"></span>
+                <a href="/MyBlog/2020/08/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/08/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -407,7 +415,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  91
+                  507
                 </span>
               
 
@@ -423,7 +431,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -442,43 +450,31 @@
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/yunduan.png" rel="gallery_ckcygv192001gwgqgf70wc8dg"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/yunduan.png" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
 
       
-        <h1 id="杨雨翔"><a href="#杨雨翔" class="headerlink" title="杨雨翔"></a>杨雨翔</h1><h2 id="第一篇文章"><a href="#第一篇文章" class="headerlink" title="第一篇文章"></a>第一篇文章</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><a id="more"></a>
-
-<ul>
-<li>列表1</li>
-<li>列表2<br>  a 子列表<br>  b 子列表</li>
-<li>列表3</li>
+        <h1 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h1><ul>
+<li><strong>浅拷贝只是拷贝一层,更深层次对象级别的只拷贝引用。</strong></li>
 </ul>
-<hr>
-<hr>
-<p><a href="https://gitee.com/yang_yu_xiang">我的gitee导航</a><br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg" alt="插入图片"></p>
-<p><em>字体变成斜的</em><br><strong>字体加粗了呀</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;&lt;/head&gt;</span><br><span class="line">    &lt;body&gt;&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-<p><code>哈哈嘻嘻</code></p>
+<p>来看个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们有个Object对象，我想把这个对象拷贝给另一个对象</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    id: <span class="number">1</span>,</span><br><span class="line">    name: <span class="string">'andy'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> obj)&#123;</span><br><span class="line">    <span class="comment">//k是属性名   obj[k]是属性值</span></span><br><span class="line">    o[k]= obj[k];</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(o);</span><br></pre></td></tr></table></figure>
+<p>这样就输出了obj中的值，但是如果我们有更深的一层数据：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    id: <span class="number">1</span>,</span><br><span class="line">    name: <span class="string">'andy'</span></span><br><span class="line">    <span class="comment">//对象里面还有个对象</span></span><br><span class="line">    msg:&#123;</span><br><span class="line">        age:<span class="number">18</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> obj)&#123;</span><br><span class="line">    <span class="comment">//k是属性名   obj[k]是属性值</span></span><br><span class="line">    o[k]= obj[k];</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(o);</span><br></pre></td></tr></table></figure>
+<p>这样拷贝虽然能拷贝成功输出msg，但是拷贝的是msg的地址。所以obj的msg和o的msg指向的是同一条数据，做个测试</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">o.msg.age = <span class="number">20</span></span><br><span class="line"><span class="built_in">console</span>.log(o.msg.age)<span class="comment">//20</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.msg.age)<span class="comment">//20</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>ES6中，为我们增加了浅拷贝的语法糖</p>
 <blockquote>
-<p>我的内容是引用的哈哈</p>
+<p>Object.assign(拷贝给谁，拷贝哪个对象)</p>
 </blockquote>
-<p><code>在视频连接中插入 class=&quot;bilibili&quot;</code></p>
-<iframe class="bilibili" src="//player.bilibili.com/player.html?aid=286039785&bvid=BV1mf4y1y7pp&cid=202160057&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<p>我们把上面的例子用语法糖的方法改写一下，就不需要for循环</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//把obj对象浅拷贝给o</span></span><br><span class="line"><span class="built_in">Object</span>.assign(o,obj)</span><br></pre></td></tr></table></figure>
+<h1 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h1><ul>
+<li><strong>深拷贝拷贝多层,每一级别的数据都会拷贝。</strong></li>
+</ul>
+<p>我们可以通过函数递归的方式来一层一层循环赋值，来实现深拷贝，我们可以封装一个<code>deepCopy</code>函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    id: <span class="number">1</span>,</span><br><span class="line">    name: <span class="string">'andy'</span>,</span><br><span class="line">    <span class="comment">//对象里面还有个对象</span></span><br><span class="line">    msg:&#123;</span><br><span class="line">        age:<span class="number">18</span></span><br><span class="line">    &#125;,</span><br><span class="line">    color:[<span class="string">'pink'</span>,<span class="string">'red'</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">newobj,oldobj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> oldobj) &#123;</span><br><span class="line">        <span class="comment">//判断我们的属性值属于那种数据类型</span></span><br><span class="line">        <span class="comment">// 1．获取属性值oldobj[k]</span></span><br><span class="line">        <span class="keyword">var</span> item = oldobj[k];</span><br><span class="line">        <span class="comment">// 2．判断这个值是否是数组</span></span><br><span class="line">        <span class="keyword">if</span> (item <span class="keyword">instanceof</span> <span class="built_in">Array</span>)&#123;</span><br><span class="line">            newobj[k] = [];</span><br><span class="line">            deepCopy(newobj[k],item)</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (item <span class="keyword">instanceof</span> <span class="built_in">Object</span>)&#123;</span><br><span class="line">            <span class="comment">// 3．判断这个值是否是对象</span></span><br><span class="line">            newobj[k]=&#123;&#125;;</span><br><span class="line">            deepCopy(newobj[k],item)</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//属于简单数据类型</span></span><br><span class="line">            newobj[k] = item;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">deepCopy(o,obj)</span><br></pre></td></tr></table></figure>
+<p>这样，我修改o中的msg中的值或者color中的值，obj不会受到影响</p>
+
       
     </div>
     
@@ -487,6 +483,35 @@
     <div>
       
         
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/MyBlog/2020/08/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/">浅拷贝和深拷贝</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 杨雨翔 的个人博客">杨雨翔</a></p>
+  <p><span>发布时间:</span>2020年08月16日 - 15:30</p>
+  <p><span>最后更新:</span>2020年08月16日 - 17:15</p>
+  <p><span>原始链接:</span><a href="/MyBlog/2020/08/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/" title="浅拷贝和深拷贝">https://gitee.com/yang_yu_xiang/MyBlog/2020/08/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://gitee.com/yang_yu_xiang/MyBlog/2020/08/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
       
     </div>
     <div style="text-align:center;color: #ccc;font-size:16px;">
@@ -503,9 +528,7 @@
       
         <div class="post-tags">
           
-            <a href="/MyBlog/tags/%E5%AF%BC%E8%88%AA/" rel="tag"><i class="fa fa-tag"></i> 导航</a>
-          
-            <a href="/MyBlog/tags/%E5%88%86%E4%BA%AB/" rel="tag"><i class="fa fa-tag"></i> 分享</a>
+            <a href="/MyBlog/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
         </div>
       
@@ -518,15 +541,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/MyBlog/2020/08/15/Vuex/" rel="next" title="Vuex">
+                <i class="fa fa-chevron-left"></i> Vuex
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/MyBlog/2020/06/14/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3js%E7%9A%84%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" rel="prev" title="深入理解js的防抖和节流">
-                深入理解js的防抖和节流 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -735,7 +758,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#杨雨翔"><span class="nav-number">1.</span> <span class="nav-text">杨雨翔</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一篇文章"><span class="nav-number">1.1.</span> <span class="nav-text">第一篇文章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三级标题"><span class="nav-number">1.1.1.</span> <span class="nav-text">三级标题</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浅拷贝"><span class="nav-number">1.</span> <span class="nav-text">浅拷贝</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深拷贝"><span class="nav-number">2.</span> <span class="nav-text">深拷贝</span></a></li></ol></div>
             
 
           </div>

@@ -1737,4 +1737,38 @@ await后面需要跟上一个异步对象，如果是我们自己写的promise�
         <tag>Vue</tag>
       </tags>
   </entry>
+  <entry>
+    <title>浅拷贝和深拷贝</title>
+    <url>/MyBlog/2020/08/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/</url>
+    <content><![CDATA[<h1 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h1><ul>
+<li><strong>浅拷贝只是拷贝一层,更深层次对象级别的只拷贝引用。</strong></li>
+</ul>
+<p>来看个例子：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//我们有个Object对象，我想把这个对象拷贝给另一个对象</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    id: <span class="number">1</span>,</span><br><span class="line">    name: <span class="string">'andy'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> obj)&#123;</span><br><span class="line">    <span class="comment">//k是属性名   obj[k]是属性值</span></span><br><span class="line">    o[k]= obj[k];</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(o);</span><br></pre></td></tr></table></figure>
+<p>这样就输出了obj中的值，但是如果我们有更深的一层数据：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    id: <span class="number">1</span>,</span><br><span class="line">    name: <span class="string">'andy'</span></span><br><span class="line">    <span class="comment">//对象里面还有个对象</span></span><br><span class="line">    msg:&#123;</span><br><span class="line">        age:<span class="number">18</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> obj)&#123;</span><br><span class="line">    <span class="comment">//k是属性名   obj[k]是属性值</span></span><br><span class="line">    o[k]= obj[k];</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(o);</span><br></pre></td></tr></table></figure>
+<p>这样拷贝虽然能拷贝成功输出msg，但是拷贝的是msg的地址。所以obj的msg和o的msg指向的是同一条数据，做个测试</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">o.msg.age = <span class="number">20</span></span><br><span class="line"><span class="built_in">console</span>.log(o.msg.age)<span class="comment">//20</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.msg.age)<span class="comment">//20</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>ES6中，为我们增加了浅拷贝的语法糖</p>
+<blockquote>
+<p>Object.assign(拷贝给谁，拷贝哪个对象)</p>
+</blockquote>
+<p>我们把上面的例子用语法糖的方法改写一下，就不需要for循环</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//把obj对象浅拷贝给o</span></span><br><span class="line"><span class="built_in">Object</span>.assign(o,obj)</span><br></pre></td></tr></table></figure>
+<h1 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h1><ul>
+<li><strong>深拷贝拷贝多层,每一级别的数据都会拷贝。</strong></li>
+</ul>
+<p>我们可以通过函数递归的方式来一层一层循环赋值，来实现深拷贝，我们可以封装一个<code>deepCopy</code>函数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    id: <span class="number">1</span>,</span><br><span class="line">    name: <span class="string">'andy'</span>,</span><br><span class="line">    <span class="comment">//对象里面还有个对象</span></span><br><span class="line">    msg:&#123;</span><br><span class="line">        age:<span class="number">18</span></span><br><span class="line">    &#125;,</span><br><span class="line">    color:[<span class="string">'pink'</span>,<span class="string">'red'</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">newobj,oldobj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> oldobj) &#123;</span><br><span class="line">        <span class="comment">//判断我们的属性值属于那种数据类型</span></span><br><span class="line">        <span class="comment">// 1．获取属性值oldobj[k]</span></span><br><span class="line">        <span class="keyword">var</span> item = oldobj[k];</span><br><span class="line">        <span class="comment">// 2．判断这个值是否是数组</span></span><br><span class="line">        <span class="keyword">if</span> (item <span class="keyword">instanceof</span> <span class="built_in">Array</span>)&#123;</span><br><span class="line">            newobj[k] = [];</span><br><span class="line">            deepCopy(newobj[k],item)</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (item <span class="keyword">instanceof</span> <span class="built_in">Object</span>)&#123;</span><br><span class="line">            <span class="comment">// 3．判断这个值是否是对象</span></span><br><span class="line">            newobj[k]=&#123;&#125;;</span><br><span class="line">            deepCopy(newobj[k],item)</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//属于简单数据类型</span></span><br><span class="line">            newobj[k] = item;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">deepCopy(o,obj)</span><br></pre></td></tr></table></figure>
+<p>这样，我修改o中的msg中的值或者color中的值，obj不会受到影响</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
 </search>
