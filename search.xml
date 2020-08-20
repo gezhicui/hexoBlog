@@ -136,7 +136,7 @@
       </tags>
   </entry>
   <entry>
-    <title>MongoDB数据库的学习使用（一） 安装及环境配置</title>
+    <title>MongoDB数据库的学习使用（一） 安装及环境配置和基本操作</title>
     <url>/MyBlog/2020/07/18/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89/</url>
     <content><![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="MongoDB数据库和可视化软件的下载"><a href="#MongoDB数据库和可视化软件的下载" class="headerlink" title="MongoDB数据库和可视化软件的下载"></a>MongoDB数据库和可视化软件的下载</h2><ul>
 <li>下载地址: <a href="https://www.mongodb.com/download-center/community" target="_blank" rel="noopener">https://www.mongodb.com/download-center/community</a></li>
@@ -162,6 +162,35 @@
 <p>在命令行工具中运行<code>net start mongoDB</code>即可启动MongoDB，否则MongoDB将无法连接。同时，也可以用<code>net stop mongoDB</code>停止服务</p>
 <p>2、连接MongoDB</p>
 <p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E8%BF%9E%E6%8E%A5MongoDB.png" alt=""></p>
+<h1 id="数据库的基本操作"><a href="#数据库的基本操作" class="headerlink" title="数据库的基本操作"></a>数据库的基本操作</h1><h2 id="查看数据库"><a href="#查看数据库" class="headerlink" title="查看数据库"></a>查看数据库</h2><p>cmd窗口cd到数据库的bin目录下，我是C:\ProgramFiles\MongoDB\Server\4.2\bin&gt;</p>
+<p>输入<code>mongo</code>进行数据库操作，输入</p>
+<blockquote>
+<p>show databases</p>
+</blockquote>
+<p>就会出现当前以及创建过的数据库</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/showdatabases.png" alt=""></p>
+<p>现在想要进入admin目录，输入</p>
+<blockquote>
+<p>use admin</p>
+</blockquote>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E8%BF%9B%E5%85%A5admin.png" alt=""></p>
+<p>当我们use进入不存在的数据库时，不会报错，而会帮我们隐式创建一个该名字的数据库，后期当该数据库有数据时，系统自动创建</p>
+<h2 id="查看集合"><a href="#查看集合" class="headerlink" title="查看集合"></a>查看集合</h2><p>进入已经创建的数据库中，输入</p>
+<blockquote>
+<p>show collections</p>
+</blockquote>
+<h2 id="创建集合"><a href="#创建集合" class="headerlink" title="创建集合"></a>创建集合</h2><blockquote>
+<p>db.createCollection(‘集合名’)</p>
+</blockquote>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%88%9B%E5%BB%BA%E9%9B%86%E5%90%88(2).png" alt=""></p>
+<h2 id="删除集合"><a href="#删除集合" class="headerlink" title="删除集合"></a>删除集合</h2><blockquote>
+<p>db.集合名.drop()</p>
+</blockquote>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%88%A0%E9%99%A4%E9%9B%86%E5%90%88.png" alt=""></p>
+<h2 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h2><ul>
+<li>1通过use语法选中数据库</li>
+<li>2通过db.dropDatabase()删除数据库</li>
+</ul>
 ]]></content>
       <categories>
         <category>数据库</category>
@@ -245,15 +274,18 @@
     <url>/MyBlog/2020/07/19/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
     <content><![CDATA[<h1 id="MongoDB-CRUD操作"><a href="#MongoDB-CRUD操作" class="headerlink" title="MongoDB CRUD操作"></a>MongoDB CRUD操作</h1><p>我们先来看看MongoDB中的相关概念</p>
 <p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89.png" alt=""></p>
-<p>在mysql中分别对应数据库、表、行、字段</p>
 <a id="more"></a>
 <h2 id="创建集合"><a href="#创建集合" class="headerlink" title="创建集合"></a>创建集合</h2><p>&emsp;&emsp;创建集合分为两步，一是对集合设定规则，二是创建集合，创建mongoose.Schema构造函数的实例即可创建集合。</p>
+<p><strong>schema为约束</strong><br>作用:用来约束MongoDB文档数据（哪些字段必须，哪些字段可选的)</p>
+<p><strong>model为模型</strong><br>一个模型对应一个集合，后面我们通过模型来管理集合中的数据</p>
+<p>集合规则的值可以设置默，如图中的name:String 可以设置为name:{type；String,dafault:’username’}</p>
 <p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%88%9B%E5%BB%BA%E9%9B%86%E5%90%88.png" alt=""></p>
 <h2 id="创建文档"><a href="#创建文档" class="headerlink" title="创建文档"></a>创建文档</h2><p>创建文档实际上就是<strong>向集合中插入数据。</strong><br>分为两步</p>
 <ul>
 <li>创建集合实例。</li>
-<li>调用实例对象下的save方法将数据保存到数据库中。<h3 id="创建文档方法一"><a href="#创建文档方法一" class="headerlink" title="创建文档方法一"></a>创建文档方法一</h3><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%88%9B%E5%BB%BA%E6%96%87%E6%A1%A3.png" alt=""></li>
+<li>调用实例对象下的save方法将数据保存到数据库中。<h3 id="创建文档方法一"><a href="#创建文档方法一" class="headerlink" title="创建文档方法一"></a>创建文档方法一</h3></li>
 </ul>
+<p>注意：这里的const的Course可以自己定义，new的对象要和自己定义的一致<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%88%9B%E5%BB%BA%E6%96%87%E6%A1%A3.png" alt=""></p>
 <p>此时，数据库就已经创建成功</p>
 <p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E6%8F%92%E5%85%A5%E7%BB%93%E6%9E%9C.png" alt=""></p>
 <h3 id="创建文档方法二"><a href="#创建文档方法二" class="headerlink" title="创建文档方法二"></a>创建文档方法二</h3><p>在集合的构造函数下有一个create方法，可以通过<code>Course.create</code>的方法创建文档</p>
