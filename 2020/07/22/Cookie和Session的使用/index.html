@@ -86,16 +86,16 @@
 
 
 
-<meta name="description" content="cookie和session概念Cookie&amp;emsp;&amp;emsp;cookie是浏览器在电脑硬盘中开辟的一块空间，主要供服务器端存储数据。  cookie中的数据是以域名的形式进行区分的。 cookie中的数据是有过期时间的，超过时间数据会被浏览器自动删除。 cookie中的数据会随着请求被自动发送到服务器端。  如何查看cookie&amp;emsp;&amp;emsp;我们访问百度，在浏览器的开发者模式下A">
+<meta name="description" content="cookie和session概念Cookie&amp;emsp;&amp;emsp;cookie是浏览器在电脑硬盘中开辟的一块空间，主要供服务器端存储数据。  cookie中的数据是以域名的形式进行区分的。 cookie中的数据是有过期时间的，超过时间数据会被浏览器自动删除。 cookie中的数据会随着请求被自动发送到服务器端。 单个cookie大小不能超过4k，很多浏览器限制一个站点最多20个cookie  如">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cookie和Session的使用">
 <meta property="og:url" content="https://gitee.com/yang_yu_xiang/MyBlog/2020/07/22/Cookie%E5%92%8CSession%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Yang&#39;s Blog">
-<meta property="og:description" content="cookie和session概念Cookie&amp;emsp;&amp;emsp;cookie是浏览器在电脑硬盘中开辟的一块空间，主要供服务器端存储数据。  cookie中的数据是以域名的形式进行区分的。 cookie中的数据是有过期时间的，超过时间数据会被浏览器自动删除。 cookie中的数据会随着请求被自动发送到服务器端。  如何查看cookie&amp;emsp;&amp;emsp;我们访问百度，在浏览器的开发者模式下A">
+<meta property="og:description" content="cookie和session概念Cookie&amp;emsp;&amp;emsp;cookie是浏览器在电脑硬盘中开辟的一块空间，主要供服务器端存储数据。  cookie中的数据是以域名的形式进行区分的。 cookie中的数据是有过期时间的，超过时间数据会被浏览器自动删除。 cookie中的数据会随着请求被自动发送到服务器端。 单个cookie大小不能超过4k，很多浏览器限制一个站点最多20个cookie  如">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E7%99%BE%E5%BA%A6cookie.png">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/cookie%E5%92%8Csession%E5%85%B3%E7%B3%BB.png">
 <meta property="article:published_time" content="2020-07-22T10:21:28.000Z">
-<meta property="article:modified_time" content="2020-08-20T14:16:07.309Z">
+<meta property="article:modified_time" content="2020-08-21T03:56:48.964Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="cookie">
 <meta property="article:tag" content="session">
@@ -276,7 +276,7 @@
 
 
  </div>
-    </header>hexo
+    </header>
 
     <main id="main" class="main">
       <div class="main-inner">
@@ -343,8 +343,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-20T22:16:07+08:00">
-                2020-08-20
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-21T11:56:48+08:00">
+                2020-08-21
               </time>
             
           </span>
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  815
+                  1.1k
                 </span>
               
 
@@ -424,7 +424,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -450,17 +450,19 @@
 <li>cookie中的数据是以域名的形式进行区分的。</li>
 <li>cookie中的数据是<strong>有过期时间</strong>的，超过时间数据会被浏览器<strong>自动删除</strong>。</li>
 <li>cookie中的数据会随着请求被<strong>自动发送</strong>到服务器端。</li>
+<li>单个cookie大小不能超过4k，很多浏览器限制一个站点最多20个cookie</li>
 </ul>
 <h2 id="如何查看cookie"><a href="#如何查看cookie" class="headerlink" title="如何查看cookie"></a>如何查看cookie</h2><p>&emsp;&emsp;我们访问百度，在浏览器的开发者模式下Application中就可以查看百度给我们的cookie<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E7%99%BE%E5%BA%A6cookie.png" alt=""></p>
 <a id="more"></a>
-<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>&emsp;&emsp;session实际上就是一个对象，存储在服务器端的内存中，在session对象中也可以存储多条数据，每一条数据都有一个<code>sessionid</code>做为唯一标识。</p>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>&emsp;&emsp;session是另一种记录客户状态的机制，不同的是Cookie保存在客户端浏览器中，而session保存在服务器上。在session对象中也可以存储多条数据，每一条数据都有一个<code>sessionid</code>做为唯一标识。</p>
+<h2 id="session工作流程"><a href="#session工作流程" class="headerlink" title="session工作流程"></a>session工作流程</h2><p>当浏览器访问服务器并发送第一次请求时，服务器端会创建一个session对象，生成一<br>个类似于key,value的键值对，然后将key(cookie)返回到浏览器(客户)端，浏览器下次<br>再访问时，携带key(cookie)，找到对应的session(value)。</p>
 <h2 id="cookie和session关系"><a href="#cookie和session关系" class="headerlink" title="cookie和session关系"></a>cookie和session关系</h2><p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/cookie%E5%92%8Csession%E5%85%B3%E7%B3%BB.png" alt=""></p>
 <h1 id="Cookie在Nodejs中使用"><a href="#Cookie在Nodejs中使用" class="headerlink" title="Cookie在Nodejs中使用"></a>Cookie在Nodejs中使用</h1><p>首先我们要安装一个模块</p>
 <blockquote>
 <p>npm install cookie-parser –save</p>
 </blockquote>
 <p>然后引入并使用</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入依赖项</span></span><br><span class="line">varexpress=<span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line">varcookieParser=<span class="built_in">require</span>(<span class="string">'cookie-parser'</span>)</span><br><span class="line"><span class="comment">//配置中间件</span></span><br><span class="line"><span class="keyword">var</span> app=express()</span><br><span class="line">app.use(cookieParser())</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听路由 </span></span><br><span class="line">app.get(<span class="string">'/'</span>,(req,res)=&gt;&#123;</span><br><span class="line">    <span class="comment">//设置cookie(名称，值，配置),保存到客户端浏览器</span></span><br><span class="line">    res.cookie(<span class="string">'username'</span>,<span class="string">'zhangsan'</span>,&#123;</span><br><span class="line">        <span class="comment">//设置cookie过期时间 单位：毫秒</span></span><br><span class="line">        maxAge:<span class="number">1000</span>*<span class="number">60</span>*<span class="number">60</span></span><br><span class="line">    &#125;)</span><br><span class="line">    res.send(<span class="string">'你好'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>,(req,res)=&gt;&#123;</span><br><span class="line">    <span class="comment">//从客户端获取cookie  </span></span><br><span class="line">    <span class="keyword">let</span> name = req.cookies.username</span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入依赖项</span></span><br><span class="line"><span class="keyword">var</span> express=<span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">var</span> cookieParser=<span class="built_in">require</span>(<span class="string">'cookie-parser'</span>)</span><br><span class="line"><span class="comment">//配置中间件</span></span><br><span class="line"><span class="keyword">var</span> app=express()</span><br><span class="line">app.use(cookieParser())</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听路由 </span></span><br><span class="line">app.get(<span class="string">'/'</span>,(req,res)=&gt;&#123;</span><br><span class="line">    <span class="comment">//设置cookie(名称，值，配置),保存到客户端浏览器</span></span><br><span class="line">    res.cookie(<span class="string">'username'</span>,<span class="string">'zhangsan'</span>,&#123;</span><br><span class="line">        <span class="comment">//设置cookie过期时间 单位：毫秒</span></span><br><span class="line">        maxAge:<span class="number">1000</span>*<span class="number">60</span>*<span class="number">60</span></span><br><span class="line">    &#125;)</span><br><span class="line">    res.send(<span class="string">'你好'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>,(req,res)=&gt;&#123;</span><br><span class="line">    <span class="comment">//从客户端获取cookie  </span></span><br><span class="line">    <span class="keyword">let</span> name = req.cookies.username</span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>在上面的代码中，我们发现cookie是可以配置参数的，在设置cookie的源码中定义了这几个配置项：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">maxAge?: number;<span class="comment">//过期时间（毫秒数）</span></span><br><span class="line">signed?: boolean;<span class="comment">//是否加密  true为加密</span></span><br><span class="line">    &#123;   <span class="comment">//用法 1、在配置的时候传入一个随意的加密字符串</span></span><br><span class="line">        app.use(cookieParser(<span class="string">'yang'</span>))</span><br><span class="line">        <span class="comment">//2、在设置cookie时，传入一个signed:true配置项</span></span><br><span class="line">        res.cookie(<span class="string">'username'</span>,<span class="string">'zhangsan'</span>&#123;<span class="attr">signed</span>:<span class="literal">true</span>&#125;)</span><br><span class="line">        <span class="comment">//3、在获取加密cookie时，用以下方法获取  **只有用以下方法才能获取到cookie**</span></span><br><span class="line">        <span class="keyword">let</span> name = req.signedCookie.username</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">expires?: <span class="built_in">Date</span>;<span class="comment">//过期时间（设置具体日期）</span></span><br><span class="line">httpOnly?: boolean;<span class="comment">//是否只能在后台访问</span></span><br><span class="line">path?: string;<span class="comment">//允许访问cookie的后端路由</span></span><br><span class="line">domain?: string;<span class="comment">//多个域共享cookie</span></span><br><span class="line">    <span class="comment">//用法</span></span><br><span class="line">    &#123;<span class="attr">domain</span>:<span class="string">".yang.com"</span>&#125;<span class="comment">//这样配置后，aaa.yang.com和bbb.yang.com都可以访问到设置的cookie</span></span><br><span class="line">secure?: boolean;<span class="comment">//设置为true，说明cookie在http中无效，在https中才有效</span></span><br><span class="line">encode?: <span class="function">(<span class="params">val: string</span>) =&gt;</span> string;</span><br><span class="line">samesite? : boolean | <span class="string">'lax'</span>| <span class="string">'strict'</span>| <span class="string">"none"</span>;</span><br></pre></td></tr></table></figure>
 
@@ -471,12 +473,24 @@
 <blockquote>
 <p>npm install express-session</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//模块为Express官方提供 是express的中间件函数</span></span><br><span class="line"><span class="keyword">const</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>) ;</span><br><span class="line">app.use(session(&#123;<span class="attr">secret</span> :<span class="string">'secret key'</span>&#125;));</span><br></pre></td></tr></table></figure>
-<p>在用户登陆成功后，保存session值</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在用户登录密码比对成功后</span></span><br><span class="line"><span class="keyword">if</span> (isValid ==<span class="literal">true</span> )&#123;</span><br><span class="line">    <span class="comment">//登录成功</span></span><br><span class="line">    <span class="comment">//在session对象中添加了一个username属性</span></span><br><span class="line">    <span class="comment">// 原代码  req.username = user. username; 这里的用户名是昵称，邮箱才是   登录账号</span></span><br><span class="line">    req.session.username = user.username;</span><br><span class="line">    res.send( req.session.username);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导包</span></span><br><span class="line"><span class="keyword">const</span> express=<span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="comment">//配置session的中间件函数</span></span><br><span class="line">app.use(session(&#123;</span><br><span class="line">    secret :<span class="string">'secret key'</span><span class="comment">//服务器生成session的签名（随意写）</span></span><br><span class="line">    <span class="comment">//以下可忽略,按照默认配置</span></span><br><span class="line">    resave:<span class="literal">false</span><span class="comment">////强制保存session即使它并没有变化</span></span><br><span class="line">    saveUninitialized:<span class="literal">true</span>，<span class="comment">//强制将未初始化的session存储</span></span><br><span class="line">    name:<span class="string">'node'</span><span class="comment">//修改session对应cookie的名称</span></span><br><span class="line">    rolling:<span class="literal">true</span><span class="comment">//在每次请求时强行设置cookie，这将重置cookie过期时间（默认: false)</span></span><br><span class="line">    cookie&#123;</span><br><span class="line">        maxAge:<span class="number">1000</span>*<span class="number">60</span></span><br><span class="line">        secure:<span class="literal">false</span></span><br><span class="line">        <span class="comment">//详见cookie配置</span></span><br><span class="line">    &#125;</span><br><span class="line">    &#125;));</span><br></pre></td></tr></table></figure>
+<p>在用户访问后端路由后，设置一个session</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/login'</span>,(req,res)=&gt;&#123;</span><br><span class="line">    <span class="comment">//设置session</span></span><br><span class="line">    req.session.username = <span class="string">'zhangsan'</span></span><br><span class="line">    res.send(<span class="string">'登录'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//获取session</span></span><br></pre></td></tr></table></figure>
 
 <p>在用户再进行登录时，判断用户登录状态</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//拦截请求判断用户登录状态</span></span><br><span class="line">app.use(<span class="string">'/admin'</span>, (req,res,next)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span> (req.url != <span class="string">'/login'</span> &amp;&amp; !req.session.username)&#123;</span><br><span class="line">        <span class="comment">//判断用户访问的是否是登录页面</span></span><br><span class="line">        <span class="comment">//判断用户的登录状态</span></span><br><span class="line">        <span class="comment">//如果用户是登录的将请求放行</span></span><br><span class="line">        <span class="comment">//如果用户不是登录的将请求重定向到登录页面</span></span><br><span class="line">        res.redirect( <span class="string">' /admin/ login'</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">//用户是登录状态将请求放行</span></span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//拦截请求判断用户登录状态</span></span><br><span class="line">app.use(<span class="string">'/admin'</span>, (req,res,next)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span> (req.url != <span class="string">'/login'</span> &amp;&amp; !req.session.username)&#123;</span><br><span class="line">        <span class="comment">//判断用户访问的是否是登录页面</span></span><br><span class="line">        <span class="comment">//判断用户的登录状态</span></span><br><span class="line">        <span class="comment">//如果用户是登录的将请求放行</span></span><br><span class="line">        <span class="comment">//如果用户不是登录的将请求重定向到登录页面</span></span><br><span class="line">        res.redirect( <span class="string">' /admin/ login'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(req.session.username)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">//用户是登录状态将请求放行</span></span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在用户退出登录时，我们需要销毁session</p>
+<pre><code class="js">app.get(<span class="string">"/loginout"</span>,(req,res)=&gt;{
+    <span class="comment">//1、设置session的过期时间为6(它会把所有的session都销毁)</span>
+    <span class="comment">//req .session.cookie.maxAge=0</span>
+    <span class="comment">//2、销毁session</span>
+    <span class="comment">//req.session.destroy()</span>
+    <span class="comment">//3、销毁指定session  *推荐</span>
+    req.session.username=<span class="string">""</span>
+
+    res.send(<span class="string">"退出登录"</span>)
+})</code></pre>
+
       
     </div>
     
@@ -737,7 +751,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie和session概念"><span class="nav-number">1.</span> <span class="nav-text">cookie和session概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie"><span class="nav-number">1.1.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何查看cookie"><span class="nav-number">1.2.</span> <span class="nav-text">如何查看cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session"><span class="nav-number">1.3.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie和session关系"><span class="nav-number">1.4.</span> <span class="nav-text">cookie和session关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cookie在Nodejs中使用"><span class="nav-number">2.</span> <span class="nav-text">Cookie在Nodejs中使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Session在Nodejs中使用"><span class="nav-number">3.</span> <span class="nav-text">Session在Nodejs中使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie和session概念"><span class="nav-number">1.</span> <span class="nav-text">cookie和session概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie"><span class="nav-number">1.1.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何查看cookie"><span class="nav-number">1.2.</span> <span class="nav-text">如何查看cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session"><span class="nav-number">1.3.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session工作流程"><span class="nav-number">1.4.</span> <span class="nav-text">session工作流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie和session关系"><span class="nav-number">1.5.</span> <span class="nav-text">cookie和session关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cookie在Nodejs中使用"><span class="nav-number">2.</span> <span class="nav-text">Cookie在Nodejs中使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Session在Nodejs中使用"><span class="nav-number">3.</span> <span class="nav-text">Session在Nodejs中使用</span></a></li></ol></div>
             
 
           </div>
@@ -771,7 +785,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">34k</span>
+    <span title="站点总字数">34.2k</span>
   
 </div>
 
