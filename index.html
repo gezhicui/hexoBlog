@@ -290,6 +290,219 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="杨雨翔">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89/" itemprop="url">Koa框架（一） 安装和基本使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-22T20:54:18+08:00">
+                2020-08-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-22T21:14:24+08:00">
+                2020-08-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/MyBlog/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  427
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="一、Koa框架介绍"><a href="#一、Koa框架介绍" class="headerlink" title="一、Koa框架介绍"></a>一、Koa框架介绍</h1><p>&emsp;&emsp;Node.js是一个异步的世界，官方API支持的都是callback形式的异步编程模型，这会带来许多问题，例如:1、callback嵌套问题2、异步函数中可能同步调用callback返回数据，带来不一致性。为了解决以上问题Koa出现了。</p>
+<p>&emsp;&emsp;<strong>Koa–基于Node.js平台的下一代web开发框架</strong></p>
+<p>&emsp;&emsp;koa是由Express原班人马打造的，致力于成为一个更小、更富有表现力、更健壮的Web框架。使用koa编写web应用，可以免除重复繁琐的回调函数嵌套，并极大地提升错误处理的效率。koa不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写Web应用变得得心应手。<strong>开发思路和express差不多，最大的特点就是避免异步嵌套</strong></p>
+<h1 id="Koa2-x的安装使用"><a href="#Koa2-x的安装使用" class="headerlink" title="Koa2.x的安装使用"></a>Koa2.x的安装使用</h1><h2 id="安装Node-js-8-x以上的版本"><a href="#安装Node-js-8-x以上的版本" class="headerlink" title="安装Node.js 8.x以上的版本"></a>安装Node.js 8.x以上的版本</h2><p>&emsp;&emsp;开发Koa2之前，Node.js是有要求的，它要求Node.js版本高于V7.6。因为 node.js 7.6版本开始完全支持async/await，所以才能完全你支持我们的Koa2</p>
+<h2 id="安装Koa"><a href="#安装Koa" class="headerlink" title="安装Koa:"></a>安装Koa:</h2><p>&emsp;&emsp;安装Koa框架和我们以前安装其他模块是一样的。</p>
+<blockquote>
+<p>npm install –save koa  /  cnpm install –save koa</p>
+</blockquote>
+<p>–save参数，表示自动修改package.json文件，自动添加依赖项。</p>
+<p>```js<br>//我们先npm init –yes初始化项目，自动创建package.json<br>//然后创建app.js  如下</p>
+<p>//引入<br>const koa=require(‘koa’);<br>//实例化<br>const app=new koa();</p>
+<p>app.use(async(ctx)=&gt;{<br>    ctx.body=’你好koa2.x’;<br>}<br>//相当于 express中<br>app.use(function(req.res){<br>    res.send(‘你好koa2.x’)<br>})</p>
+<p>app.listen(3000)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:16px;">
+      ---------------- The End ----------------
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/08/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2264,228 +2477,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/07/28/Vue%E4%B8%AD%E7%9A%84%E8%B7%AF%E7%94%B1%EF%BC%88%E4%B8%80%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="杨雨翔">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/MyBlog/2020/07/28/Vue%E4%B8%AD%E7%9A%84%E8%B7%AF%E7%94%B1%EF%BC%88%E4%B8%80%EF%BC%89/" itemprop="url">Vue中的路由</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-28T16:16:41+08:00">
-                2020-07-28
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-14T11:21:17+08:00">
-                2020-08-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/%E5%89%8D%E7%AB%AF/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/MyBlog/2020/07/28/Vue%E4%B8%AD%E7%9A%84%E8%B7%AF%E7%94%B1%EF%BC%88%E4%B8%80%EF%BC%89/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/07/28/Vue%E4%B8%AD%E7%9A%84%E8%B7%AF%E7%94%B1%EF%BC%88%E4%B8%80%EF%BC%89/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  9
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1><h2 id="后端路由"><a href="#后端路由" class="headerlink" title="后端路由"></a>后端路由</h2><ul>
-<li>概念:根据不同的用户URL请求，返回不同的内容</li>
-<li>本质:URL请求地址与服务器资源之间的对应关系<h2 id="前端路由"><a href="#前端路由" class="headerlink" title="前端路由"></a>前端路由</h2></li>
-<li>概念:根据不同的用户事件，显示不同的页面内容</li>
-<li>本质:用户事件与事件处理函数之间的对应关系</li>
-</ul>
-<h1 id="Vue-Router"><a href="#Vue-Router" class="headerlink" title="Vue Router"></a>Vue Router</h1><p>&emsp;&emsp;vue Router(官网: <a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">https://router.vuejs.org/zh/</a> )是Vue.js官方的路由管理器。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/MyBlog/2020/07/28/Vue%E4%B8%AD%E7%9A%84%E8%B7%AF%E7%94%B1%EF%BC%88%E4%B8%80%EF%BC%89/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-    <div style="text-align:center;color: #ccc;font-size:16px;">
-      ---------------- The End ----------------
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2542,7 +2533,7 @@
               
                <a href="/MyBlog/archives/">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2564,7 +2555,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/MyBlog/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2657,7 +2648,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">34.2k</span>
+    <span title="站点总字数">35.3k</span>
   
 </div>
 

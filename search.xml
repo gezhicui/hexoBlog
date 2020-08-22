@@ -370,7 +370,7 @@
       </tags>
   </entry>
   <entry>
-    <title>MongoDB数据库的学习使用（三）集合关联</title>
+    <title>MongoDB数据库的学习使用（三）集合关联、聚合管道</title>
     <url>/MyBlog/2020/07/20/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%89%EF%BC%89/</url>
     <content><![CDATA[<h1 id="集合关联"><a href="#集合关联" class="headerlink" title="集合关联"></a>集合关联</h1><p>通常<strong>不同集合的数据之间是有关系的</strong>，例如文章信息和用户信息存储在不同集合中，但文章是某个用户发表的<br>，要查询文章的所有信息包括发表用户，就需要用到集合关联。</p>
 <ul>
@@ -380,36 +380,96 @@
 <p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E9%9B%86%E5%90%88%E5%85%B3%E8%81%94.png" alt=""></p>
 <a id="more"></a>
 
-<h2 id="集合关联实现"><a href="#集合关联实现" class="headerlink" title="集合关联实现"></a>集合关联实现</h2><pre><code class="js"><span class="comment">//我们先定义两个集合</span>
-<span class="comment">//用户集合  </span>
-<span class="keyword">const</span> User = mongoose.model(<span class="string">'User'</span>,<span class="keyword">new</span> mongoose.schema({<span class="attr">name</span>:{<span class="attr">type</span>:string )}));<span class="comment">//我们之前是单独给集合规则赋给一个对象，但其实可以直接写在里面</span>
-
-<span class="comment">//文章集合</span>
-<span class="keyword">const</span> Post = mongoose.model(<span class="string">'Post'</span>, <span class="keyword">new</span> mongoose.schema({
-    title:{
-        type: <span class="built_in">String</span>
-    },
-    <span class="comment">//使用ID将文章集合和作者集合进行关联</span>
-    author: {
-        type: mongoose.schema.Types.ObjectId, 
-        ref:<span class="string">'User'</span><span class="comment">//当前字段要关联的集合</span>
-    }
-}));
-
-<span class="comment">//创建用户</span>
-User.create({<span class="attr">name</span>:<span class="string">'yang'</span>} ).then(<span class="function"><span class="params">result</span> =&gt;</span> <span class="built_in">console</span>.log(result));<span class="comment">//自动生成id为12321412312</span>
-<span class="comment">//创建文章</span>
-Post.create({<span class="attr">titile</span>:<span class="string">'123'</span>，author:<span class="string">'12321412312'</span>}).then(<span class="function"><span class="params">result</span> =&gt;</span> <span class="built_in">console</span>.log(result));
-
-
-<span class="comment">//联合查询</span>
-Post.find()<span class="comment">//查询post信息</span>
-    .then(<span class="function">(<span class="params">err, result</span>)=&gt;</span><span class="built_in">console</span>.log(result));<span class="comment">//查出来的author是id</span>
-
-Post.find()<span class="comment">//查询post信息</span>
-    .populate(<span class="string">'author'</span>)
-    .then(<span class="function">(<span class="params">err, result</span>)=&gt;</span><span class="built_in">console</span>.log(result));<span class="comment">//查出来的author是一个对象，对象中是author的具体内容</span></code></pre>
-]]></content>
+<h2 id="集合关联实现"><a href="#集合关联实现" class="headerlink" title="集合关联实现"></a>集合关联实现</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//我们先定义两个集合</span></span><br><span class="line"><span class="comment">//用户集合  </span></span><br><span class="line"><span class="keyword">const</span> User = mongoose.model(<span class="string">'User'</span>,<span class="keyword">new</span> mongoose.schema(&#123;<span class="attr">name</span>:&#123;<span class="attr">type</span>:string )&#125;));<span class="comment">//我们之前是单独给集合规则赋给一个对象，但其实可以直接写在里面</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//文章集合</span></span><br><span class="line"><span class="keyword">const</span> Post = mongoose.model(<span class="string">'Post'</span>, <span class="keyword">new</span> mongoose.schema(&#123;</span><br><span class="line">    title:&#123;</span><br><span class="line">        type: <span class="built_in">String</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//使用ID将文章集合和作者集合进行关联</span></span><br><span class="line">    author: &#123;</span><br><span class="line">        type: mongoose.schema.Types.ObjectId, </span><br><span class="line">        ref:<span class="string">'User'</span><span class="comment">//当前字段要关联的集合</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建用户</span></span><br><span class="line">User.create(&#123;<span class="attr">name</span>:<span class="string">'yang'</span>&#125; ).then(<span class="function"><span class="params">result</span> =&gt;</span> <span class="built_in">console</span>.log(result));<span class="comment">//自动生成id为12321412312</span></span><br><span class="line"><span class="comment">//创建文章</span></span><br><span class="line">Post.create(&#123;<span class="attr">titile</span>:<span class="string">'123'</span>，author:<span class="string">'12321412312'</span>&#125;).then(<span class="function"><span class="params">result</span> =&gt;</span> <span class="built_in">console</span>.log(result));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//联合查询</span></span><br><span class="line">Post.find()<span class="comment">//查询post信息</span></span><br><span class="line">    .then(<span class="function">(<span class="params">err, result</span>)=&gt;</span><span class="built_in">console</span>.log(result));<span class="comment">//查出来的author是id</span></span><br><span class="line"></span><br><span class="line">Post.find()<span class="comment">//查询post信息</span></span><br><span class="line">    .populate(<span class="string">'author'</span>)</span><br><span class="line">    .then(<span class="function">(<span class="params">err, result</span>)=&gt;</span><span class="built_in">console</span>.log(result));<span class="comment">//查出来的author是一个对象，对象中是author的具体内容</span></span><br></pre></td></tr></table></figure>
+<h1 id="聚合管道-Aggregation-Pipeline"><a href="#聚合管道-Aggregation-Pipeline" class="headerlink" title="聚合管道 Aggregation Pipeline"></a>聚合管道 Aggregation Pipeline</h1><p>使用聚合管道可以对集合中的文档进行变换和组合。</p>
+<h2 id="管道操作符"><a href="#管道操作符" class="headerlink" title="管道操作符"></a>管道操作符</h2><table>
+<thead>
+<tr>
+<th>管道操作符</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>增加、删除、重命名字段</td>
+<td>$project</td>
+</tr>
+<tr>
+<td>条件匹配。只满足条件的文档才能进入下阶段</td>
+<td>$match</td>
+</tr>
+<tr>
+<td>限制结果的数量</td>
+<td>$limit</td>
+</tr>
+<tr>
+<td>跳过文档的数量</td>
+<td>$skip</td>
+</tr>
+<tr>
+<td>条件排序</td>
+<td>$sort</td>
+</tr>
+<tr>
+<td>条件组合结果统计</td>
+<td>$group</td>
+</tr>
+<tr>
+<td>$lookup操作符用以引入其它集合的数</td>
+<td>$lookup</td>
+</tr>
+</tbody></table>
+<h2 id="SQL和NOSQL对比："><a href="#SQL和NOSQL对比：" class="headerlink" title="SQL和NOSQL对比："></a>SQL和NOSQL对比：</h2><table>
+<thead>
+<tr>
+<th>WHERE</th>
+<th>$match</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GROUP BY</td>
+<td>$group</td>
+</tr>
+<tr>
+<td>HAVING</td>
+<td>$match</td>
+</tr>
+<tr>
+<td>SELECT</td>
+<td>$project</td>
+</tr>
+<tr>
+<td>ORDER BY</td>
+<td>$sort</td>
+</tr>
+<tr>
+<td>LIMIT</td>
+<td>$limit</td>
+</tr>
+<tr>
+<td>SUM()</td>
+<td>$sum</td>
+</tr>
+<tr>
+<td>COUNT()</td>
+<td>$sum</td>
+</tr>
+<tr>
+<td>join</td>
+<td>$lookup</td>
+</tr>
+</tbody></table>
+<p>来学着用一下，先搞点数据</p>
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line"><span class="keyword">db</span>.<span class="keyword">order</span>.insert(&#123;<span class="string">"order_id"</span>:<span class="string">"1"</span>,<span class="string">"uid"</span>:10,<span class="string">"trade_no"</span>:<span class="string">"111"</span>,<span class="string">"all_price"</span>:100,<span class="string">"all_num"</span>:2&#125;)</span><br><span class="line"><span class="keyword">db</span>.<span class="keyword">order</span>.insert(&#123;<span class="string">"order_id"</span>:<span class="string">"2"</span>,<span class="string">"uid"</span>:7,<span class="string">"trade_no"</span>:<span class="string">"222"</span>,<span class="string">"all_price"</span>:90,<span class="string">"all_num"</span>:2)</span><br><span class="line"><span class="keyword">db</span>.<span class="keyword">order</span>.insert(&#123;<span class="string">"order_id"</span>:<span class="string">"3"</span>,<span class="string">"uid"</span>:9,<span class="string">"trade_no"</span>:<span class="string">"333"</span> ,<span class="string">"all_price"</span>:20 , <span class="string">"all_num"</span>:6&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">db</span>.order_item.insert(&#123;<span class="string">"order_id"</span>:<span class="string">"1"</span>,<span class="string">"title"</span>:<span class="string">"商品鼠标1"</span>,<span class="string">"price"</span>:50,num:1&#125;)</span><br><span class="line"><span class="keyword">db</span>.order_item.insert(&#123;<span class="string">"order_id"</span>:<span class="string">"1"</span>,<span class="string">"title"</span>:<span class="string">"商品键盘2"</span>,<span class="string">"price"</span>:50,num:1&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">db</span>.order_item.insert(&#123;<span class="string">"order_id"</span>:<span class="string">"2"</span>,<span class="string">"title"</span>:<span class="string">"牛奶"</span>,<span class="string">"price"</span> :50,num:1&#125;)</span><br><span class="line"><span class="keyword">db</span>.order_item.insert(&#123;<span class="string">"order_id"</span>:<span class="string">"2"</span>,<span class="string">"title"</span>:<span class="string">"酸奶"</span>,<span class="string">"price"</span> :40,num:1&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">db</span> order_item.inset(&#123;<span class="string">"order_id"</span>:<span class="string">"3"</span>,<span class="string">"title"</span>:<span class="string">"矿泉水"</span>,<span class="string">"price"</span>:2,num:5)</span><br><span class="line"><span class="keyword">db</span> order_item.inset(&#123;<span class="string">"order_id"</span>:<span class="string">"3"</span>,<span class="string">"title"</span>:<span class="string">"毛巾"</span>,<span class="string">"price"</span>:2,num:5)</span><br></pre></td></tr></table></figure>
+<p>现在我们有一个<code>order</code>表和一个<code>order_item</code>表</p>
+<h2 id="project-查询指定的字段"><a href="#project-查询指定的字段" class="headerlink" title="$project 查询指定的字段"></a>$project 查询指定的字段</h2><p>要求查找order只返回文档中trade_no和all_price字段</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">db.order.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $project:&#123; <span class="attr">trade_no</span>:<span class="number">1</span>,<span class="attr">all_price</span>:<span class="number">1</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h2 id="match-过滤"><a href="#match-过滤" class="headerlink" title="$match 过滤"></a>$match 过滤</h2><p>作用:用于过滤文档。用法类似于find()方法中的参数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//查询all_Price大于90的数据的三个列</span></span><br><span class="line">db.order.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        order_id:<span class="number">1</span>, <span class="attr">trade_no</span>:<span class="number">1</span>, <span class="attr">a11_price</span>:<span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        $match: &#123;<span class="string">"a11_price"</span>: &#123;<span class="attr">$gte</span>:<span class="number">90</span>&#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h2 id="group-分组"><a href="#group-分组" class="headerlink" title="$group 分组"></a>$group 分组</h2><p>将集合中的文档进行分组，可用于统计结果。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//统计每个订单的订单数量，按照订单号分组</span></span><br><span class="line">db.order_item.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $group:&#123;<span class="attr">_id</span>: <span class="string">"$order_id"</span> , <span class="attr">total</span>: &#123;<span class="attr">$sum</span>:<span class="string">"$num"</span>&#125;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br><span class="line"><span class="comment">//统计订单的总价格</span></span><br><span class="line">db.order_item.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $group:&#123;<span class="attr">_id</span>: <span class="string">"$order_id"</span> , <span class="attr">price</span>: &#123;<span class="attr">$sum</span>:<span class="string">"$price"</span>&#125;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h2 id="sort-对文档内容进行排序"><a href="#sort-对文档内容进行排序" class="headerlink" title="$sort 对文档内容进行排序"></a>$sort 对文档内容进行排序</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">db.order.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $project:&#123; <span class="attr">trade_no</span>:<span class="number">1</span>,<span class="attr">all_price</span>:<span class="number">1</span> &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        $match:&#123;<span class="string">"all_price"</span>:&#123;<span class="attr">$gte</span>:<span class="number">90</span>&#125;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; </span><br><span class="line">        $sort:&#123;<span class="string">"all_price"</span>:<span class="number">-1</span>&#125;<span class="comment">//-1表示降序排列，1表示升序排列</span></span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h2 id="limit-限制数据条数"><a href="#limit-限制数据条数" class="headerlink" title="$limit 限制数据条数"></a>$limit 限制数据条数</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">db.order.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $project:&#123; <span class="attr">trade_no</span>:<span class="number">1</span>,<span class="attr">all_price</span>:<span class="number">1</span> &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        $match:&#123;<span class="string">"all_price"</span>:&#123;<span class="attr">$gte</span>:<span class="number">90</span>&#125;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; </span><br><span class="line">        $sort:&#123;<span class="string">"all_price"</span>:<span class="number">-1</span>&#125;<span class="comment">//-1表示降序排列，1表示升序排列</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; </span><br><span class="line">        $limit:<span class="number">1</span><span class="comment">//限制一条数据 skip用法同理</span></span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h2 id="lookup-表关联"><a href="#lookup-表关联" class="headerlink" title="$lookup 表关联"></a>$lookup 表关联</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">db.order.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $lookup: &#123;</span><br><span class="line">            <span class="keyword">from</span>: <span class="string">"order_item"</span>,<span class="comment">//order表要和哪个表进行关联</span></span><br><span class="line">            localField: <span class="string">"order_id"</span>,<span class="comment">//要关联的字段</span></span><br><span class="line">            foreignField: <span class="string">"order_id"</span>,<span class="comment">//另一个表的该字段</span></span><br><span class="line">            <span class="keyword">as</span>: <span class="string">"item"</span><span class="comment">//关联的数据放在item里面</span></span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>数据库</category>
         <category>MongoDB</category>
@@ -1827,6 +1887,31 @@ await后面需要跟上一个异步对象，如果是我们自己写的promise�
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Koa框架（一） 安装和基本使用</title>
+    <url>/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="一、Koa框架介绍"><a href="#一、Koa框架介绍" class="headerlink" title="一、Koa框架介绍"></a>一、Koa框架介绍</h1><p>&emsp;&emsp;Node.js是一个异步的世界，官方API支持的都是callback形式的异步编程模型，这会带来许多问题，例如:1、callback嵌套问题2、异步函数中可能同步调用callback返回数据，带来不一致性。为了解决以上问题Koa出现了。</p>
+<p>&emsp;&emsp;<strong>Koa–基于Node.js平台的下一代web开发框架</strong></p>
+<p>&emsp;&emsp;koa是由Express原班人马打造的，致力于成为一个更小、更富有表现力、更健壮的Web框架。使用koa编写web应用，可以免除重复繁琐的回调函数嵌套，并极大地提升错误处理的效率。koa不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写Web应用变得得心应手。<strong>开发思路和express差不多，最大的特点就是避免异步嵌套</strong></p>
+<h1 id="Koa2-x的安装使用"><a href="#Koa2-x的安装使用" class="headerlink" title="Koa2.x的安装使用"></a>Koa2.x的安装使用</h1><h2 id="安装Node-js-8-x以上的版本"><a href="#安装Node-js-8-x以上的版本" class="headerlink" title="安装Node.js 8.x以上的版本"></a>安装Node.js 8.x以上的版本</h2><p>&emsp;&emsp;开发Koa2之前，Node.js是有要求的，它要求Node.js版本高于V7.6。因为 node.js 7.6版本开始完全支持async/await，所以才能完全你支持我们的Koa2</p>
+<h2 id="安装Koa"><a href="#安装Koa" class="headerlink" title="安装Koa:"></a>安装Koa:</h2><p>&emsp;&emsp;安装Koa框架和我们以前安装其他模块是一样的。</p>
+<blockquote>
+<p>npm install –save koa  /  cnpm install –save koa</p>
+</blockquote>
+<p>–save参数，表示自动修改package.json文件，自动添加依赖项。</p>
+<p>```js<br>//我们先npm init –yes初始化项目，自动创建package.json<br>//然后创建app.js  如下</p>
+<p>//引入<br>const koa=require(‘koa’);<br>//实例化<br>const app=new koa();</p>
+<p>app.use(async(ctx)=&gt;{<br>    ctx.body=’你好koa2.x’;<br>}<br>//相当于 express中<br>app.use(function(req.res){<br>    res.send(‘你好koa2.x’)<br>})</p>
+<p>app.listen(3000)</p>
+]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>Koa</tag>
       </tags>
   </entry>
 </search>
