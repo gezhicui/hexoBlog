@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="Yang&#39;s Blog">
 <meta property="og:description" content="一、Koa框架介绍&amp;emsp;&amp;emsp;Node.js是一个异步的世界，官方API支持的都是callback形式的异步编程模型，这会带来许多问题，例如:1、callback嵌套问题2、异步函数中可能同步调用callback返回数据，带来不一致性。为了解决以上问题Koa出现了。 &amp;emsp;&amp;emsp;Koa–基于Node.js平台的下一代web开发框架 &amp;emsp;&amp;emsp;koa是由Expr">
 <meta property="article:published_time" content="2020-08-22T12:54:18.000Z">
-<meta property="article:modified_time" content="2020-08-22T13:22:01.405Z">
+<meta property="article:modified_time" content="2020-08-23T05:17:45.028Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="Node.js">
 <meta property="article:tag" content="Koa">
@@ -340,8 +340,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-22T21:22:01+08:00">
-                2020-08-22
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-23T13:17:45+08:00">
+                2020-08-23
               </time>
             
           </span>
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  427
+                  431
                 </span>
               
 
@@ -451,11 +451,7 @@
 <p>npm install –save koa  /  cnpm install –save koa</p>
 </blockquote>
 <p>–save参数，表示自动修改package.json文件，自动添加依赖项。</p>
-<p>```js<br>//我们先npm init –yes初始化项目，自动创建package.json<br>//然后创建app.js  如下</p>
-<p>//引入<br>const Koa=require(‘koa’);<br>//实例化<br>const app=new Koa();</p>
-<p>app.use(async(ctx)=&gt;{<br>    ctx.body=’你好koa2.x’;<br>}<br>//相当于 express中<br>app.use(function(req.res){<br>    res.send(‘你好koa2.x’)<br>})</p>
-<p>app.listen(3000)</p>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们先npm init --yes初始化项目，自动创建package.json</span></span><br><span class="line"><span class="comment">//然后创建app.js  如下</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//引入</span></span><br><span class="line"><span class="keyword">const</span> Koa=<span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="comment">//实例化</span></span><br><span class="line"><span class="keyword">const</span> app=<span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx)=&gt;&#123;</span><br><span class="line">    ctx.body=<span class="string">'你好koa2.x'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//相当于 express中</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req.res</span>)</span>&#123;</span><br><span class="line">    res.send(<span class="string">'你好koa2.x'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -473,7 +469,7 @@
   <p><span>本文标题:</span><a href="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89/">Koa框架（一） 安装和基本使用</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 杨雨翔 的个人博客">杨雨翔</a></p>
   <p><span>发布时间:</span>2020年08月22日 - 20:54</p>
-  <p><span>最后更新:</span>2020年08月22日 - 21:22</p>
+  <p><span>最后更新:</span>2020年08月23日 - 13:17</p>
   <p><span>原始链接:</span><a href="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89/" title="Koa框架（一） 安装和基本使用">https://gitee.com/yang_yu_xiang/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://gitee.com/yang_yu_xiang/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89/"  aria-label="复制成功！"></i></span>
   </p>
@@ -648,7 +644,7 @@ var jiathis_config={
               
                <a href="/MyBlog/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -726,6 +722,10 @@ var jiathis_config={
                     <a href="https://cloudhao.top/#/search/%E5%9F%9F%E5%90%8D" title="陈昀昊的小窝" target="_blank">陈昀昊的小窝</a>
                   </li>
                 
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.shezhiwei.top/" title="佘智伟的博客" target="_blank">佘智伟的博客</a>
+                  </li>
+                
               </ul>
             </div>
           
@@ -779,7 +779,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">36k</span>
+    <span title="站点总字数">36.9k</span>
   
 </div>
 

@@ -290,6 +290,221 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="杨雨翔">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89/" itemprop="url">Koa框架（三） 中间件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-23T11:53:42+08:00">
+                2020-08-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-23T13:35:54+08:00">
+                2020-08-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/MyBlog/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  912
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="什么是中间件"><a href="#什么是中间件" class="headerlink" title="什么是中间件"></a>什么是中间件</h1><p>&emsp;&emsp;通俗的讲:中间件就是匹配路由之前或者匹配路由完成做的一系列的操作，我们就可以把它叫做中间件。<br>&emsp;&emsp;在<code>express</code>中间件(Middleware)是一个函数,它可以访问请求对象<code>(request object(req))</code>,响应对象<code>(response object(res))</code>，和web应用中处理请求-响应循环流程中的中间件，一般被命名为<code>next</code>的变量。在Koa中中间件和express有点类似。</p>
+<p>中间件的功能包括:</p>
+<ul>
+<li>执行任何代码。</li>
+<li>修改请求和响应对象。</li>
+<li>终结请求-响应循环。</li>
+<li>调用堆栈中的下一个中间件。</li>
+</ul>
+<p>如果我的get、post回调函数中，没有next参数，那么就匹配上第一个路由，就不会往下匹配了。如果想往下匹配的话，那么需要写<code>next()</code></p>
+<h1 id="应用级中间件"><a href="#应用级中间件" class="headerlink" title="应用级中间件"></a>应用级中间件</h1><p>我们来实现一个不管接到任何请求都打印日期的中间件，也叫<strong>应用级中间件</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>( <span class="string">'koa '</span>);</span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router();</span><br><span class="line"><span class="comment">//设置中间件，可以设置匹配路由 app.use('/',functio()) 不设置默认匹配所有路由</span></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx,next)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>());</span><br><span class="line">    <span class="comment">//当前路由匹配完成以后继续向下匹配,如果不写next，路由匹配到了就不会继续向下</span></span><br><span class="line">    <span class="keyword">await</span> next();</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ctx,next</span>)</span>&#123;</span><br><span class="line">    ctx.body=<span class="string">"Hello koa"</span>;</span><br><span class="line">&#125;)</span><br><span class="line">router.get(<span class="string">'/news '</span>,(ctx,next)=&gt;&#123;</span><br><span class="line">    ctx.body=<span class="string">"新闻页面"</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(router.routes());<span class="comment">//作用:启动路由</span></span><br><span class="line">app.use(router.allowedMethods());<span class="comment">//作用:当请求出错时的处理逻辑</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:16px;">
+      ---------------- The End ----------------
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -337,7 +552,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-23T11:52:19+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-23T13:35:46+08:00">
                 2020-08-23
               </time>
             
@@ -435,8 +650,7 @@
 
       
         
-          
-            <h1 id="Koa路由介绍和使用"><a href="#Koa路由介绍和使用" class="headerlink" title="Koa路由介绍和使用"></a>Koa路由介绍和使用</h1><p>&emsp;&emsp;路由（Routing）是由一个URL(或者叫路径）和一个特定的HTTP方法（GET、POST等)组成的，涉及到应用如何响应客户端对某个网站节点的访问。</p>
+          <h1 id="Koa路由介绍和使用"><a href="#Koa路由介绍和使用" class="headerlink" title="Koa路由介绍和使用"></a>Koa路由介绍和使用</h1><p>&emsp;&emsp;路由（Routing）是由一个URL(或者叫路径）和一个特定的HTTP方法（GET、POST等)组成的，涉及到应用如何响应客户端对某个网站节点的访问。</p>
 <p>&emsp;&emsp;通俗的讲:路由就是根据不同的URL地址，加载不同的页面实现不同的功能。</p>
 <p>&emsp;&emsp;Koa中的路由和Express有所不同，在Express中直接引入Express就可以配置路由，但是在Koa中我们需要安装对应的<code>koa-router</code>路由模块来实现。</p>
 <blockquote>
@@ -444,19 +658,13 @@
 </blockquote>
 <p>然后就可以使用了</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导包</span></span><br><span class="line"><span class="keyword">var</span> Koa = <span class="built_in">require</span> (<span class="string">'koa'</span>) :</span><br><span class="line"><span class="keyword">var</span> Router = <span class="built_in">require</span> (<span class="string">'koa-router'</span>);</span><br><span class="line"><span class="comment">//实例化</span></span><br><span class="line"><span class="keyword">var</span> app =  <span class="keyword">new</span> Koa ( ;</span><br><span class="line"><span class="keyword">var</span> router = <span class="keyword">new</span> Router();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//配置路由，在express中，调用参数有req，res，但是在Koa中request和response的所有信息都放在context（上下文）中 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//写法一</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="keyword">async</span>(ctx)=&gt; &#123;</span><br><span class="line">    <span class="comment">//ctx.body相当于res.send()</span></span><br><span class="line">    ctx.body=<span class="string">'首页'</span><span class="comment">//返回数据</span></span><br><span class="line">&#125;).get(<span class="string">'/news'</span>,<span class="keyword">async</span>(ctx)=&gt;&#123;</span><br><span class="line">    ctx.body=<span class="string">'新闻页'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//写法二</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="keyword">async</span>(ctx)=&gt; &#123;</span><br><span class="line">    <span class="comment">//ctx.body相当于res.send()</span></span><br><span class="line">    ctx.body=<span class="string">'首页'</span><span class="comment">//返回数据</span></span><br><span class="line">&#125;)</span><br><span class="line">router.get(<span class="string">'/news'</span>,<span class="keyword">async</span>(ctx)=&gt;&#123;</span><br><span class="line">    ctx.body=<span class="string">'新闻页'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//启动路由  </span></span><br><span class="line">app</span><br><span class="line">    .use(router.routes())</span><br><span class="line">    .use(router.allowedMethods());</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
-<p>Koa的路由还有另一种实例化方法和监听方法，如下</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导包</span></span><br><span class="line"><span class="keyword">var</span> Koa = <span class="built_in">require</span> (<span class="string">'koa'</span>) :</span><br><span class="line"><span class="keyword">var</span> router = <span class="built_in">require</span> (<span class="string">'koa-router'</span>)();<span class="comment">//导的过程实例化</span></span><br><span class="line"><span class="comment">//实例化</span></span><br><span class="line"><span class="keyword">var</span> app =  <span class="keyword">new</span> Koa ( ;</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="keyword">async</span>(ctx)=&gt; &#123;</span><br><span class="line">    <span class="comment">//ctx.body相当于res.send()</span></span><br><span class="line">    ctx.body=<span class="string">'首页'</span><span class="comment">//返回数据</span></span><br><span class="line">&#125;)</span><br><span class="line">router.get(<span class="string">'/news'</span>,<span class="keyword">async</span>(ctx)=&gt;&#123;</span><br><span class="line">    ctx.body=<span class="string">'新闻页'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//启动路由  </span></span><br><span class="line">app</span><br><span class="line">    .use(router.routes())</span><br><span class="line">    .use(router.allowedMethods());</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
-
-<h1 id="Koa路由-Get传值"><a href="#Koa路由-Get传值" class="headerlink" title="Koa路由 Get传值"></a>Koa路由 Get传值</h1><p>当浏览器url发来的路径后面带上<code>？xxx=xxx</code>，在Koa里面如何获取请求参数呢</p>
-<p>在koa2中GET传值通过request接收，但是接收的方法有两种:<code>query</code>和<code>querystring</code>.</p>
-<ul>
-<li>query:返回的是格式化好的参数对象。</li>
-<li>querystring:返回的是请求字符串。</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在express中，我们可以用req.query,在Koa中，所有信息都放在ctx中，可以从ctx中拿</span></span><br><span class="line">router.get(<span class="string">'/newscontent'</span>,(ctx)=&gt;&#123;</span><br><span class="line">    <span class="keyword">let</span> url =ctx.url;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//从request中获取GET 请求</span></span><br><span class="line">    <span class="keyword">let</span> request =ctx.request;</span><br><span class="line">    <span class="keyword">let</span> req_query = request.query;<span class="comment">//包含域名信息和请求头信息</span></span><br><span class="line">    <span class="keyword">let</span> req_querystring = request.querystring;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//从上下文中直接获取</span></span><br><span class="line">    <span class="keyword">let</span> ctx_query = ctx.query; <span class="comment">//***&#123;aid: '123'&#125;获取的是对象,用的最多的方式</span></span><br><span class="line">    <span class="keyword">let</span> ctx_querystring = ctx.querystring;<span class="comment">//'aid=123&amp;name=zhangsan获取的是一个字符串</span></span><br><span class="line"></span><br><span class="line">    ctx.body=&#123;</span><br><span class="line">        url,</span><br><span class="line">        req_query,</span><br><span class="line">        req_querystring,</span><br><span class="line">        ctx_query,</span><br><span class="line">        ctx_querystring</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h1 id="动态路由传值"><a href="#动态路由传值" class="headerlink" title="动态路由传值"></a>动态路由传值</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动态路由需在路由后面跟上/:xx</span></span><br><span class="line">router.get(<span class="string">'/newscontent/:aid'</span>,(ctx)=&gt;&#123;</span><br><span class="line">    <span class="comment">//获取动态路由的传值</span></span><br><span class="line">    <span class="built_in">console</span>.log(ctx.params)<span class="comment">//&#123;aid:'456'&#125;</span></span><br><span class="line">    ctx.body=<span class="string">"新闻aid页面详情"</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//动态路由里面可以传递多个值</span></span><br><span class="line">router.get(<span class="string">'/newscontent/:aid/:bid'</span>,(ctx)=&gt;&#123;</span><br><span class="line">    <span class="comment">//获取动态路由的传值</span></span><br><span class="line">    <span class="built_in">console</span>.log(ctx.params)<span class="comment">//&#123;aid:'456'&#125;</span></span><br><span class="line">    ctx.body=<span class="string">"新闻aid页面详情"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -556,8 +764,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-22T21:22:01+08:00">
-                2020-08-22
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-23T13:17:45+08:00">
+                2020-08-23
               </time>
             
           </span>
@@ -616,7 +824,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  427
+                  431
                 </span>
               
 
@@ -664,11 +872,7 @@
 <p>npm install –save koa  /  cnpm install –save koa</p>
 </blockquote>
 <p>–save参数，表示自动修改package.json文件，自动添加依赖项。</p>
-<p>```js<br>//我们先npm init –yes初始化项目，自动创建package.json<br>//然后创建app.js  如下</p>
-<p>//引入<br>const Koa=require(‘koa’);<br>//实例化<br>const app=new Koa();</p>
-<p>app.use(async(ctx)=&gt;{<br>    ctx.body=’你好koa2.x’;<br>}<br>//相当于 express中<br>app.use(function(req.res){<br>    res.send(‘你好koa2.x’)<br>})</p>
-<p>app.listen(3000)</p>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们先npm init --yes初始化项目，自动创建package.json</span></span><br><span class="line"><span class="comment">//然后创建app.js  如下</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//引入</span></span><br><span class="line"><span class="keyword">const</span> Koa=<span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="comment">//实例化</span></span><br><span class="line"><span class="keyword">const</span> app=<span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx)=&gt;&#123;</span><br><span class="line">    ctx.body=<span class="string">'你好koa2.x'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//相当于 express中</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req.res</span>)</span>&#123;</span><br><span class="line">    res.send(<span class="string">'你好koa2.x'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
           
         
       
@@ -2255,224 +2459,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/07/29/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E8%A7%84%E8%8C%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="杨雨翔">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/MyBlog/2020/07/29/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E8%A7%84%E8%8C%83/" itemprop="url">前端模块化规范</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-29T14:47:35+08:00">
-                2020-07-29
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-07-29T15:57:29+08:00">
-                2020-07-29
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/%E5%89%8D%E7%AB%AF/%E6%A8%A1%E5%9D%97%E5%8C%96/" itemprop="url" rel="index">
-                    <span itemprop="name">模块化</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/MyBlog/2020/07/29/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E8%A7%84%E8%8C%83/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/07/29/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E8%A7%84%E8%8C%83/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  657
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="CommonJS模块化规范"><a href="#CommonJS模块化规范" class="headerlink" title="CommonJS模块化规范"></a>CommonJS模块化规范</h1><p>&emsp;&emsp;CommonJS的核心思想是通过require方法来同步加载依赖的其他模块，通过module.exports导出需要暴露的接口。根据这个规范，每个文件就是一个模块，有自己的作用域。在一个文件里面定义的变量、函数、类，都是私有的，对其他文件不可见。</p>
-<h2 id="module-exports和require"><a href="#module-exports和require" class="headerlink" title="module.exports和require"></a>module.exports和require</h2><p>采用 CommonJS 导入及导出的代码如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入 </span></span><br><span class="line"><span class="keyword">const</span> moduleA = <span class="built_in">require</span> (<span class="string">'./moduleA'</span>); </span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; test，demo，flag &#125; = <span class="built_in">require</span>(<span class="string">'./moduleA'</span>);</span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line"><span class="keyword">let</span> _mA = <span class="built_in">require</span>(<span class="string">' moduleA '</span>);</span><br><span class="line"><span class="keyword">let</span> test = _mA.test;</span><br><span class="line"><span class="keyword">let</span> demo = _mA.demo;</span><br><span class="line"><span class="keyword">let</span> flag = _mA.f1ag;</span><br><span class="line"></span><br><span class="line"><span class="comment">//导出  </span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    flag: <span class="literal">true</span>,</span><br><span class="line">    test(a,b)&#123;</span><br><span class="line">        <span class="keyword">return</span> a + b</span><br><span class="line">    &#125;，</span><br><span class="line">    demo(a,b)&#123;</span><br><span class="line">        <span class="keyword">return</span> a * b</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/MyBlog/2020/07/29/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E8%A7%84%E8%8C%83/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-    <div style="text-align:center;color: #ccc;font-size:16px;">
-      ---------------- The End ----------------
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2529,7 +2515,7 @@
               
                <a href="/MyBlog/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2607,6 +2593,10 @@
                     <a href="https://cloudhao.top/#/search/%E5%9F%9F%E5%90%8D" title="陈昀昊的小窝" target="_blank">陈昀昊的小窝</a>
                   </li>
                 
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.shezhiwei.top/" title="佘智伟的博客" target="_blank">佘智伟的博客</a>
+                  </li>
+                
               </ul>
             </div>
           
@@ -2644,7 +2634,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">36k</span>
+    <span title="站点总字数">36.9k</span>
   
 </div>
 
