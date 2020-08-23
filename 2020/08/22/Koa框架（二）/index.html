@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="Yang&#39;s Blog">
 <meta property="og:description" content="Koa路由介绍和使用&amp;emsp;&amp;emsp;路由（Routing）是由一个URL(或者叫路径）和一个特定的HTTP方法（GET、POST等)组成的，涉及到应用如何响应客户端对某个网站节点的访问。 &amp;emsp;&amp;emsp;通俗的讲:路由就是根据不同的URL地址，加载不同的页面实现不同的功能。 &amp;emsp;&amp;emsp;Koa中的路由和Express有所不同，在Express中直接引入Express就可">
 <meta property="article:published_time" content="2020-08-22T13:15:12.000Z">
-<meta property="article:modified_time" content="2020-08-23T06:29:23.214Z">
+<meta property="article:modified_time" content="2020-08-23T06:30:27.584Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="Node.js">
 <meta property="article:tag" content="Koa">
@@ -340,7 +340,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-23T14:29:23+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-23T14:30:27+08:00">
                 2020-08-23
               </time>
             
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  788
+                  790
                 </span>
               
 
@@ -466,12 +466,7 @@
 
 <h1 id="Koa路由-Post传值"><a href="#Koa路由-Post传值" class="headerlink" title="Koa路由 Post传值"></a>Koa路由 Post传值</h1><p>在koa中，我们可以用koa-bodyparser来获取post提交的数据</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>npm install –save koa-bodyparser</p>
-<h2 id="引入中间件"><a href="#引入中间件" class="headerlink" title="引入中间件"></a>引入中间件</h2><p>```js<br>//导包<br>var Koa = require (‘koa’) :<br>var bodyParser = require(‘koa-bodyparser’)<br>var router = require (‘koa-router’)();</p>
-<p>var app =  new Koa () ;</p>
-<p>app.use(bodyParser())</p>
-<p>router.post(‘/add’,async (ctx)=&gt;{<br>    //crx.request.body 获取post数据，数据为对象形式<br>    ctx.body = ctx.request.body<br>})</p>
-<p>app.listen(3000)</p>
-
+<h2 id="引入中间件"><a href="#引入中间件" class="headerlink" title="引入中间件"></a>引入中间件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导包</span></span><br><span class="line"><span class="keyword">var</span> Koa = <span class="built_in">require</span> (<span class="string">'koa'</span>) :</span><br><span class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'koa-bodyparser'</span>)</span><br><span class="line"><span class="keyword">var</span> router = <span class="built_in">require</span> (<span class="string">'koa-router'</span>)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app =  <span class="keyword">new</span> Koa () ;</span><br><span class="line"></span><br><span class="line">app.use(bodyParser())</span><br><span class="line"></span><br><span class="line">router.post(<span class="string">'/add'</span>,<span class="keyword">async</span> (ctx)=&gt;&#123;</span><br><span class="line">    <span class="comment">//crx.request.body 获取post数据，数据为对象形式</span></span><br><span class="line">    ctx.body = ctx.request.body</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -489,7 +484,7 @@
   <p><span>本文标题:</span><a href="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/">Koa框架（二） 路由</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 杨雨翔 的个人博客">杨雨翔</a></p>
   <p><span>发布时间:</span>2020年08月22日 - 21:15</p>
-  <p><span>最后更新:</span>2020年08月23日 - 14:29</p>
+  <p><span>最后更新:</span>2020年08月23日 - 14:30</p>
   <p><span>原始链接:</span><a href="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/" title="Koa框架（二） 路由">https://gitee.com/yang_yu_xiang/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://gitee.com/yang_yu_xiang/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/"  aria-label="复制成功！"></i></span>
   </p>

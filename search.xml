@@ -1937,12 +1937,7 @@ await后面需要跟上一个异步对象，如果是我们自己写的promise�
 
 <h1 id="Koa路由-Post传值"><a href="#Koa路由-Post传值" class="headerlink" title="Koa路由 Post传值"></a>Koa路由 Post传值</h1><p>在koa中，我们可以用koa-bodyparser来获取post提交的数据</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>npm install –save koa-bodyparser</p>
-<h2 id="引入中间件"><a href="#引入中间件" class="headerlink" title="引入中间件"></a>引入中间件</h2><p>```js<br>//导包<br>var Koa = require (‘koa’) :<br>var bodyParser = require(‘koa-bodyparser’)<br>var router = require (‘koa-router’)();</p>
-<p>var app =  new Koa () ;</p>
-<p>app.use(bodyParser())</p>
-<p>router.post(‘/add’,async (ctx)=&gt;{<br>    //crx.request.body 获取post数据，数据为对象形式<br>    ctx.body = ctx.request.body<br>})</p>
-<p>app.listen(3000)</p>
-]]></content>
+<h2 id="引入中间件"><a href="#引入中间件" class="headerlink" title="引入中间件"></a>引入中间件</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//导包</span></span><br><span class="line"><span class="keyword">var</span> Koa = <span class="built_in">require</span> (<span class="string">'koa'</span>) :</span><br><span class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'koa-bodyparser'</span>)</span><br><span class="line"><span class="keyword">var</span> router = <span class="built_in">require</span> (<span class="string">'koa-router'</span>)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app =  <span class="keyword">new</span> Koa () ;</span><br><span class="line"></span><br><span class="line">app.use(bodyParser())</span><br><span class="line"></span><br><span class="line">router.post(<span class="string">'/add'</span>,<span class="keyword">async</span> (ctx)=&gt;&#123;</span><br><span class="line">    <span class="comment">//crx.request.body 获取post数据，数据为对象形式</span></span><br><span class="line">    ctx.body = ctx.request.body</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Node.js</category>
       </categories>
