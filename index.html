@@ -290,6 +290,225 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="杨雨翔">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="url">Koa框架（二） 路由</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-22T21:15:12+08:00">
+                2020-08-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-23T11:52:19+08:00">
+                2020-08-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/MyBlog/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  697
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Koa路由介绍和使用"><a href="#Koa路由介绍和使用" class="headerlink" title="Koa路由介绍和使用"></a>Koa路由介绍和使用</h1><p>&emsp;&emsp;路由（Routing）是由一个URL(或者叫路径）和一个特定的HTTP方法（GET、POST等)组成的，涉及到应用如何响应客户端对某个网站节点的访问。</p>
+<p>&emsp;&emsp;通俗的讲:路由就是根据不同的URL地址，加载不同的页面实现不同的功能。</p>
+<p>&emsp;&emsp;Koa中的路由和Express有所不同，在Express中直接引入Express就可以配置路由，但是在Koa中我们需要安装对应的<code>koa-router</code>路由模块来实现。</p>
+<blockquote>
+<p>npm install –save koa-router</p>
+</blockquote>
+<p>然后就可以使用了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导包</span></span><br><span class="line"><span class="keyword">var</span> Koa = <span class="built_in">require</span> (<span class="string">'koa'</span>) :</span><br><span class="line"><span class="keyword">var</span> Router = <span class="built_in">require</span> (<span class="string">'koa-router'</span>);</span><br><span class="line"><span class="comment">//实例化</span></span><br><span class="line"><span class="keyword">var</span> app =  <span class="keyword">new</span> Koa ( ;</span><br><span class="line"><span class="keyword">var</span> router = <span class="keyword">new</span> Router();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//配置路由，在express中，调用参数有req，res，但是在Koa中request和response的所有信息都放在context（上下文）中 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//写法一</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="keyword">async</span>(ctx)=&gt; &#123;</span><br><span class="line">    <span class="comment">//ctx.body相当于res.send()</span></span><br><span class="line">    ctx.body=<span class="string">'首页'</span><span class="comment">//返回数据</span></span><br><span class="line">&#125;).get(<span class="string">'/news'</span>,<span class="keyword">async</span>(ctx)=&gt;&#123;</span><br><span class="line">    ctx.body=<span class="string">'新闻页'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//写法二</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="keyword">async</span>(ctx)=&gt; &#123;</span><br><span class="line">    <span class="comment">//ctx.body相当于res.send()</span></span><br><span class="line">    ctx.body=<span class="string">'首页'</span><span class="comment">//返回数据</span></span><br><span class="line">&#125;)</span><br><span class="line">router.get(<span class="string">'/news'</span>,<span class="keyword">async</span>(ctx)=&gt;&#123;</span><br><span class="line">    ctx.body=<span class="string">'新闻页'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//启动路由  </span></span><br><span class="line">app</span><br><span class="line">    .use(router.routes())</span><br><span class="line">    .use(router.allowedMethods());</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+<p>Koa的路由还有另一种实例化方法和监听方法，如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导包</span></span><br><span class="line"><span class="keyword">var</span> Koa = <span class="built_in">require</span> (<span class="string">'koa'</span>) :</span><br><span class="line"><span class="keyword">var</span> router = <span class="built_in">require</span> (<span class="string">'koa-router'</span>)();<span class="comment">//导的过程实例化</span></span><br><span class="line"><span class="comment">//实例化</span></span><br><span class="line"><span class="keyword">var</span> app =  <span class="keyword">new</span> Koa ( ;</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="keyword">async</span>(ctx)=&gt; &#123;</span><br><span class="line">    <span class="comment">//ctx.body相当于res.send()</span></span><br><span class="line">    ctx.body=<span class="string">'首页'</span><span class="comment">//返回数据</span></span><br><span class="line">&#125;)</span><br><span class="line">router.get(<span class="string">'/news'</span>,<span class="keyword">async</span>(ctx)=&gt;&#123;</span><br><span class="line">    ctx.body=<span class="string">'新闻页'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//启动路由  </span></span><br><span class="line">app</span><br><span class="line">    .use(router.routes())</span><br><span class="line">    .use(router.allowedMethods());</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Koa路由-Get传值"><a href="#Koa路由-Get传值" class="headerlink" title="Koa路由 Get传值"></a>Koa路由 Get传值</h1><p>当浏览器url发来的路径后面带上<code>？xxx=xxx</code>，在Koa里面如何获取请求参数呢</p>
+<p>在koa2中GET传值通过request接收，但是接收的方法有两种:<code>query</code>和<code>querystring</code>.</p>
+<ul>
+<li>query:返回的是格式化好的参数对象。</li>
+<li>querystring:返回的是请求字符串。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在express中，我们可以用req.query,在Koa中，所有信息都放在ctx中，可以从ctx中拿</span></span><br><span class="line">router.get(<span class="string">'/newscontent'</span>,(ctx)=&gt;&#123;</span><br><span class="line">    <span class="keyword">let</span> url =ctx.url;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//从request中获取GET 请求</span></span><br><span class="line">    <span class="keyword">let</span> request =ctx.request;</span><br><span class="line">    <span class="keyword">let</span> req_query = request.query;<span class="comment">//包含域名信息和请求头信息</span></span><br><span class="line">    <span class="keyword">let</span> req_querystring = request.querystring;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//从上下文中直接获取</span></span><br><span class="line">    <span class="keyword">let</span> ctx_query = ctx.query; <span class="comment">//***&#123;aid: '123'&#125;获取的是对象,用的最多的方式</span></span><br><span class="line">    <span class="keyword">let</span> ctx_querystring = ctx.querystring;<span class="comment">//'aid=123&amp;name=zhangsan获取的是一个字符串</span></span><br><span class="line"></span><br><span class="line">    ctx.body=&#123;</span><br><span class="line">        url,</span><br><span class="line">        req_query,</span><br><span class="line">        req_querystring,</span><br><span class="line">        ctx_query,</span><br><span class="line">        ctx_querystring</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="动态路由传值"><a href="#动态路由传值" class="headerlink" title="动态路由传值"></a>动态路由传值</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动态路由需在路由后面跟上/:xx</span></span><br><span class="line">router.get(<span class="string">'/newscontent/:aid'</span>,(ctx)=&gt;&#123;</span><br><span class="line">    <span class="comment">//获取动态路由的传值</span></span><br><span class="line">    <span class="built_in">console</span>.log(ctx.params)<span class="comment">//&#123;aid:'456'&#125;</span></span><br><span class="line">    ctx.body=<span class="string">"新闻aid页面详情"</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//动态路由里面可以传递多个值</span></span><br><span class="line">router.get(<span class="string">'/newscontent/:aid/:bid'</span>,(ctx)=&gt;&#123;</span><br><span class="line">    <span class="comment">//获取动态路由的传值</span></span><br><span class="line">    <span class="built_in">console</span>.log(ctx.params)<span class="comment">//&#123;aid:'456'&#125;</span></span><br><span class="line">    ctx.body=<span class="string">"新闻aid页面详情"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:16px;">
+      ---------------- The End ----------------
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -337,7 +556,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-22T21:14:24+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-22T21:22:01+08:00">
                 2020-08-22
               </time>
             
@@ -446,7 +665,7 @@
 </blockquote>
 <p>–save参数，表示自动修改package.json文件，自动添加依赖项。</p>
 <p>```js<br>//我们先npm init –yes初始化项目，自动创建package.json<br>//然后创建app.js  如下</p>
-<p>//引入<br>const koa=require(‘koa’);<br>//实例化<br>const app=new koa();</p>
+<p>//引入<br>const Koa=require(‘koa’);<br>//实例化<br>const app=new Koa();</p>
 <p>app.use(async(ctx)=&gt;{<br>    ctx.body=’你好koa2.x’;<br>}<br>//相当于 express中<br>app.use(function(req.res){<br>    res.send(‘你好koa2.x’)<br>})</p>
 <p>app.listen(3000)</p>
 
@@ -2254,229 +2473,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/07/28/Vue%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82param%E4%B8%8Equery%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="杨雨翔">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/MyBlog/2020/07/28/Vue%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82param%E4%B8%8Equery%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">Vue路由传参param与query两种方式的区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-28T22:08:58+08:00">
-                2020-07-28
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-07-28T22:42:49+08:00">
-                2020-07-28
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/%E5%89%8D%E7%AB%AF/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/MyBlog/2020/07/28/Vue%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82param%E4%B8%8Equery%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/07/28/Vue%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82param%E4%B8%8Equery%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  477
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="基本说明"><a href="#基本说明" class="headerlink" title="基本说明"></a>基本说明</h1><p>路由配置：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">path</span>:<span class="string">'/login'</span>,<span class="attr">name</span>:<span class="string">'Login'</span>,<span class="attr">component</span>:Login&#125;,</span><br></pre></td></tr></table></figure>
-<p>1.页面携带query参数跳转(path,name指定跳转到Login时都可以携带query参数)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$router.push(&#123; <span class="attr">path</span>:<span class="string">'/login'</span>,<span class="attr">name</span>:<span class="string">'Login'</span>, <span class="attr">query</span>: &#123; <span class="attr">id</span>: <span class="keyword">this</span>.id &#125; )</span><br></pre></td></tr></table></figure>
-<p>query相当与发送了一次get请求，请求参数会显示在浏览器地址栏中</p>
-<p>2.页面携带params参数跳转(携带params参数跳转时只能使用name指定)</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$router.push(&#123; <span class="attr">name</span>:<span class="string">'Login'</span>, <span class="attr">params</span>: &#123; <span class="attr">id</span>: <span class="keyword">this</span>.id &#125; )</span><br></pre></td></tr></table></figure>
-<p>params相当与发送了一次post请求，请求参数则不会显示，并且刷新页面之后参数会消失</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/MyBlog/2020/07/28/Vue%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82param%E4%B8%8Equery%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-    <div style="text-align:center;color: #ccc;font-size:16px;">
-      ---------------- The End ----------------
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2533,7 +2529,7 @@
               
                <a href="/MyBlog/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2648,7 +2644,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">35.3k</span>
+    <span title="站点总字数">36k</span>
   
 </div>
 
