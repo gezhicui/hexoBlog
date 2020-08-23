@@ -290,6 +290,238 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E5%9B%9B%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="杨雨翔">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E5%9B%9B%EF%BC%89/" itemprop="url">Koa框架（四） Koa中的Cookie和Session</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-23T17:19:30+08:00">
+                2020-08-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-23T18:01:58+08:00">
+                2020-08-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/MyBlog/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/MyBlog/categories/Node-js/Koa/" itemprop="url" rel="index">
+                    <span itemprop="name">Koa</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E5%9B%9B%EF%BC%89/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E5%9B%9B%EF%BC%89/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  487
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Koa中Cookie的使用"><a href="#Koa中Cookie的使用" class="headerlink" title="Koa中Cookie的使用"></a>Koa中Cookie的使用</h1><p>cookie可以实现的功能：</p>
+<ul>
+<li>保存用户信息</li>
+<li>浏览器历史记录</li>
+<li>猜你喜欢的功能</li>
+<li>10天免登陆</li>
+<li>多个页面之间的数据传递</li>
+<li>cookie实现购物车功能<h2 id="设置Cookie的值"><a href="#设置Cookie的值" class="headerlink" title="设置Cookie的值"></a>设置Cookie的值</h2><blockquote>
+<p>ctx.cookies.set(name,value,{options})</p>
+</blockquote>
+</li>
+</ul>
+<p>其中，options参数可选以下值：</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/options%E5%80%BC.png" alt=""></p>
+<h2 id="Cookie的获取"><a href="#Cookie的获取" class="headerlink" title="Cookie的获取"></a>Cookie的获取</h2><blockquote>
+<p>ctx.cookies.get(‘name’)</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E5%9B%9B%EF%BC%89/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:16px;">
+      ---------------- The End ----------------
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2272,226 +2504,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/07/30/Webpack%EF%BC%88%E4%B8%80%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="杨雨翔">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/MyBlog/2020/07/30/Webpack%EF%BC%88%E4%B8%80%EF%BC%89/" itemprop="url">Webpack（一） 基本使用和loader</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-30T13:43:28+08:00">
-                2020-07-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-07-30T21:04:03+08:00">
-                2020-07-30
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/%E5%89%8D%E7%AB%AF/Webpack/" itemprop="url" rel="index">
-                    <span itemprop="name">Webpack</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/MyBlog/2020/07/30/Webpack%EF%BC%88%E4%B8%80%EF%BC%89/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/07/30/Webpack%EF%BC%88%E4%B8%80%EF%BC%89/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="什么是Webpack"><a href="#什么是Webpack" class="headerlink" title="什么是Webpack"></a>什么是Webpack</h1><p>来看看官方的解释：</p>
-<p>&emsp;&emsp;At its core, webpack is a static module bundler for modern JavaScript applications.</p>
-<p>&emsp;&emsp;从本质上来讲，webpack是一个现代的JavgScript应用的静态<strong>模块打包</strong>工具。</p>
-<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/webpack.png" alt=""></p>
-<p>&emsp;&emsp;他把所有资源打包压缩成浏览器认识的语法，从而更好的放在服务器上部署，按我的理解就是：大概webpack类似于一个翻译软件，但是它内部是用google翻译（即node）进行翻译的。<br>翻译是为了让我们写的代码能被计算机所识别。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/MyBlog/2020/07/30/Webpack%EF%BC%88%E4%B8%80%EF%BC%89/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-    <div style="text-align:center;color: #ccc;font-size:16px;">
-      ---------------- The End ----------------
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2548,7 +2560,7 @@
               
                <a href="/MyBlog/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2671,7 +2683,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">37k</span>
+    <span title="站点总字数">37.5k</span>
   
 </div>
 

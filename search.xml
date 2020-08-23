@@ -1993,4 +1993,54 @@ await后面需要跟上一个异步对象，如果是我们自己写的promise�
         <tag>JavaScript</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Koa框架（四） Koa中的Cookie和Session</title>
+    <url>/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E5%9B%9B%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="Koa中Cookie的使用"><a href="#Koa中Cookie的使用" class="headerlink" title="Koa中Cookie的使用"></a>Koa中Cookie的使用</h1><p>cookie可以实现的功能：</p>
+<ul>
+<li>保存用户信息</li>
+<li>浏览器历史记录</li>
+<li>猜你喜欢的功能</li>
+<li>10天免登陆</li>
+<li>多个页面之间的数据传递</li>
+<li>cookie实现购物车功能<h2 id="设置Cookie的值"><a href="#设置Cookie的值" class="headerlink" title="设置Cookie的值"></a>设置Cookie的值</h2><blockquote>
+<p>ctx.cookies.set(name,value,{options})</p>
+</blockquote>
+</li>
+</ul>
+<p>其中，options参数可选以下值：</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/options%E5%80%BC.png" alt=""></p>
+<h2 id="Cookie的获取"><a href="#Cookie的获取" class="headerlink" title="Cookie的获取"></a>Cookie的获取</h2><blockquote>
+<p>ctx.cookies.get(‘name’)</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Koa中设置中文cookie"><a href="#Koa中设置中文cookie" class="headerlink" title="Koa中设置中文cookie"></a>Koa中设置中文cookie</h2><p>我们用cookies.set的方法没办法设置中文cookie，会报错。那我们就可以用到以下方法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> Buffer(<span class="string">'hello，world!'</span>).toString (<span class="string">'base64'</span>))<span class="comment">//转换成base64字符串: aGvsbG8sIHdvcmxkIQ==</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> Buffer(<span class="string">'aGVsbG8sIHdvcmxkIQ=='</span>,<span class="string">'base64'</span>).toString());<span class="comment">//还原base64字符串:hello, world!</span></span><br></pre></td></tr></table></figure>
+<p>在项目中，我们就可以这么使用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">router.get(<span class="string">'/'</span>,<span class="keyword">async</span>(ctx)=&gt;&#123;</span><br><span class="line">    <span class="keyword">var</span> name=<span class="keyword">new</span> Buffer(<span class="string">'张三'</span>).toString(<span class="string">'base64'</span>);</span><br><span class="line"></span><br><span class="line">    ctx.cookies.set(<span class="string">'userinfo'</span>,name,&#123;</span><br><span class="line">        maxAge:<span class="number">60</span>*<span class="number">1000</span>*<span class="number">60</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">'/news'</span>,<span class="keyword">async</span>(ctx)=&gt;&#123;</span><br><span class="line">    <span class="keyword">var</span> userinfo=ctx.cookies.get(<span class="string">'userinfo'</span>)</span><br><span class="line">    <span class="keyword">var</span> name = <span class="keyword">new</span> Buffer(userinfo,<span class="string">'base64'</span>).toString();</span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Koa中Session的使用"><a href="#Koa中Session的使用" class="headerlink" title="Koa中Session的使用"></a>Koa中Session的使用</h1><h2 id="Session工作流程"><a href="#Session工作流程" class="headerlink" title="Session工作流程"></a>Session工作流程</h2><p>&emsp;&emsp;当浏览器访问服务器并发送第一次请求时，服务器端会创建一个<code>session</code>对象，生成一个类似于<code>key,value</code>的键值对，然后将<code>key(cookie)</code>返回到浏览器(客户)端，浏览器下次再访问时，携带 <code>key(cookie)</code>，找到对应的<code>session(value)</code>。客户的信息都保存在<code>session</code>中</p>
+<h2 id="Koa-session的使用"><a href="#Koa-session的使用" class="headerlink" title="Koa-session的使用"></a>Koa-session的使用</h2><h3 id="安装koa-session"><a href="#安装koa-session" class="headerlink" title="安装koa-session"></a>安装koa-session</h3><blockquote>
+<p>install koa-session –save</p>
+</blockquote>
+<h3 id="引入koa-session"><a href="#引入koa-session" class="headerlink" title="引入koa-session"></a>引入koa-session</h3><blockquote>
+<p>const session = require(‘koa-session’);</p>
+</blockquote>
+<h3 id="设置官方文档提供的中间件"><a href="#设置官方文档提供的中间件" class="headerlink" title="设置官方文档提供的中间件"></a>设置官方文档提供的中间件</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//照着复制就行</span></span><br><span class="line">app.keys = [<span class="string">'some secret hurr'</span>];<span class="comment">//cookie的签名</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> CONFIG = &#123;</span><br><span class="line">  key: <span class="string">'koa.sess'</span>, <span class="comment">//默认</span></span><br><span class="line">  maxAge: <span class="number">86400000</span>,<span class="comment">//cookie过期时间 需要设置</span></span><br><span class="line">  autoCommit: <span class="literal">true</span>, </span><br><span class="line">  overwrite: <span class="literal">true</span>, <span class="comment">//没有效果，默认</span></span><br><span class="line">  httpOnly: <span class="literal">true</span>, <span class="comment">//true表示只有服务器端可以获取cookie</span></span><br><span class="line">  signed: <span class="literal">true</span>, <span class="comment">//签名  默认 </span></span><br><span class="line">  rolling: <span class="literal">false</span>, <span class="comment">//每次访问重新设置session</span></span><br><span class="line">  renew: <span class="literal">true</span>, <span class="comment">//快过期时设置session 当用户在指定时间内有操作，重新设置session，无操作就过期</span></span><br><span class="line">  secure: <span class="literal">true</span>, <span class="comment">//加密cookie</span></span><br><span class="line">  sameSite: <span class="literal">null</span>, </span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">app.use(session(CONFIG, app));</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code class="js"><span class="comment">//在路由中</span>
+<span class="comment">//设置值</span>
+ctx.session.username =<span class="string">'张三'</span>
+<span class="comment">//获取值</span>
+ctx.session.username</code></pre>
+]]></content>
+      <categories>
+        <category>Node.js</category>
+        <category>Koa</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>Koa</tag>
+      </tags>
+  </entry>
 </search>
