@@ -94,7 +94,7 @@
 <meta property="og:description" content="路由根据url的不同来切换对应的组件实现spa(单页面应用)在页面切换的时候不会刷新，更加接近原生体验 路由的下载下载  npm install –save react-router-dom   router-router    只提供了一些核心的API router-router-dom    提供更多的一些选项  路由模式:  hash HashRouter (hash模式带#号，刷新的时候页">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/routerLink.png">
 <meta property="article:published_time" content="2020-07-03T12:27:47.000Z">
-<meta property="article:modified_time" content="2020-09-21T04:08:22.205Z">
+<meta property="article:modified_time" content="2020-09-21T05:32:21.120Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -341,7 +341,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-09-21T12:08:22+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-09-21T13:32:21+08:00">
                 2020-09-21
               </time>
             
@@ -495,14 +495,14 @@
 <p>另一种做法是，使用<code>activeClassName</code>指定当前路由的<code>Class</code></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">"/about"</span> <span class="attr">activeClassName</span>=<span class="string">"active"</span>&gt;</span>About<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">"/repos"</span> <span class="attr">activeClassName</span>=<span class="string">"active"</span>&gt;</span>Repos<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>上面代码中，当前页面的链接的<code>class</code>会包含<code>active</code>。</p>
-<h1 id="表单处理"><a href="#表单处理" class="headerlink" title="表单处理"></a>表单处理</h1><p><code>Link</code>组件用于正常的用户点击跳转，但是有时还需要<code>表单跳转</code>、<code>点击按钮跳转</code>等操作。这些情况怎么跟React Router对接呢？’</p>
+<h1 id="表单处理"><a href="#表单处理" class="headerlink" title="表单处理"></a>表单处理</h1><p><code>Link</code>组件用于正常的用户点击跳转，但是有时还需要<code>表单跳转</code>、<code>点击按钮跳转</code>等操作。这些情况怎么跟React Router对接呢？</p>
+<p>下面是一个表单。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">onSubmit</span>=<span class="string">&#123;this.handleSubmit&#125;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"userName"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"repo"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Go<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>第一种方法是使用<code>browserHistory.push</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; browserHistory &#125; <span class="keyword">from</span> <span class="string">'react-router'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">  handleSubmit(event) &#123;</span><br><span class="line">    event.preventDefault()</span><br><span class="line">    <span class="keyword">const</span> userName = event.target.elements[<span class="number">0</span>].value</span><br><span class="line">    <span class="keyword">const</span> repo = event.target.elements[<span class="number">1</span>].value</span><br><span class="line">    <span class="keyword">const</span> path = <span class="string">`/repos/<span class="subst">$&#123;userName&#125;</span>/<span class="subst">$&#123;repo&#125;</span>`</span></span><br><span class="line">    browserHistory.push(path)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
 <p>第二种方法是使用<code>context</code>对象。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> React.createClass(&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ask for `router` from context</span></span><br><span class="line">  contextTypes: &#123;</span><br><span class="line">    router: React.PropTypes.object</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  handleSubmit(event) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">this</span>.context.router.push(path)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>下面是一个表单。</p>
 <h1 id="history、location、match"><a href="#history、location、match" class="headerlink" title="history、location、match"></a>history、location、match</h1><h2 id="history"><a href="#history" class="headerlink" title="history"></a>history</h2><p>来介绍一下如何使用history插件管理浏览记录</p>
 <p>React Router中很重要的一部分就是history package，他给react router提供了主要的功能。首先需要安装</p>
 <blockquote>
