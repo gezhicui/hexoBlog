@@ -88,7 +88,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Yang&#39;s Blog">
-<meta property="og:url" content="https://gitee.com/yang_yu_xiang/MyBlog/tags/JavaScript/index.html">
+<meta property="og:url" content="https://gitee.com/yang_yu_xiang/MyBlog/tags/javascript/index.html">
 <meta property="og:site_name" content="Yang&#39;s Blog">
 <meta property="article:author" content="杨雨翔">
 <meta name="twitter:card" content="summary">
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://gitee.com/yang_yu_xiang/MyBlog/tags/JavaScript/"/>
+  <link rel="canonical" href="https://gitee.com/yang_yu_xiang/MyBlog/tags/javascript/"/>
 
 
 
 
 
-  <title>标签: JavaScript | Yang's Blog</title>
+  <title>标签: javascript | Yang's Blog</title>
   
 
 
@@ -282,7 +282,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>JavaScript<small>标签</small>
+        <h1>javascript<small>标签</small>
         </h1>
       </div>
 
@@ -294,9 +294,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/MyBlog/2020/08/16/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/" itemprop="url">
+            <a class="post-title-link" href="/MyBlog/2020/06/19/%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AD%E5%8C%85/" itemprop="url">
               
-                <span itemprop="name">浅拷贝和深拷贝</span>
+                <span itemprop="name">函数的闭包</span>
               
             </a>
         
@@ -304,9 +304,65 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2020-08-16T15:30:43+08:00"
-              content="2020-08-16" >
-          08-16
+              datetime="2020-06-19T11:20:43+08:00"
+              content="2020-06-19" >
+          06-19
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/MyBlog/2020/06/18/js%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" itemprop="url">
+              
+                <span itemprop="name">js中的常用数组方法</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-06-18T22:58:19+08:00"
+              content="2020-06-18" >
+          06-18
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/MyBlog/2020/06/16/js%E4%B8%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" itemprop="url">
+              
+                <span itemprop="name">js中字符串常用方法</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-06-16T20:09:52+08:00"
+              content="2020-06-16" >
+          06-16
         </time>
       </div>
 
@@ -495,7 +551,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">40k</span>
+    <span title="站点总字数">40.8k</span>
   
 </div>
 
@@ -982,70 +1038,6 @@
           } else {
             $('.search-icon').click(inputEventFunction);
             input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-
-
-
-
-<script src="/MyBlog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/MyBlog/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
-</html>
-input.addEventListener('keypress', function (event) {
               if (event.keyCode === 13) {
                 inputEventFunction();
               }
