@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E4%BF%AE%E6%94%B9reducer.js.png">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/action%E8%B0%83%E7%94%A8%E6%88%90%E5%8A%9F.png">
 <meta property="article:published_time" content="2020-07-04T09:32:15.000Z">
-<meta property="article:modified_time" content="2020-09-27T06:23:28.585Z">
+<meta property="article:modified_time" content="2020-09-27T08:27:01.910Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -346,7 +346,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-09-27T14:23:28+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-09-27T16:27:01+08:00">
                 2020-09-27
               </time>
             
@@ -422,7 +422,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2k
+                  2.6k
                 </span>
               
 
@@ -438,7 +438,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  11
                 </span>
               
             </div>
@@ -495,7 +495,29 @@
 
 <p>  &emsp;&emsp;这时候你在浏览器中预览，我们仿佛实现了<code>componentWillUnmount</code>方法。但这只是好像实现了，当点击计数器按钮时，你会<code>发现老弟，你走了!Index页面</code>，也出现了。这到底是怎么回事那？其实每次状态发生变化，<code>useEffect</code>都进行了解绑。</p>
 <p>  &emsp;&emsp;这就需要请出<code>useEffect</code>的第二个参数，它是一个数组，数组中可以写入很多状态对应的变量，意思是当状态值发生变化时，我们才进行解绑。但是当传空数组<code>[]</code>时，就是当组件将被销毁时才进行解绑，这也就实现了<code>componentWillUnmount</code>的生命周期函数。<br>  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  function Index() &#123;</span><br><span class="line">    useEffect(()=&gt;&#123;</span><br><span class="line">        console.log('useEffect=&gt;老弟你来了！Index页面')</span><br><span class="line">        return ()=&gt;&#123;</span><br><span class="line">            console.log('老弟，你走了!Index页面')</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,[]) <span class="comment">&lt;!-- 数组里如果是count，每次count发生变化，才会输出 return的函数中的内容  --&gt;</span></span><br><span class="line">    return <span class="tag">&lt;<span class="name">h2</span>&gt;</span>JSPang.com<span class="tag">&lt;/<span class="name">h2</span>&gt;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="useContext"><a href="#useContext" class="headerlink" title="useContext"></a>useContext</h2><p>有了<code>useState</code>和<code>useEffect</code>已经可以实现大部分的业务逻辑了，但是<code>React Hooks</code>中还是有很多好用的<code>Hooks</code>函数的，比如<code>useContext</code>和<code>useReducer</code>。</p>
+<h2 id="useContext"><a href="#useContext" class="headerlink" title="useContext"></a>useContext</h2><p>&emsp;&emsp;有了<code>useState</code>和<code>useEffect</code>已经可以实现大部分的业务逻辑了，但是<code>React Hooks</code>中还是有很多好用的<code>Hooks</code>函数的，比如<code>useContext</code>和<code>useReducer</code>。</p>
+<p>&emsp;&emsp;现在使用方法(Function)来声明组件，已经没有了<code>constructor</code>构造函数也就没有了props的接收，那父子组件的传值就成了一个问题。<code>React Hooks</code> 为我们准备了<code>useContext</code>来进行父子组件的传值</p>
+<p>&emsp;&emsp;来看代码：<code>Example.js</code>中引入<code>createContext</code>函数，并使用得到一个组件，然后在<code>return</code>方法中进行使用。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState , createContext &#125; from 'react';</span><br><span class="line"> <span class="comment">&lt;!-- ========关键代码(创建一个CountCountext对象)========= --&gt;</span></span><br><span class="line">const CountContext = createContext()</span><br><span class="line"></span><br><span class="line">function Example()&#123;</span><br><span class="line">    const [ count , setCount ] = useState(0);</span><br><span class="line"></span><br><span class="line">    return (</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>You clicked &#123;count&#125; times<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;setCount(count+1)&#125;&#125;&gt;click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- =============关键代码(把count暴露出去)============== --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">CountContext.Provider</span> <span class="attr">value</span>=<span class="string">&#123;count&#125;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">CountContext.Provider</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">export default Example;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;已经有了上下文变量，剩下的就时如何接收了，接收这个直接使用<code>useContext</code>就可以，但是在使用前需要新进行引入<code>useContext</code>（不引入是没办法使用的）。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState , createContext , useContext &#125; from 'react';</span><br><span class="line"></span><br><span class="line">function Counter()&#123;</span><br><span class="line">    const count = useContext(CountContext) <span class="comment">&lt;!--一句话就可以得到count --&gt;</span></span><br><span class="line">    return (<span class="tag">&lt;<span class="name">h2</span>&gt;</span>&#123;count&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>得到后就可以显示出来了，但是要记得在<code>&lt;CountContext.Provider&gt;</code>的闭合标签中,代码如下。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">CountContext.Provider</span> <span class="attr">value</span>=<span class="string">&#123;count&#125;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Counter</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">CountContext.Provider</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="useReducer"><a href="#useReducer" class="headerlink" title="useReducer"></a>useReducer</h2><p>&emsp;&emsp;为了更好的理解<code>useReducer</code>，所以先要了解JavaScript里的<code>Redcuer</code>是什么。它的兴起是从<code>Redux</code>广泛使用开始的，但不仅仅存在<code>Redux</code>中。reducer其实就是一个函数，这个函数接收两个参数，一个是状态，一个用来控制业务逻辑的判断参数。我们举一个最简单的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">countReducer</span>(<span class="params">state, action</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(action.type) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'add'</span>:</span><br><span class="line">            <span class="keyword">return</span> state + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'sub'</span>:</span><br><span class="line">            <span class="keyword">return</span> state - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">default</span>: </span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;了解<code>reducer</code>的含义后，就可以讲<code>useReducer</code>了，它也是<code>React hooks</code>提供的函数，可以增强我们的<code>Reducer</code>，实现类似<code>Redux</code>的功能。我们新建一个<code>Example.js</code>的文件，然后用<code>useReducer</code>实现计数器的加减双向操作</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useReducer &#125; from 'react';</span><br><span class="line"></span><br><span class="line">function ReducerDemo()&#123;</span><br><span class="line">    const [ count , dispatch ] =useReducer((state,action)=&gt;&#123;</span><br><span class="line">        switch(action)&#123;</span><br><span class="line">            case 'add':</span><br><span class="line">                return state+1</span><br><span class="line">            case 'sub':</span><br><span class="line">                return state-1</span><br><span class="line">            default:</span><br><span class="line">                return state</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,0)<span class="comment">&lt;!--0为count默认值--&gt;</span></span><br><span class="line">    return (</span><br><span class="line">       <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">h2</span>&gt;</span>现在的分数是&#123;count&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>dispatch('add')&#125;&gt;Increment<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>dispatch('sub')&#125;&gt;Decrement<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default ReducerDemo</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
 <h1 id="redux"><a href="#redux" class="headerlink" title="redux"></a>redux</h1><p>&emsp;&emsp;<code>redux</code> 是javascript提供的一个可预测性<code>(我们给个固定的输入 那么必定可以等到一个结果)</code>的状态容器。<code>redux</code>是个专门的状态管理库，并不是react独有的。在vue等当中也可以使用 但是在react中会比较多。</p>
 <p>&emsp;&emsp;<code>redux</code>的作用就是集中的管理react中多个组件的状态</p>
 <h2 id="需求场景"><a href="#需求场景" class="headerlink" title="需求场景"></a>需求场景</h2><ul>
@@ -790,7 +812,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hook"><span class="nav-number">1.</span> <span class="nav-text">hook</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在类组件中使用状态："><span class="nav-number">1.1.</span> <span class="nav-text">在类组件中使用状态：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在无状态组件中使用状态-useState-："><span class="nav-number">1.2.</span> <span class="nav-text">在无状态组件中使用状态(useState)：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useEffect"><span class="nav-number">1.3.</span> <span class="nav-text">useEffect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useContext"><span class="nav-number">1.4.</span> <span class="nav-text">useContext</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux"><span class="nav-number">2.</span> <span class="nav-text">redux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求场景"><span class="nav-number">2.1.</span> <span class="nav-text">需求场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个核心概念"><span class="nav-number">2.2.</span> <span class="nav-text">几个核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redux的使用"><span class="nav-number">2.3.</span> <span class="nav-text">redux的使用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hook"><span class="nav-number">1.</span> <span class="nav-text">hook</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在类组件中使用状态："><span class="nav-number">1.1.</span> <span class="nav-text">在类组件中使用状态：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在无状态组件中使用状态-useState-："><span class="nav-number">1.2.</span> <span class="nav-text">在无状态组件中使用状态(useState)：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useEffect"><span class="nav-number">1.3.</span> <span class="nav-text">useEffect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useContext"><span class="nav-number">1.4.</span> <span class="nav-text">useContext</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useReducer"><span class="nav-number">1.5.</span> <span class="nav-text">useReducer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux"><span class="nav-number">2.</span> <span class="nav-text">redux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求场景"><span class="nav-number">2.1.</span> <span class="nav-text">需求场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个核心概念"><span class="nav-number">2.2.</span> <span class="nav-text">几个核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redux的使用"><span class="nav-number">2.3.</span> <span class="nav-text">redux的使用</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -824,7 +846,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">40.8k</span>
+    <span title="站点总字数">41.4k</span>
   
 </div>
 
