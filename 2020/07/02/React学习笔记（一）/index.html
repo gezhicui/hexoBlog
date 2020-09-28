@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="Yang&#39;s Blog">
 <meta property="og:description" content="react的组件分为3个部分  属性 props 状态state 生命周期  组件的创建函数组件&#x2F;无状态组件无状态组件的创建方式: 12345678910function MyCom()&amp;#123;    return (        &lt;!-- jsx代码 --&gt;      &lt;div&gt;我是一个无状态组件&lt;&#x2F;div&gt;    )&amp;#125;&lt;!-- 组件就是">
 <meta property="article:published_time" content="2020-07-02T03:19:48.000Z">
-<meta property="article:modified_time" content="2020-09-24T12:06:09.338Z">
+<meta property="article:modified_time" content="2020-09-27T08:45:58.316Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-09-24T20:06:09+08:00">
-                2020-09-24
+              <time title="更新于" itemprop="dateModified" datetime="2020-09-27T16:45:58+08:00">
+                2020-09-27
               </time>
             
           </span>
@@ -476,6 +476,9 @@
 
 <h1 id="父子组件传值"><a href="#父子组件传值" class="headerlink" title="父子组件传值"></a>父子组件传值</h1><h2 id="父传子"><a href="#父传子" class="headerlink" title="父传子"></a>父传子</h2><p>之前的数据都是存在组件内部，如果我想要渲染外部传递进来props的数据怎么办？</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">let MyCom=(props)=&gt;&#123;</span><br><span class="line">    return(</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            我是子组件 </span><br><span class="line">            &#123;</span><br><span class="line">                props.arr.map((v,i)=&gt;&#123;</span><br><span class="line">                    return <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;v&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">let dataArr=["寒冰","盖伦","蛮王"];</span><br><span class="line">let Com=()=&gt;&#123;</span><br><span class="line">    return (</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            我是父组件</span><br><span class="line">            <span class="tag">&lt;<span class="name">MyCom</span> <span class="attr">arr</span>=<span class="string">&#123;dataArr&#125;/</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    )       </span><br><span class="line">&#125;</span><br><span class="line">ReactDOM. render(<span class="tag">&lt;<span class="name">Com</span> /&gt;</span>,document.getElementById("demoReact"));</span><br></pre></td></tr></table></figure>
+
+<p>还有一种传值方法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--在子组件MyCom中，用props.children接收--&gt;</span></span><br><span class="line">let dataArr=["寒冰","盖伦","蛮王"];</span><br><span class="line"></span><br><span class="line">let Com=()=&gt;&#123;</span><br><span class="line">    return (</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            我是父组件</span><br><span class="line">            <span class="tag">&lt;<span class="name">MyCom</span>&gt;</span>&#123;dataArr&#125;<span class="tag">&lt;/<span class="name">MyCom</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    )       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>来看一个修改过的例子：</p>
 <p>当我点击页面中的lol英雄展示的时候下面的内容隐藏，点击之后在显示</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">&lt;!-- 控制变量用来保存当前的内容显示和隐藏的状态 --&gt;</span></span><br><span class="line">let bool=true; </span><br><span class="line">let MyCom=(props)=&gt;&#123;</span><br><span class="line">    return (</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&#123;&#123;display</span> <span class="attr">:</span> <span class="attr">bool</span> ?"<span class="attr">block</span>"<span class="attr">:</span>"<span class="attr">none</span>"&#125;&#125;&gt;</span></span><br><span class="line">            &#123;</span><br><span class="line">                props.arr.map((v,i)=&gt;&#123;</span><br><span class="line">                return <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;v&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">let dataArr=["寒冰","盖伦" ,"蛮王"];</span><br><span class="line">let Com=()=&gt;&#123;</span><br><span class="line">    return(</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;bool =! bool;console.log(bool);render()&#125;&#125;&gt;</span><br><span class="line">                LOL英雄展示</span><br><span class="line">            <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">MyCom</span> <span class="attr">arr</span>=<span class="string">&#123;dataArr&#125;/</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">function render()&#123;</span><br><span class="line">    ReactDOM. render(<span class="tag">&lt;<span class="name">Com</span> /&gt;</span>,document.getElementById(" demoReact" ));</span><br><span class="line">&#125;</span><br><span class="line">render()</span><br></pre></td></tr></table></figure>
@@ -643,7 +646,7 @@ var jiathis_config={
               
                <a href="/MyBlog/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -665,7 +668,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/MyBlog/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -782,7 +785,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">41.4k</span>
+    <span title="站点总字数">41.5k</span>
   
 </div>
 
