@@ -2184,6 +2184,7 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//得到手机屏幕的宽度</span></span><br><span class="line"><span class="keyword">let</span> htmlWidth = <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth;</span><br><span class="line"><span class="comment">//得到html的Dom元素</span></span><br><span class="line"><span class="keyword">let</span> htmlDom = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'html'</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="comment">//设置根元素字体大小</span></span><br><span class="line">htmlDom.style.fontSize= htmlWidth/<span class="number">20</span> + <span class="string">'px'</span>;</span><br></pre></td></tr></table></figure>
 
 <p>搞定啦</p>
+<p>tips：补充个小知识。在进行移动端布局的时候，在<code>meta</code>属性的<code>content</code>中加入<code>user-scalable=no</code>,即禁止用户缩放</p>
 ]]></content>
       <tags>
         <tag>前端</tag>
