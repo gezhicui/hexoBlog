@@ -95,7 +95,7 @@
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E7%99%BE%E5%BA%A6cookie.png">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/cookie%E5%92%8Csession%E5%85%B3%E7%B3%BB.png">
 <meta property="article:published_time" content="2020-07-22T10:21:28.000Z">
-<meta property="article:modified_time" content="2020-08-21T03:56:48.964Z">
+<meta property="article:modified_time" content="2020-10-04T13:32:25.936Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="cookie">
 <meta property="article:tag" content="session">
@@ -343,8 +343,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-21T11:56:48+08:00">
-                2020-08-21
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-04T21:32:25+08:00">
+                2020-10-04
               </time>
             
           </span>
@@ -480,17 +480,7 @@
 <p>在用户再进行登录时，判断用户登录状态</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//拦截请求判断用户登录状态</span></span><br><span class="line">app.use(<span class="string">'/admin'</span>, (req,res,next)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span> (req.url != <span class="string">'/login'</span> &amp;&amp; !req.session.username)&#123;</span><br><span class="line">        <span class="comment">//判断用户访问的是否是登录页面</span></span><br><span class="line">        <span class="comment">//判断用户的登录状态</span></span><br><span class="line">        <span class="comment">//如果用户是登录的将请求放行</span></span><br><span class="line">        <span class="comment">//如果用户不是登录的将请求重定向到登录页面</span></span><br><span class="line">        res.redirect( <span class="string">' /admin/ login'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(req.session.username)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">//用户是登录状态将请求放行</span></span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>在用户退出登录时，我们需要销毁session</p>
-<pre><code class="js">app.get(<span class="string">"/loginout"</span>,(req,res)=&gt;{
-    <span class="comment">//1、设置session的过期时间为6(它会把所有的session都销毁)</span>
-    <span class="comment">//req .session.cookie.maxAge=0</span>
-    <span class="comment">//2、销毁session</span>
-    <span class="comment">//req.session.destroy()</span>
-    <span class="comment">//3、销毁指定session  *推荐</span>
-    req.session.username=<span class="string">""</span>
-
-    res.send(<span class="string">"退出登录"</span>)
-})</code></pre>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">"/loginout"</span>,(req,res)=&gt;&#123;</span><br><span class="line">    <span class="comment">//1、设置session的过期时间为6(它会把所有的session都销毁)</span></span><br><span class="line">    <span class="comment">//req .session.cookie.maxAge=0</span></span><br><span class="line">    <span class="comment">//2、销毁session</span></span><br><span class="line">    <span class="comment">//req.session.destroy()</span></span><br><span class="line">    <span class="comment">//3、销毁指定session  *推荐</span></span><br><span class="line">    req.session.username=<span class="string">""</span></span><br><span class="line">    </span><br><span class="line">    res.send(<span class="string">"退出登录"</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
       
     </div>
     
