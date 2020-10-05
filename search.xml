@@ -290,12 +290,7 @@
 </blockquote>
 <h3 id="设置官方文档提供的中间件"><a href="#设置官方文档提供的中间件" class="headerlink" title="设置官方文档提供的中间件"></a>设置官方文档提供的中间件</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//照着复制就行</span></span><br><span class="line">app.keys = [<span class="string">'some secret hurr'</span>];<span class="comment">//cookie的签名</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> CONFIG = &#123;</span><br><span class="line">  key: <span class="string">'koa.sess'</span>, <span class="comment">//默认</span></span><br><span class="line">  maxAge: <span class="number">86400000</span>,<span class="comment">//cookie过期时间 需要设置</span></span><br><span class="line">  autoCommit: <span class="literal">true</span>, </span><br><span class="line">  overwrite: <span class="literal">true</span>, <span class="comment">//没有效果，默认</span></span><br><span class="line">  httpOnly: <span class="literal">true</span>, <span class="comment">//true表示只有服务器端可以获取cookie</span></span><br><span class="line">  signed: <span class="literal">true</span>, <span class="comment">//签名  默认 </span></span><br><span class="line">  rolling: <span class="literal">false</span>, <span class="comment">//每次访问重新设置session</span></span><br><span class="line">  renew: <span class="literal">true</span>, <span class="comment">//快过期时设置session 当用户在指定时间内有操作，重新设置session，无操作就过期</span></span><br><span class="line">  secure: <span class="literal">true</span>, <span class="comment">//加密cookie</span></span><br><span class="line">  sameSite: <span class="literal">null</span>, </span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">app.use(session(CONFIG, app));</span><br></pre></td></tr></table></figure>
 
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code class="js"><span class="comment">//在路由中</span>
-<span class="comment">//设置值</span>
-ctx.session.username =<span class="string">'张三'</span>
-<span class="comment">//获取值</span>
-ctx.session.username</code></pre>
-]]></content>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在路由中</span></span><br><span class="line"><span class="comment">//设置值</span></span><br><span class="line">ctx.session.username =<span class="string">'张三'</span></span><br><span class="line"><span class="comment">//获取值</span></span><br><span class="line">ctx.session.username</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Node.js</category>
         <category>Koa</category>
