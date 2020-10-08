@@ -2234,4 +2234,51 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
         <tag>Vue</tag>
       </tags>
   </entry>
+  <entry>
+    <title>项目优化策略</title>
+    <url>/MyBlog/2020/10/08/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/</url>
+    <content><![CDATA[<h1 id="为开发模式与发布模式指定不同的打包入口"><a href="#为开发模式与发布模式指定不同的打包入口" class="headerlink" title="为开发模式与发布模式指定不同的打包入口"></a>为开发模式与发布模式指定不同的打包入口</h1><p>默认情况下，Vue项目的开发模式与发布模式，共用同一个打包的入口文件(<strong>即src/main.js</strong>)。为了将项目的开发过程与发布过程分离，我们可以为两种模式，各自指定打包的入口文件。</p>
+<ul>
+<li>开发模式的入口文件为src/main-dev.js</li>
+<li>发布模式的入口文件为src/main-prod.js</li>
+</ul>
+<p>在<code>vue.config.js</code>导出的配置对象中，我们可以新增<code>configureWebpack</code>或<code>chainWebpack</code>节点，来自定义webpack的打包配置</p>
+<p>在这里,configureWebpack和chainWebpack的作用相同，唯一的区别就是它们修改webpack配置的方式不同:</p>
+<ul>
+<li>chainWebpack通过<code>链式编程</code>的形式，来修改默认的webpack配置</li>
+<li>configureWebpack通过<code>操作对象</code>的形式，来修改默认的webpack配置</li>
+</ul>
+<p>我们先删除main.js,把内容复制到<code>main-dev.js</code>和<code>main-prod.js</code>中<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/mainprodjs.png" alt=""></p>
+<p>下面通过chainWebpack自定义打包入口</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//module.exports暴露配置对象</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//chainwebpack声明了一个配置节点，config接收默认webpack配置对象</span></span><br><span class="line">    chainwebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">//判断产品处于什么模式</span></span><br><span class="line">        config.when(process.env.NODE_ENV=== <span class="string">'production'</span>,config=&gt;&#123;</span><br><span class="line">            <span class="comment">//.entry得到默认的打包入口，clear清空默认的打包入口，add新增自己的打包入口</span></span><br><span class="line">            config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-prod.js'</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'development'</span>,config=&gt;&#123;</span><br><span class="line">            config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-dev.js'</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，在发布阶段的修改就可以在<code>main-prod.js</code>中进行</p>
+<h1 id="通过externals加载外部CDN资源"><a href="#通过externals加载外部CDN资源" class="headerlink" title="通过externals加载外部CDN资源"></a>通过externals加载外部CDN资源</h1><p>默认情况下，通过import语法导入的第三方依赖包，最终会被<strong>打包合并到同一个文件</strong>中，从而导致打包成功后，单文件体积过大的问题。</p>
+<p>为了解决上述问题，可以通过webpack的<code>externals</code>节点，来配置并加载外部的CDN资源。凡是声明在externals中的第三方依赖包，都不会被打包。</p>
+<p>具体配置代码如下:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在vue.config.js的发布模式中</span></span><br><span class="line">config.when(process.env.NODE_ENV=== <span class="string">'production'</span>,config=&gt;&#123;</span><br><span class="line">    <span class="comment">//修改打包入口</span></span><br><span class="line">    config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-projs'</span>)</span><br><span class="line">    <span class="comment">//主要代码</span></span><br><span class="line">    config.set(<span class="string">'externals'</span>,&#123;</span><br><span class="line">        vue:<span class="string">'vue'</span>,</span><br><span class="line">        <span class="string">'vue-router'</span>:<span class="string">'VueRouter'</span>,</span><br><span class="line">        axios: <span class="string">'axios'</span>,</span><br><span class="line">        echarts: <span class="string">'echarts'</span> ,</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>同时，需要在<code>public/index.html</code>文件的头部，添加如下的CDN资源引用:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.staticfile.org/vue/2.5.22/vue.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://edn.staticfile.org/vue-router/3.0.1/ve-router.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.staticfile.org/axios/0.18.0/axios.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.staticfile.org/echarts/4.1.0/echarts.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 注意：如果有css资源也需要并且可以CDN引入的，也需要引入 --&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="通过CDN优化Element-UI的打包"><a href="#通过CDN优化Element-UI的打包" class="headerlink" title="通过CDN优化Element UI的打包"></a>通过CDN优化Element UI的打包</h1><p>ElementUI打包完体积也很大，但是配置稍微有点不一样，单独开一个大标题讲<br>由于体积问题，elementui是按需加载的，但是用了CDN我们就不需要按需加载，能很快的把elementui的所有资源都拿过来，所以操作流程如下：</p>
+<ul>
+<li>在main-prod.js中，注释掉element-ui按需加载的代码</li>
+<li>在index.html的头部区域中，通过CDN加载element-ui的js和css样式</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- element-ui 的样式表文件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://cdn.staticfile.org/element-ui/2.8.2/theme-chalk/index.css"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- element-ui的js 文件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.staticfile.org/element-ui/2.8.2/index.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，我们就可以把按需加载elementui的地方注释或删除掉了</p>
+<h1 id="路由懒加载"><a href="#路由懒加载" class="headerlink" title="路由懒加载"></a>路由懒加载</h1><p>当打包构建项目时，JavaScript包会变得非常大，影响页面加载。如果我们能把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就更加高效了。</p>
+<p>具体需要3步:</p>
+<ul>
+<li>安装<code>@babel/plugin-syntax-dynamic-import</code>包。</li>
+<li>在<code>babel.config.js</code>配置文件中声明该插件。</li>
+<li>将路由改为按需加载的形式，示例代码如下</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// import中的内容为路由分组/路由组件存放路径</span></span><br><span class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "group-foo"*/</span> <span class="string">'./Foo.vue'</span> )</span><br><span class="line"><span class="keyword">const</span> Bar = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackchunkName: "group-foo"*/</span> <span class="string">'./Bar.vue'</span> )</span><br><span class="line"><span class="keyword">const</span> Baz = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "group-boo"*/</span> <span class="string">'./Baz.vue'</span>)</span><br><span class="line"><span class="comment">//Foo和Bar在同一个分组，打包后会被放到同一个js文件中，请求其中一个路由时，另一个也会顺便被请求回来</span></span><br></pre></td></tr></table></figure>
+<p>然后，我们把普通的import导入方式删除就行了</p>
+<p>具体参考链接：<br><a href="https://router.vuejs.org/zh/guide/advanced/lazy-loading.html" target="_blank" rel="noopener">https://router.vuejs.org/zh/guide/advanced/lazy-loading.html</a></p>
+]]></content>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
 </search>
