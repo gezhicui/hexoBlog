@@ -97,7 +97,7 @@
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB.png">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E5%8E%9F%E5%9E%8B%E9%93%BE.png">
 <meta property="article:published_time" content="2020-06-16T09:05:57.000Z">
-<meta property="article:modified_time" content="2020-06-16T10:23:13.274Z">
+<meta property="article:modified_time" content="2020-10-09T03:48:25.995Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="原型">
 <meta property="article:tag" content="原型链">
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-16T18:23:13+08:00">
-                2020-06-16
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-09T11:48:25+08:00">
+                2020-10-09
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  972
+                  974
                 </span>
               
 
@@ -462,12 +462,12 @@
 <p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/gouzaohanshu.png" alt=""></p>
 <p>如图，每创建一个对象，都要开辟一个新的内存区域，<strong>我们希望所有的对象使用同一个函数，这样就比较节省内存，那么我们要怎样做呢？</strong></p>
 <h1 id="构造函数原型prototype"><a href="#构造函数原型prototype" class="headerlink" title="构造函数原型prototype"></a>构造函数原型prototype</h1><a id="more"></a>
-<p> &emsp;&emsp;构造函数通过原型分配的函数是所有对象所<strong>共享的</strong>。<br> JavaScript规定，每一个构造函数都有一个prototype属性，指向另一个对象。注意这个prototype就是一个对象，这个对象的所有属性和方法，都会被构造函数所拥有。称为<strong><em>原型对象</em></strong></p>
+<p> &emsp;&emsp;构造函数通过原型分配的函数是所有对象所<strong>共享的</strong>。<br> &emsp;&emsp;JavaScript规定，每一个构造函数都有一个<code>prototype</code>属性，指向另一个对象。注意这个<code>prototype</code>就是一个对象，这个对象的所有属性和方法，都会被构造函数所拥有。称为<strong><em>原型对象</em></strong></p>
 <p> &emsp;&emsp;我们可以把那些不变的方法，直接定义在prototype对象上，这样所有对象的实例就可以共享这些方法。这就是原型的作用</p>
 <p> &emsp;&emsp;举个栗子<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解决构造函数的问题</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">star</span>(<span class="params">uname,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.uname = uname;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//把sing方法挂载到原型上</span></span><br><span class="line">star.prototype.sing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'我会唱歌'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ldh = <span class="keyword">new</span> star(<span class="string">'刘德华'</span>, <span class="number">18</span>);</span><br><span class="line"><span class="keyword">var</span> zxy = <span class="keyword">new</span> star(<span class="string">'张学友'</span>, <span class="number">18</span>);</span><br><span class="line">ldh.sing()</span><br><span class="line">zxy.sing()</span><br></pre></td></tr></table></figure></p>
 <hr>
-<h1 id="对象原型proto"><a href="#对象原型proto" class="headerlink" title="对象原型proto"></a>对象原型<strong>proto</strong></h1><p> &emsp;&emsp;对象都会有一个属性<strong>proto</strong>指向构造数的prototype原型对象，之 以我们对可以使用构造函数prototype原型对象的性和方法，就是因为对象 <strong>proto</strong>原型的存在。</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">console</span>.log(ldh.__proto__===star.prototype);</span><br><span class="line"> <span class="comment">//输出结果为true</span></span><br><span class="line"> <span class="comment">//方法的查找规则：首先先看1dh对象身上是否有sing方法，如果有就执行这个对象上的sing</span></span><br><span class="line"><span class="comment">//如果么有sing这个方法，因为有_proto的存在，就去构造函数原型对象prototype身上去查找sing这个方法I</span></span><br></pre></td></tr></table></figure>
+<h1 id="对象原型-proto"><a href="#对象原型-proto" class="headerlink" title="对象原型 proto"></a>对象原型 <strong>proto</strong></h1><p> &emsp;&emsp;对象都会有一个属性 <strong>proto</strong> 指向构造数的prototype原型对象，之 以我们对可以使用构造函数prototype原型对象的性和方法，就是因为对象 <strong>proto</strong>原型的存在。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(ldh.__proto__===star.prototype);</span><br><span class="line"><span class="comment">//输出结果为true</span></span><br><span class="line"><span class="comment">//方法的查找规则：首先先看1dh对象身上是否有sing方法，如果有就执行这个对象上的sing</span></span><br><span class="line"><span class="comment">//如果么有sing这个方法，因为有_proto的存在，就去构造函数原型对象prototype身上去查找sing这个方法I</span></span><br></pre></td></tr></table></figure>
 <p> &emsp;&emsp;proto对象原型的意义就在于为对象的查找机制提供一个方向，或者说一条路线，但是它是一个非标准属性，因此实际开发中，不可以使用这个属性，它只是内部指向原型对象prototype<br><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/proto.png" alt=""></p>
 <hr>
 <h1 id="constructor构造函数"><a href="#constructor构造函数" class="headerlink" title="constructor构造函数"></a>constructor构造函数</h1><p>&emsp;&emsp;对象原型（ <em>proto</em> ）和构造函数（prototype）原型对象里面都有一个属性constructor属性，constructor我们称为构造函数，因为它指回构造函数本身。</p>
@@ -768,7 +768,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数原型prototype"><span class="nav-number">1.</span> <span class="nav-text">构造函数原型prototype</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象原型proto"><span class="nav-number">2.</span> <span class="nav-text">对象原型proto</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#constructor构造函数"><span class="nav-number">3.</span> <span class="nav-text">constructor构造函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数、实例、原型对象三者之间的关系"><span class="nav-number">4.</span> <span class="nav-text">构造函数、实例、原型对象三者之间的关系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型链"><span class="nav-number">5.</span> <span class="nav-text">原型链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript的成员查找机制（规则）"><span class="nav-number">6.</span> <span class="nav-text">JavaScript的成员查找机制（规则）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型对象中的this指向问题"><span class="nav-number">7.</span> <span class="nav-text">原型对象中的this指向问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数原型prototype"><span class="nav-number">1.</span> <span class="nav-text">构造函数原型prototype</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象原型-proto"><span class="nav-number">2.</span> <span class="nav-text">对象原型 proto</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#constructor构造函数"><span class="nav-number">3.</span> <span class="nav-text">constructor构造函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数、实例、原型对象三者之间的关系"><span class="nav-number">4.</span> <span class="nav-text">构造函数、实例、原型对象三者之间的关系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型链"><span class="nav-number">5.</span> <span class="nav-text">原型链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript的成员查找机制（规则）"><span class="nav-number">6.</span> <span class="nav-text">JavaScript的成员查找机制（规则）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型对象中的this指向问题"><span class="nav-number">7.</span> <span class="nav-text">原型对象中的this指向问题</span></a></li></ol></div>
             
 
           </div>
@@ -802,7 +802,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">44.8k</span>
+    <span title="站点总字数">45.1k</span>
   
 </div>
 
