@@ -94,7 +94,7 @@
 <meta property="og:description" content="路由根据url的不同来切换对应的组件实现spa(单页面应用)在页面切换的时候不会刷新，更加接近原生体验 路由的下载下载  npm install –save react-router-dom   router-router    只提供了一些核心的API router-router-dom    提供更多的一些选项  路由模式:  hash HashRouter (hash模式带#号，刷新的时候页">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/routerLink.png">
 <meta property="article:published_time" content="2020-07-03T12:27:47.000Z">
-<meta property="article:modified_time" content="2020-09-26T08:27:23.221Z">
+<meta property="article:modified_time" content="2020-10-15T08:12:48.675Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -341,8 +341,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-09-26T16:27:23+08:00">
-                2020-09-26
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-15T16:12:48+08:00">
+                2020-10-15
               </time>
             
           </span>
@@ -485,7 +485,7 @@
 <blockquote>
 <p>import {Route,Link,Redirect} from ‘react-router-dom’</p>
 </blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Redirect</span> <span class="attr">from</span>=<span class="string">"/"</span> <span class="attr">to</span> "/<span class="attr">home</span>" <span class="attr">exact</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Redirect</span> <span class="attr">from</span>=<span class="string">"/"</span> <span class="attr">to</span>=<span class="string">"/home"</span> <span class="attr">exact</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;关于Route的exact,加上exact代表当前路由path的路径采用精确匹配，比如说Home的path如果不加上exact,那么path=”/home”将会匹配他自己与path=”/“这两个，所以一般path=”/“这个路由一般会加上exact</p>
 <h1 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h1><p>Link组件用于取代<code>&lt;a&gt;</code>元素，生成一个<code>链接</code>，允许用户<code>点击后跳转到另一个路由</code>。它基本上就是<code>&lt;a&gt;</code>元素的React 版本，可以接收Router的状态。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  return <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">role</span>=<span class="string">"nav"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">"/about"</span>&gt;</span>About<span class="tag">&lt;/<span class="name">Link</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">"/repos"</span>&gt;</span>Repos<span class="tag">&lt;/<span class="name">Link</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
