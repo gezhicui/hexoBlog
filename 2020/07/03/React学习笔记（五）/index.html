@@ -94,7 +94,7 @@
 <meta property="og:description" content="路由根据url的不同来切换对应的组件实现spa(单页面应用)在页面切换的时候不会刷新，更加接近原生体验 路由的下载下载  npm install –save react-router-dom   router-router    只提供了一些核心的API router-router-dom    提供更多的一些选项  路由模式:  hash HashRouter (hash模式带#号，刷新的时候页">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/routerLink.png">
 <meta property="article:published_time" content="2020-07-03T12:27:47.000Z">
-<meta property="article:modified_time" content="2020-10-16T02:42:04.365Z">
+<meta property="article:modified_time" content="2020-10-16T02:58:08.757Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -341,7 +341,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-16T10:42:04+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-16T10:58:08+08:00">
                 2020-10-16
               </time>
             
@@ -433,7 +433,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9
+                  10
                 </span>
               
             </div>
@@ -532,17 +532,18 @@
 <h1 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h1><h2 id="params方式进行传参"><a href="#params方式进行传参" class="headerlink" title="params方式进行传参"></a>params方式进行传参</h2><ul>
 <li>1.需要在路由规则中设置传递的接受参数   :xxx</li>
 <li>2.发送参数,直接在跳转路径后进行编写</li>
-<li>3.接受:props.match.params.参数名</li>
+<li>3.接受:props.match.params.参数名/this.props.params.参数名</li>
 </ul>
 <p><strong>优势:刷新地址,参数依然存在</strong></p>
 <p><strong>缺点:只能传递字符中,并且参数过多的时候url会变得比较丑陋</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 传递方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/phone/:id")&#125;&#125;&gt;点我去phone<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/user/我是参数")&#125;&#125;&gt;点我去user<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 子路由componentDidMount中接受 --&gt;</span></span><br><span class="line">let id = this.props.match.params</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 路由表中--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">'/user/:id'</span> <span class="attr">component</span>=<span class="string">&#123;User&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">Route</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- js传递方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/user"+"2")&#125;&#125;&gt;点我去user<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- HTML传递方式 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&#123;</span>'/<span class="attr">user</span>/'+'<span class="attr">2</span>'&#125; <span class="attr">activeClassName</span>=<span class="string">'active'</span>&gt;</span>点我去user<span class="tag">&lt;/<span class="name">Link</span>&gt;</span>         </span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 子路由componentDidMount中接受 --&gt;</span></span><br><span class="line">let id = this.props.params.id</span><br></pre></td></tr></table></figure>
 <h2 id="query方式进行传参"><a href="#query方式进行传参" class="headerlink" title="query方式进行传参"></a>query方式进行传参</h2><ul>
 <li>1.不需要再路由规则中进行传递参数的配置</li>
 <li>2.直接发送数据</li>
 <li>3.使用 this.props.location.query.xxx</li>
+<li>4.必须由其他页面跳过来，参数才会被传递过来 </li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 传递方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/phone",query:&#123;name:"小明"&#125;)&#125;&#125;&gt;点我去phone<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/user",query:&#123;name:"小刚"&#125;)&#125;&#125;&gt;点我去user<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 子路由componentDidMount中接受 --&gt;</span></span><br><span class="line">let name = this.props.location.query.name</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- JS传递方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/phone",query:&#123;name:"小明"&#125;)&#125;&#125;&gt;点我去phone<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;props.history.push("/user",query:&#123;name:"小刚"&#125;)&#125;&#125;&gt;点我去user<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- HTML传递方式 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&#123;&#123;pathname:</span>'/<span class="attr">user</span>',<span class="attr">query:</span>&#123; <span class="attr">day:</span>'<span class="attr">Friday</span>'&#125;&#125;&#125;&gt;</span> <span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 子路由componentDidMount中接受 --&gt;</span></span><br><span class="line">let name = this.props.location.query.参数</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -843,7 +844,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">45.1k</span>
+    <span title="站点总字数">45.2k</span>
   
 </div>
 
