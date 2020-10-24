@@ -1505,7 +1505,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Webpack（二）plugin</title>
+    <title>Webpack（二）plugin mode中的生产模式</title>
     <url>/MyBlog/2020/07/30/Webpack%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
     <content><![CDATA[<h1 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h1><h2 id="plugin是什么"><a href="#plugin是什么" class="headerlink" title="plugin是什么?"></a>plugin是什么?</h2><p>plugin是插件的意思，通常是用于对某个现有的架构进行扩展。</p>
 <h2 id="loader和plugin区别"><a href="#loader和plugin区别" class="headerlink" title="loader和plugin区别"></a>loader和plugin区别</h2><ul>
@@ -1532,8 +1532,21 @@
 <p>npm install html-webpack-plugin –save-dev</p>
 </blockquote>
 <p>使用插件，修改webpack.config.js文件中plugins部分的内容如下:</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlwebpackPlugin = <span class="built_in">require</span>( <span class="string">' html-webpack-plugin '</span> );</span><br><span class="line"></span><br><span class="line">plugins:[</span><br><span class="line">    <span class="keyword">new</span> webpack.BannerPlugin(<span class="string">'最终版权归yang所有'</span>)，</span><br><span class="line">    <span class="keyword">new</span> htmlwebpackPlugin(&#123;</span><br><span class="line">        template: <span class="string">'index.html'</span></span><br><span class="line">    &#125;)，</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlwebpackPlugin = <span class="built_in">require</span>( <span class="string">' html-webpack-plugin '</span> );</span><br><span class="line"><span class="comment">//加上module.export</span></span><br><span class="line">plugins:[</span><br><span class="line">    <span class="keyword">new</span> webpack.BannerPlugin(<span class="string">'最终版权归yang所有'</span>)，</span><br><span class="line">    <span class="keyword">new</span> htmlwebpackPlugin(&#123;</span><br><span class="line">        template: <span class="string">'index.html'</span></span><br><span class="line">    &#125;)，</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p>这里的template表示根据什么模板来生成index.html</p>
+<h1 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h1><p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/webpackmode.png" alt=""></p>
+<p>&emsp;&emsp;在开发模式中，我们只要能让代码跑起来就行，那么生产环境中我们需要做什么呢？</p>
+<ul>
+<li>在开发模式中，我们把css也打包进了bundle.js文件中,这样做会让js体积变得特别大，同时，因为它先加载js才能创建style标签插入到页面中，这里会出现<strong>闪屏</strong>现象，所以，我们需要把css从js中提取出来。</li>
+<li>由于css代码也很多，所以我们需要进行<strong>压缩处理</strong><br>&emsp;&emsp;这时候，我们就需要两种mode，一种是<strong>开发模式(developmen)</strong>，一种是<strong>生产模式(production)</strong></li>
+</ul>
+<p>首先，我们进行提取css成单独文件的插件的下载</p>
+<blockquote>
+<p>npm i mini-css-extract-plugin -D</p>
+</blockquote>
+<p>然后导入并使用。使用方法如下：</p>
+<p>```js<br>const MiniCssExtractPlugin = require( ‘mini-css-extract-plugin’ );<br>//加上module.export<br>module: {<br>    rules: [<br>        {<br>            test:/.css$ /,<br>            use:[<br>                //创建style标签，将样式放入<br>                //‘style-loader’ ,<br>                //这个loader取代style-loader。作用:提取js中的css成单独文件<br>                MiniCssExtractPlugin.loader,<br>                //将css文件整合到js文件中<br>                ‘css-loader’<br>            ]<br>        }<br>    ]<br>},</p>
+<p>plugins:[<br>    new MiniCssExtractPlugin({<br>        //对文件重命名<br>        filename:’css/build.css’<br>    })<br>],<br>mode:’development’</p>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -1691,7 +1704,7 @@ await后面需要跟上一个异步对象，如果是我们自己写的promise�
 <p>在<code>webpack.config.js</code>的<code>module</code>的<code>rules</code>中添加：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  test: <span class="regexp">/\.(png|jpg|gif)$/</span>,</span><br><span class="line">  use: [</span><br><span class="line">    <span class="comment">//可以一个loader写成一个对象形式，这样方便我们添加参数如options</span></span><br><span class="line">    &#123;</span><br><span class="line">      loader: <span class="string">'url-loader'</span>,</span><br><span class="line">      options: &#123;</span><br><span class="line">        <span class="comment">///当加载的图片，小于limit时，会将图片编译成base64字符串形式.limit可自行修改</span></span><br><span class="line">        <span class="comment">//当加载的图片，大于limit时，需要使用file-loader模块进行加载.npm安装就行，不需要配置</span></span><br><span class="line">        limit: <span class="number">8</span>*<span class="number">1024</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">//问题:因为url-loader默认使用es6模块化解析，而ihtml-loader引入图片是commonjs//解析时会出问题:[object Module]</span></span><br><span class="line">        <span class="comment">//解决:关闭ur1-loader的es6模块化，使用commonjs解析</span></span><br><span class="line">        esModule: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果是在html文件中使用img引入的图片，我们需要添加一个loader：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    test: <span class="regexp">/\.html$ /</span>,</span><br><span class="line">    <span class="comment">//处理html文件的img图片（负责引入img，从而能被url-loader进行处理)</span></span><br><span class="line">    loader: <span class="string">'htm1-loader '</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    test: <span class="regexp">/\.html$ /</span>,</span><br><span class="line">    <span class="comment">//处理html文件的img图片（负责引入img，从而能被url-loader进行处理)</span></span><br><span class="line">    loader: <span class="string">'html-loader '</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>&emsp;&emsp;我们发现webpack在dist文件夹下自动帮助我们生成一个非常长的名字,这是一个32位hash值，目的是防止名字重复<br>&emsp;&emsp;但是，真实开发中，我们可能对打包的图片名字有一定的要求<br>&emsp;&emsp;比如，将所有的图片放在一个文件夹中，跟上图片原来的名称，同时也要防止重复</p>
 <p>所以，我们可以在options中添加上如下选项:</p>
@@ -1707,7 +1720,13 @@ await后面需要跟上一个异步对象，如果是我们自己写的promise�
 <p>npm install -D babel-loader @babel/core @babel/preset-es2015 webpack</p>
 </blockquote>
 <p>配置webpack.config.js文件下的rules</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> &#123;</span><br><span class="line">    test: <span class="regexp">/\.m?js$/</span>,</span><br><span class="line">    <span class="comment">//exclude:排除</span></span><br><span class="line">    exclude: <span class="regexp">/(node_modules|bower_components)/</span>,</span><br><span class="line">    use: &#123;</span><br><span class="line">       loader: <span class="string">'babel-loader'</span>,</span><br><span class="line">       options: &#123;</span><br><span class="line">          presets: [<span class="string">'es2015'</span>]</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> &#123;</span><br><span class="line">    test: <span class="regexp">/\.m?js$/</span>,</span><br><span class="line">    <span class="comment">//exclude:排除</span></span><br><span class="line">    exclude: <span class="regexp">/(node_modules|bower_components)/</span>,</span><br><span class="line">    use: &#123;</span><br><span class="line">       loader: <span class="string">'babel-loader'</span>,</span><br><span class="line">       options: &#123;</span><br><span class="line">          presets: [<span class="string">'es2015'</span>]</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="处理其他资源"><a href="#处理其他资源" class="headerlink" title="处理其他资源"></a>处理其他资源</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//处理其他资源</span></span><br><span class="line">&#123;</span><br><span class="line">    exclude: <span class="regexp">/\.( html|js|css|less|jpg|png|gif)/</span>,</span><br><span class="line">    loader: <span class="string">'file-loader'</span>,</span><br><span class="line">    options: &#123;</span><br><span class="line">        limit: <span class="number">8192</span>,</span><br><span class="line">        name:<span class="string">'images/[name].[hash:8].[ext]'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="outputPath"><a href="#outputPath" class="headerlink" title="outputPath"></a>outputPath</h2><p>outputPath可以指定改文件打包完输出的路径，如：</p>
+<p>```js<br>{<br>    exclude: /.( html|js|css|less|jpg|png|gif)/,<br>    loader: ‘file-loader’,<br>    options: {<br>        limit: 8192,<br>        name:’images/[name].[hash:8].[ext]’<br>    },<br>    //所有的loader都可以使用outputPath<br>    outputPath:’media’<br>}</p>
+]]></content>
       <categories>
         <category>前端</category>
         <category>Webpack</category>
@@ -2343,6 +2362,47 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
       <tags>
         <tag>计算机网络</tag>
         <tag>TCP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Webpack（三） devServer</title>
+    <url>/MyBlog/2020/10/24/Webpack%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+    <content><![CDATA[<p>&emsp;&emsp;在Webpack中，除了<code>entry、output、module、plugins、mode</code>这五大部分，我们还有一个部分是<code>devServer</code>(开发服务器)，它的作用是用来自动化（自动编译，自动打开浏览器，自动刷新浏览器，设置代理)等。</p>
+<p>在启动之前，我们需要下载包</p>
+<blockquote>
+<p>npm install webpack-dev-server -D</p>
+</blockquote>
+<p>配置如下</p>
+<pre><code class="js"><span class="built_in">module</span>.exports = {
+    entry: <span class="string">'./ src/index.js '</span>,
+    output: {},
+    <span class="built_in">module</span>: {},
+    plugins:[],
+    mode: <span class="string">'development'</span>,
+
+    <span class="comment">//启动devServer指令为:npx webpack-dev-server</span>
+    <span class="comment">//特点:只会在内存中编译打包，不会有任何输出。即build文件在内存中给你弄好，原本的文件夹中不会出现build文件夹</span>
+
+    devserver:{
+        <span class="comment">//要运行的项目的根目录</span>
+        contentBase: resolve(__dirname,<span class="string">' build'</span>),
+        <span class="comment">//启动gzip压缩</span>
+        compress:<span class="literal">true</span>,
+        <span class="comment">//指定端口号</span>
+        port:<span class="number">3000</span>,
+        <span class="comment">//编译完成自动打开浏览器</span>
+        open:<span class="literal">true</span>
+    }
+};
+
+</code></pre>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Webpack</category>
+      </categories>
+      <tags>
+        <tag>Webpack</tag>
       </tags>
   </entry>
 </search>
