@@ -94,7 +94,7 @@
 <meta property="og:description" content="pluginplugin是什么?plugin是插件的意思，通常是用于对某个现有的架构进行扩展。 loader和plugin区别 loader主要用于转换某些类型的模块，它是一个转换器。 plugin是插件，它是对webpack本身的扩展，是一个扩展器。  plugin的使用过程∶ 步骤一∶通过npm安装需要使用的plugins(某些webpack已经内置的插件不需要安装) 步骤二︰在webpack">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/webpackmode.png">
 <meta property="article:published_time" content="2020-07-30T12:44:20.000Z">
-<meta property="article:modified_time" content="2020-10-25T03:16:04.287Z">
+<meta property="article:modified_time" content="2020-10-25T07:13:36.323Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="Webpack">
 <meta name="twitter:card" content="summary">
@@ -341,7 +341,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-25T11:16:04+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-25T15:13:36+08:00">
                 2020-10-25
               </time>
             
@@ -507,7 +507,11 @@
 <p>在node中，默认打包为生产环境，这个和mode设置成development没有关系,所以，我们要手动设置成开发环境</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在上个示例中的module.export外部设置</span></span><br><span class="line">process.env.NODE_ENV = <span class="string">'development'</span> ;</span><br><span class="line"><span class="comment">//如果打包成生产环境，把这段话注释掉就行</span></span><br></pre></td></tr></table></figure>
 <p>这样就可以处理开发模式css的兼容问题</p>
-
+<h2 id="压缩css"><a href="#压缩css" class="headerlink" title="压缩css"></a>压缩css</h2><p>压缩css，我们需要使用一个插件</p>
+<blockquote>
+<p>npm i optimize-css-assets-webpack-plugin -D</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入</span></span><br><span class="line"><span class="keyword">const</span> optimizeCssAssetsWebpackPlugin=<span class="built_in">require</span>(<span class="string">'optimize-css-assets-webpack-plugin'</span>)</span><br><span class="line"></span><br><span class="line">plugins:[</span><br><span class="line">    <span class="keyword">new</span> optimizeCssAssetsWebpackPlugin()</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -525,7 +529,7 @@
   <p><span>本文标题:</span><a href="/MyBlog/2020/07/30/Webpack%EF%BC%88%E4%BA%8C%EF%BC%89/">Webpack（二）plugin mode</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 杨雨翔 的个人博客">杨雨翔</a></p>
   <p><span>发布时间:</span>2020年07月30日 - 20:44</p>
-  <p><span>最后更新:</span>2020年10月25日 - 11:16</p>
+  <p><span>最后更新:</span>2020年10月25日 - 15:13</p>
   <p><span>原始链接:</span><a href="/MyBlog/2020/07/30/Webpack%EF%BC%88%E4%BA%8C%EF%BC%89/" title="Webpack（二）plugin mode">https://gitee.com/yang_yu_xiang/MyBlog/2020/07/30/Webpack%EF%BC%88%E4%BA%8C%EF%BC%89/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://gitee.com/yang_yu_xiang/MyBlog/2020/07/30/Webpack%EF%BC%88%E4%BA%8C%EF%BC%89/"  aria-label="复制成功！"></i></span>
   </p>
@@ -803,7 +807,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#plugin"><span class="nav-number">1.</span> <span class="nav-text">plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#plugin是什么"><span class="nav-number">1.1.</span> <span class="nav-text">plugin是什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loader和plugin区别"><span class="nav-number">1.2.</span> <span class="nav-text">loader和plugin区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plugin的使用过程∶"><span class="nav-number">1.3.</span> <span class="nav-text">plugin的使用过程∶</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#plugin的使用"><span class="nav-number">2.</span> <span class="nav-text">plugin的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打包html的plugin"><span class="nav-number">3.</span> <span class="nav-text">打包html的plugin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mode的生产模式中css的优化"><span class="nav-number">4.</span> <span class="nav-text">mode的生产模式中css的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#打包后css的兼容性处理"><span class="nav-number">4.1.</span> <span class="nav-text">打包后css的兼容性处理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#plugin"><span class="nav-number">1.</span> <span class="nav-text">plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#plugin是什么"><span class="nav-number">1.1.</span> <span class="nav-text">plugin是什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loader和plugin区别"><span class="nav-number">1.2.</span> <span class="nav-text">loader和plugin区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plugin的使用过程∶"><span class="nav-number">1.3.</span> <span class="nav-text">plugin的使用过程∶</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#plugin的使用"><span class="nav-number">2.</span> <span class="nav-text">plugin的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打包html的plugin"><span class="nav-number">3.</span> <span class="nav-text">打包html的plugin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mode的生产模式中css的优化"><span class="nav-number">4.</span> <span class="nav-text">mode的生产模式中css的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#打包后css的兼容性处理"><span class="nav-number">4.1.</span> <span class="nav-text">打包后css的兼容性处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩css"><span class="nav-number">4.2.</span> <span class="nav-text">压缩css</span></a></li></ol></li></ol></div>
             
 
           </div>

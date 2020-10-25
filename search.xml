@@ -1560,7 +1560,11 @@
 <p>在node中，默认打包为生产环境，这个和mode设置成development没有关系,所以，我们要手动设置成开发环境</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在上个示例中的module.export外部设置</span></span><br><span class="line">process.env.NODE_ENV = <span class="string">'development'</span> ;</span><br><span class="line"><span class="comment">//如果打包成生产环境，把这段话注释掉就行</span></span><br></pre></td></tr></table></figure>
 <p>这样就可以处理开发模式css的兼容问题</p>
-]]></content>
+<h2 id="压缩css"><a href="#压缩css" class="headerlink" title="压缩css"></a>压缩css</h2><p>压缩css，我们需要使用一个插件</p>
+<blockquote>
+<p>npm i optimize-css-assets-webpack-plugin -D</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//引入</span></span><br><span class="line"><span class="keyword">const</span> optimizeCssAssetsWebpackPlugin=<span class="built_in">require</span>(<span class="string">'optimize-css-assets-webpack-plugin'</span>)</span><br><span class="line"></span><br><span class="line">plugins:[</span><br><span class="line">    <span class="keyword">new</span> optimizeCssAssetsWebpackPlugin()</span><br><span class="line">],</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端</category>
         <category>Webpack</category>
