@@ -1505,7 +1505,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Webpack（二）plugin mode中的生产模式</title>
+    <title>Webpack（二）plugin mode</title>
     <url>/MyBlog/2020/07/30/Webpack%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
     <content><![CDATA[<h1 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h1><h2 id="plugin是什么"><a href="#plugin是什么" class="headerlink" title="plugin是什么?"></a>plugin是什么?</h2><p>plugin是插件的意思，通常是用于对某个现有的架构进行扩展。</p>
 <h2 id="loader和plugin区别"><a href="#loader和plugin区别" class="headerlink" title="loader和plugin区别"></a>loader和plugin区别</h2><ul>
@@ -1534,7 +1534,7 @@
 <p>使用插件，修改webpack.config.js文件中plugins部分的内容如下:</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlwebpackPlugin = <span class="built_in">require</span>( <span class="string">' html-webpack-plugin '</span> );</span><br><span class="line"><span class="comment">//加上module.export</span></span><br><span class="line">plugins:[</span><br><span class="line">    <span class="keyword">new</span> webpack.BannerPlugin(<span class="string">'最终版权归yang所有'</span>)，</span><br><span class="line">    <span class="keyword">new</span> htmlwebpackPlugin(&#123;</span><br><span class="line">        template: <span class="string">'index.html'</span></span><br><span class="line">    &#125;)，</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p>这里的template表示根据什么模板来生成index.html</p>
-<h1 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h1><p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/webpackmode.png" alt=""></p>
+<h1 id="mode的生产模式中css的优化"><a href="#mode的生产模式中css的优化" class="headerlink" title="mode的生产模式中css的优化"></a>mode的生产模式中css的优化</h1><p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/webpackmode.png" alt=""></p>
 <p>&emsp;&emsp;在开发模式中，我们只要能让代码跑起来就行，那么生产环境中我们需要做什么呢？</p>
 <ul>
 <li>在开发模式中，我们把css也打包进了bundle.js文件中,这样做会让js体积变得特别大，同时，因为它先加载js才能创建style标签插入到页面中，这里会出现<strong>闪屏</strong>现象，所以，我们需要把css从js中提取出来。</li>
@@ -2315,6 +2315,7 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// import中的内容为路由分组/路由组件存放路径</span></span><br><span class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "group-foo"*/</span> <span class="string">'./Foo.vue'</span> )</span><br><span class="line"><span class="keyword">const</span> Bar = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackchunkName: "group-foo"*/</span> <span class="string">'./Bar.vue'</span> )</span><br><span class="line"><span class="keyword">const</span> Baz = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "group-boo"*/</span> <span class="string">'./Baz.vue'</span>)</span><br><span class="line"><span class="comment">//Foo和Bar在同一个分组，打包后会被放到同一个js文件中，请求其中一个路由时，另一个也会顺便被请求回来</span></span><br></pre></td></tr></table></figure>
 <p>然后，我们把普通的import导入方式删除就行了</p>
 <p>具体参考链接：<br><a href="https://router.vuejs.org/zh/guide/advanced/lazy-loading.html" target="_blank" rel="noopener">https://router.vuejs.org/zh/guide/advanced/lazy-loading.html</a></p>
+<h1 id="通过优化css包并将其从js中分离"><a href="#通过优化css包并将其从js中分离" class="headerlink" title="通过优化css包并将其从js中分离"></a>通过优化css包并将其从js中分离</h1><p>详见 <a href="http://yang_yu_xiang.gitee.io/myblog/2020/07/30/Webpack%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_blank" rel="noopener">Webpack（二）</a>中mode的生产模式中的优化策略</p>
 ]]></content>
       <tags>
         <tag>前端</tag>
