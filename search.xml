@@ -2342,11 +2342,28 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
 <h1 id="tree-shaking"><a href="#tree-shaking" class="headerlink" title="tree shaking"></a>tree shaking</h1><p>tree shaking的作用：去除无用代码<br>前提：</p>
 <ul>
 <li>必须使用 ES6 模块化</li>
-<li>开启 production 环境 （这样就自动会把无用代码去掉）<br>这样，在打包构建的时候，会自动进行<code>tree shaking</code><br>，<br>但是，在一些webpack版本中，可能会摇掉一些css等的代码，因为css我们只是引入但是斌没有使用。这时候我们需要在 package.json 中配置：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//"sideEffects": false表示所有代码都没有副作用（都可以进行 tree shaking），这样会导致的问题：可能会把 css / @babel/polyfill 文件干掉（副作用）</span></span><br><span class="line"><span class="string">"sideEffects"</span>: [<span class="string">"*.css"</span>, <span class="string">"*.less"</span>]<span class="comment">//不会对css/less文件tree shaking处理</span></span><br></pre></td></tr></table></figure>
+<li>开启 production 环境 （这样就自动会把无用代码去掉）<br>这样，在打包构建的时候，会自动进行<code>tree shaking</code><br>但是，在一些webpack版本中，可能会摇掉一些css等的代码，因为css我们只是引入但是斌没有使用。这时候我们需要在 package.json 中配置：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//"sideEffects": false表示所有代码都没有副作用（都可以进行 tree shaking），这样会导致的问题：可能会把 css / @babel/polyfill 文件干掉（副作用）</span></span><br><span class="line"><span class="string">"sideEffects"</span>: [<span class="string">"*.css"</span>, <span class="string">"*.less"</span>]<span class="comment">//不会对css/less文件tree shaking处理</span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h1 id="code-split-代码分割"><a href="#code-split-代码分割" class="headerlink" title="code split 代码分割"></a>code split 代码分割</h1>]]></content>
+<h1 id="code-split-代码分割"><a href="#code-split-代码分割" class="headerlink" title="code split 代码分割"></a>code split 代码分割</h1><p>&emsp;&emsp;代码分割主要有两种场景：单入口场景和多入口场景。<br>&emsp;&emsp;将打包输出的一个大的 bundle.js 文件拆分成多个小文件，这样可以并行加载多个文件，比加载一个文件更快。<br>&emsp;&emsp;比如我们在开发单页面应用的时候，如vue，整个页面是一个非常庞大的文件，那么我们肯定要按照路由去拆分不同的文件，从而实现按需加载，这时候拆分文件就需要使用代码分割了</p>
+<h2 id="多入口拆分"><a href="#多入口拆分" class="headerlink" title="多入口拆分"></a>多入口拆分</h2><p>多入口：有几个入口，最终输出就有几个bundle<br>问题：很难去维护多入口，如果要修改多个页面总得去修改多入口</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">entry: &#123;</span><br><span class="line">    <span class="comment">// 多入口：有几个入口，最终输出就有几个bundle</span></span><br><span class="line">    index: <span class="string">'./src/js/index.js'</span>,</span><br><span class="line">    test: <span class="string">'./src/js/test.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    <span class="comment">// [name]：取文件名</span></span><br><span class="line">    filename: <span class="string">'js/[name].[contenthash:10].js'</span>,</span><br><span class="line">    path: resolve(__dirname, <span class="string">'build'</span>)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="optimization"><a href="#optimization" class="headerlink" title="optimization"></a>optimization</h2><p>optimization： 将 <code>node_modules</code>中的代码单独打包</p>
+<ul>
+<li>将 <code>node_modules</code>中的代码单独打包（大小超过30kb）</li>
+<li>自动分析多入口<code>chunk</code>中，有没有公共的文件。如果有会打包成单独一个chunk(比如两个模块中都引入了<code>jquery</code>，正常情况下多入口页面会打包两个引入<code>jquery</code>的文件，使用<code>optimization</code>会被打包成一个单独的文件，不会重复打包多次)（大小超过30kb）<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">      chunks: <span class="string">'all'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="import-动态导入语法："><a href="#import-动态导入语法：" class="headerlink" title="import 动态导入语法："></a>import 动态导入语法：</h2><ul>
+<li>通过js代码，让某个文件被单独打包成一个<code>chunk</code>，采用id命名（0、1、2、3…），避免命名冲突</li>
+<li><code>import</code>动态导入语法：能将某个文件单独打包(<code>test</code>文件不会和<code>index</code>打包在同一个文件而是单独打包)</li>
+<li><code>webpackChunkName</code>:指定test单独打包后文件的名字</li>
+<li>一般在单入口文件中和<code>optimization</code>配合使用<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="comment">/* webpackChunkName: 'test' */</span><span class="string">'./test'</span>)</span><br><span class="line">  .then(<span class="function">(<span class="params">&#123; mul, count &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 文件加载成功~</span></span><br><span class="line">    <span class="comment">// eslint-disable-next-line</span></span><br><span class="line">    <span class="built_in">console</span>.log(mul(<span class="number">2</span>, <span class="number">5</span>));</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// eslint-disable-next-line</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'文件加载失败~'</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
       <tags>
         <tag>前端</tag>
       </tags>
