@@ -94,7 +94,7 @@
 <meta property="og:description" content="为开发模式与发布模式指定不同的打包入口&amp;emsp;&amp;emsp;默认情况下，Vue项目的开发模式与发布模式，共用同一个打包的入口文件(即src&#x2F;main.js)。为了将项目的开发过程与发布过程分离，我们可以为两种模式，各自指定打包的入口文件。  开发模式的入口文件为src&#x2F;main-dev.js 发布模式的入口文件为src&#x2F;main-prod.js  在vue.config.js导出的配置对象中，我">
 <meta property="og:image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/mainprodjs.png">
 <meta property="article:published_time" content="2020-10-08T01:24:25.000Z">
-<meta property="article:modified_time" content="2020-10-25T02:47:40.865Z">
+<meta property="article:modified_time" content="2020-10-26T07:11:29.645Z">
 <meta property="article:author" content="杨雨翔">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -341,8 +341,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-25T10:47:40+08:00">
-                2020-10-25
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-26T15:11:29+08:00">
+                2020-10-26
               </time>
             
           </span>
@@ -384,7 +384,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.3k
                 </span>
               
 
@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  5
                 </span>
               
             </div>
@@ -462,7 +462,14 @@
 <p>然后，我们把普通的import导入方式删除就行了</p>
 <p>具体参考链接：<br><a href="https://router.vuejs.org/zh/guide/advanced/lazy-loading.html" target="_blank" rel="noopener">https://router.vuejs.org/zh/guide/advanced/lazy-loading.html</a></p>
 <h1 id="通过优化css包并将其从js中分离"><a href="#通过优化css包并将其从js中分离" class="headerlink" title="通过优化css包并将其从js中分离"></a>通过优化css包并将其从js中分离</h1><p>详见 <a href="http://yang_yu_xiang.gitee.io/myblog/2020/07/30/Webpack%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_blank" rel="noopener">Webpack（二）</a>中mode的生产模式中的优化策略</p>
+<h1 id="tree-shaking"><a href="#tree-shaking" class="headerlink" title="tree shaking"></a>tree shaking</h1><p>tree shaking的作用：去除无用代码<br>前提：</p>
+<ul>
+<li>必须使用 ES6 模块化</li>
+<li>开启 production 环境 （这样就自动会把无用代码去掉）<br>这样，在打包构建的时候，会自动进行<code>tree shaking</code><br>，<br>但是，在一些webpack版本中，可能会摇掉一些css等的代码，因为css我们只是引入但是斌没有使用。这时候我们需要在 package.json 中配置：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//"sideEffects": false表示所有代码都没有副作用（都可以进行 tree shaking），这样会导致的问题：可能会把 css / @babel/polyfill 文件干掉（副作用）</span></span><br><span class="line"><span class="string">"sideEffects"</span>: [<span class="string">"*.css"</span>, <span class="string">"*.less"</span>]<span class="comment">//不会对css/less文件tree shaking处理</span></span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
+<h1 id="code-split-代码分割"><a href="#code-split-代码分割" class="headerlink" title="code split 代码分割"></a>code split 代码分割</h1>
       
     </div>
     
@@ -480,7 +487,7 @@
   <p><span>本文标题:</span><a href="/MyBlog/2020/10/08/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/">项目优化策略</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 杨雨翔 的个人博客">杨雨翔</a></p>
   <p><span>发布时间:</span>2020年10月08日 - 09:24</p>
-  <p><span>最后更新:</span>2020年10月25日 - 10:47</p>
+  <p><span>最后更新:</span>2020年10月26日 - 15:11</p>
   <p><span>原始链接:</span><a href="/MyBlog/2020/10/08/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" title="项目优化策略">https://gitee.com/yang_yu_xiang/MyBlog/2020/10/08/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://gitee.com/yang_yu_xiang/MyBlog/2020/10/08/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/"  aria-label="复制成功！"></i></span>
   </p>
@@ -758,7 +765,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为开发模式与发布模式指定不同的打包入口"><span class="nav-number">1.</span> <span class="nav-text">为开发模式与发布模式指定不同的打包入口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过externals加载外部CDN资源"><span class="nav-number">2.</span> <span class="nav-text">通过externals加载外部CDN资源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过CDN优化Element-UI的打包"><span class="nav-number">3.</span> <span class="nav-text">通过CDN优化Element UI的打包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路由懒加载"><span class="nav-number">4.</span> <span class="nav-text">路由懒加载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过优化css包并将其从js中分离"><span class="nav-number">5.</span> <span class="nav-text">通过优化css包并将其从js中分离</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为开发模式与发布模式指定不同的打包入口"><span class="nav-number">1.</span> <span class="nav-text">为开发模式与发布模式指定不同的打包入口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过externals加载外部CDN资源"><span class="nav-number">2.</span> <span class="nav-text">通过externals加载外部CDN资源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过CDN优化Element-UI的打包"><span class="nav-number">3.</span> <span class="nav-text">通过CDN优化Element UI的打包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路由懒加载"><span class="nav-number">4.</span> <span class="nav-text">路由懒加载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过优化css包并将其从js中分离"><span class="nav-number">5.</span> <span class="nav-text">通过优化css包并将其从js中分离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tree-shaking"><span class="nav-number">6.</span> <span class="nav-text">tree shaking</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code-split-代码分割"><span class="nav-number">7.</span> <span class="nav-text">code split 代码分割</span></a></li></ol></div>
             
 
           </div>
@@ -792,7 +799,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">47.9k</span>
+    <span title="站点总字数">48.1k</span>
   
 </div>
 
