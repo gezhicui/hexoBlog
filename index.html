@@ -290,6 +290,410 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/10/28/Vue3-0%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BB%84%E5%90%88API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="杨雨翔">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/MyBlog/2020/10/28/Vue3-0%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BB%84%E5%90%88API/" itemprop="url">Vue3.0（二）组合API(Composition API)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-28T20:01:23+08:00">
+                2020-10-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-28T21:22:44+08:00">
+                2020-10-28
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/MyBlog/2020/10/28/Vue3-0%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BB%84%E5%90%88API/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/10/28/Vue3-0%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BB%84%E5%90%88API/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>&emsp;&emsp;Vue 3.0 中引入了一种新的代码编写方式，那就是 <code>Composition API</code>，这是有别于 <code>Vue 2.0 Options API</code>的一种函数式 API。无需通过指定一长串选项来定义组件，<code>Composition API</code>允许用户像编写函数一样自由地组合逻辑和代码。他就是<strong>将我们封装好的具备独立功能的函数组合在一起</strong><br>来看看代码示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//Vue2中组件的写法</span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;count&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"getClick"</span>&gt;</span>button<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">  name: <span class="string">'App'</span>,</span></span><br><span class="line">  data()&#123;</span><br><span class="line"><span class="actionscript">    <span class="keyword">return</span>&#123;</span></span><br><span class="line">      count:0</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    getClick()&#123;</span><br><span class="line"><span class="actionscript">      <span class="keyword">this</span>.count++;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>写出来的代码长这样：</p>
+<p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/ToDoListNew.png" alt=""></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/MyBlog/2020/10/28/Vue3-0%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BB%84%E5%90%88API/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:16px;">
+      ---------------- The End ----------------
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/10/28/Vue3-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="杨雨翔">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/MyBlog/2020/10/28/Vue3-0/" itemprop="url">Vue3.0（一） 认识Vue3.0</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-28T14:46:02+08:00">
+                2020-10-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-28T20:01:38+08:00">
+                2020-10-28
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/MyBlog/2020/10/28/Vue3-0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/10/28/Vue3-0/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  951
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Vue3-0六大亮点"><a href="#Vue3-0六大亮点" class="headerlink" title="Vue3.0六大亮点"></a>Vue3.0六大亮点</h1><ul>
+<li>Performance:性能比Vue 2.x快1.2~2倍</li>
+<li>Tree shaking support:按需编译,体积比Vue2.x更小</li>
+<li>Composition API:组合API(类似React Hooks)</li>
+<li>Better TypeScript support:更好的Ts支持</li>
+<li>Custom Renderer API:暴露了自定义渲染API</li>
+<li>Fragment，Teleport (Protal)，Suspense:更先进的组件</li>
+</ul>
+<h1 id="Vue3-0是如何变快的？"><a href="#Vue3-0是如何变快的？" class="headerlink" title="Vue3.0是如何变快的？"></a>Vue3.0是如何变快的？</h1><h2 id="diff方法优化"><a href="#diff方法优化" class="headerlink" title="diff方法优化:"></a>diff方法优化:</h2><p>Vue2中的虚拟dom是进行全量的对比，Vue3新增了静态标记(PatchFlag)，这是啥意思呢？</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>我是段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;msg&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在Vue2.0中,当<code>msg</code>发生改变的时候，所有的虚拟dom节点都会重新渲染</li>
+<li>在Vue3中，div和前面一个p标签数据不会发生变化，但是最后一个p标签数据会发生变化，所以diff算法为他添加一个<code>PatchFlags</code>标记。在与上次虚拟节点进行对比时候，只对比带有<code>PatchFlag</code>的节点并且可以通过flag的信息得知当前节点要对比的具体内容<h2 id="hoistStatic静态提升"><a href="#hoistStatic静态提升" class="headerlink" title="hoistStatic静态提升"></a>hoistStatic静态提升</h2></li>
+<li>Vue2无论元素是否参与更新,每次都是重新创建元素</li>
+<li>Vue3中对于不参与更新的元素做<strong>静态提升</strong>,只会创建一次,后面直接复用即可.<br>拿上一段代码举例子，静态提升之前:<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">_ctx,_cache，$props，$setup，$data，$options</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (_openBlock()，_createBlock (<span class="string">"div"</span>, <span class="literal">null</span>，[</span><br><span class="line">        _createVNode(<span class="string">"p"</span>, <span class="literal">null</span>，<span class="string">"我是段落"</span>)，</span><br><span class="line">        _createVNode(<span class="string">"p"</span>, <span class="literal">null</span>,_toDisplayString(_ctx.msg)+<span class="string">"&#125;"</span>，<span class="number">1</span><span class="comment">/* TEXT*/</span>)</span><br><span class="line">    ]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+静态提升之后：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建静态节点提升成全局变量</span></span><br><span class="line"><span class="keyword">const</span> _hoisted_1 =<span class="comment">/*#__PURE_ */</span>_createVNode(<span class="string">"p"</span>， <span class="literal">null</span>,<span class="string">"我是段落"</span>，<span class="number">-1</span><span class="comment">/* HOISTED */</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">_ctx,_cache，$props，$setup，$data，$options</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (_openBlock()，_createBlock(<span class="string">"div"</span>, <span class="literal">null</span>，[</span><br><span class="line">        _hoisted_l,</span><br><span class="line">        _createVNode(<span class="string">"p"</span>, <span class="literal">null</span>，_toDisplayString (_ctx.msg)+<span class="string">"&#125;"</span>，<span class="number">1</span><span class="comment">/* TEXT*/</span>)</span><br><span class="line">    ]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="事件侦听缓存"><a href="#事件侦听缓存" class="headerlink" title="事件侦听缓存"></a>事件侦听缓存</h2>&emsp;&emsp;默认情况下onClick会被视为动态绑定，所以每次都会去追踪它的变化。但是因为是同一个函数，所以没有追踪变化,直接缓存起来复用即可，来看代码<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">'onClick'</span>&gt;</span>button<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+开启事件监听缓存之前：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createVNode <span class="keyword">as</span> _createVNode, openBlock <span class="keyword">as</span> _openBlock, createBlock <span class="keyword">as</span> _createBlock &#125; <span class="keyword">from</span> <span class="string">"vue"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">_ctx, _cache, $props, $setup, $data, $options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (_openBlock(), _createBlock(<span class="string">"div"</span>, <span class="literal">null</span>, [</span><br><span class="line">    _createVNode(<span class="string">"button"</span>, &#123; <span class="attr">onClick</span>: _ctx.onClick &#125;, <span class="string">"btn"</span>, <span class="number">8</span> <span class="comment">/* PROPS */</span>, [<span class="string">"onClick"</span>])</span><br><span class="line">  ]))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//</span></span><br></pre></td></tr></table></figure>
+&emsp;&emsp;这里我们还没有开启事件监听缓存，所以存在一个静态标记<code>8 /* PROPS */</code>，它将标签的 Props （属性） 标记动态属性。<br>如果我们的属性不会改变，不希望这个属性被标记为动态，那么就需要 <code>cacheHandler</code> 的出场了。</li>
+</ul>
+<p>开启事件监听缓存之后：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createVNode <span class="keyword">as</span> _createVNode, openBlock <span class="keyword">as</span> _openBlock, createBlock <span class="keyword">as</span> _createBlock &#125; <span class="keyword">from</span> <span class="string">"vue"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">_ctx, _cache, $props, $setup, $data, $options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (_openBlock(), _createBlock(<span class="string">"div"</span>, <span class="literal">null</span>, [</span><br><span class="line">    _createVNode(<span class="string">"button"</span>, &#123;</span><br><span class="line">      onClick: _cache[<span class="number">1</span>] || <span class="function">(<span class="params">_cache[<span class="number">1</span>] = (...args</span>) =&gt;</span> (_ctx.onClick(...args)))</span><br><span class="line">    &#125;, <span class="string">"btn"</span>)</span><br><span class="line">  ]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>它的意思是<code>onClick</code>方法被存入<code>cache</code>。在使用的时候，如果能在缓存中找到这个方法，那么它将直接被使用。如果找不到，那么将这个方法注入缓存。<br>总之，静态提升之后，事件就不会在 diff 算法中进行比较了。</p>
+<h2 id="Vite"><a href="#Vite" class="headerlink" title="Vite"></a>Vite</h2><h3 id="什么是Vite"><a href="#什么是Vite" class="headerlink" title="什么是Vite"></a>什么是Vite</h3><ul>
+<li>Vite是尤雨溪开发的一款意图取代webpack的工具</li>
+<li>其实现原理是利用ES6的import会发送请求去加载文件的特性,拦截这些请求，做一些预编译，省去webpack冗长的打包时间<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><blockquote>
+<p>npm install -g create-vite-app</p>
+</blockquote>
+<h3 id="利用-Vite-创建-Vue3-项目"><a href="#利用-Vite-创建-Vue3-项目" class="headerlink" title="利用 Vite 创建 Vue3 项目"></a>利用 Vite 创建 Vue3 项目</h3><blockquote>
+<p>create-vite-app projectName</p>
+</blockquote>
+<h3 id="安装依赖运行项目"><a href="#安装依赖运行项目" class="headerlink" title="安装依赖运行项目"></a>安装依赖运行项目</h3><blockquote>
+<p>cd projectName<br>npm install<br>npm run dev</p>
+</blockquote>
+</li>
+</ul>
+<p>这时候，我们点进main.js文件,会发现这是一个全新的文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App.vue'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'./index.css'</span></span><br><span class="line"></span><br><span class="line">createApp(App).mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure>
+<p>在vue2中，我们的mian.js文件是这样的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="keyword">new</span> Vue (&#123;</span><br><span class="line">    el : <span class="string">'#app'</span>,</span><br><span class="line">    store: store,</span><br><span class="line">    router: router,</span><br><span class="line">    render: <span class="function"><span class="params">c</span> =&gt;</span> c(App)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//2</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    store: store,</span><br><span class="line">    router: router,</span><br><span class="line">    render: <span class="function"><span class="params">c</span> =&gt;</span>c(App)</span><br><span class="line">&#125;).$mount (<span class="string">"#app"</span>);</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:16px;">
+      ---------------- The End ----------------
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/10/24/Webpack%EF%BC%88%E4%B8%89%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1917,455 +2321,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="杨雨翔">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89/" itemprop="url">Koa框架（三） 中间件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-23T11:53:42+08:00">
-                2020-08-23
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-19T14:20:11+08:00">
-                2020-10-19
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/Node-js/" itemprop="url" rel="index">
-                    <span itemprop="name">Node.js</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/Node-js/Koa/" itemprop="url" rel="index">
-                    <span itemprop="name">Koa</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  983
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="什么是中间件"><a href="#什么是中间件" class="headerlink" title="什么是中间件"></a>什么是中间件</h1><p>&emsp;&emsp;通俗的讲:中间件就是匹配路由之前或者匹配路由完成做的一系列的操作，我们就可以把它叫做中间件。<br>&emsp;&emsp;在<code>express</code>中间件(Middleware)是一个函数,它可以访问请求对象<code>(request object(req))</code>,响应对象<code>(response object(res))</code>，和web应用中处理请求-响应循环流程中的中间件，一般被命名为<code>next</code>的变量。在Koa中中间件和express有点类似。</p>
-<p>中间件的功能包括:</p>
-<ul>
-<li>执行任何代码。</li>
-<li>修改请求和响应对象。</li>
-<li>终结请求-响应循环。</li>
-<li>调用堆栈中的下一个中间件。</li>
-</ul>
-<p>如果我的get、post回调函数中，没有next参数，那么就匹配上第一个路由，就不会往下匹配了。如果想往下匹配的话，那么需要写<code>next()</code></p>
-<h1 id="应用级中间件"><a href="#应用级中间件" class="headerlink" title="应用级中间件"></a>应用级中间件</h1><p>我们来实现一个不管接到任何请求都打印日期的中间件，也叫<strong>应用级中间件</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>( <span class="string">'koa '</span>);</span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router();</span><br><span class="line"><span class="comment">//设置中间件，可以设置匹配路由 app.use('/',functio()) 不设置默认匹配所有路由</span></span><br><span class="line">app.use(<span class="keyword">async</span>(ctx,next)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>());</span><br><span class="line">    <span class="comment">//当前路由匹配完成以后继续向下匹配,如果不写next，路由匹配到了就不会继续向下</span></span><br><span class="line">    <span class="keyword">await</span> next();</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ctx,next</span>)</span>&#123;</span><br><span class="line">    ctx.body=<span class="string">"Hello koa"</span>;</span><br><span class="line">&#125;)</span><br><span class="line">router.get(<span class="string">'/news '</span>,(ctx,next)=&gt;&#123;</span><br><span class="line">    ctx.body=<span class="string">"新闻页面"</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(router.routes());<span class="comment">//作用:启动路由</span></span><br><span class="line">app.use(router.allowedMethods());<span class="comment">//作用:当请求出错时的处理逻辑</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/MyBlog/2020/08/23/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-    <div style="text-align:center;color: #ccc;font-size:16px;">
-      ---------------- The End ----------------
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gitee.com/yang_yu_xiang/MyBlog/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="杨雨翔">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/psb.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="url">Koa框架（二） 路由</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-22T21:15:12+08:00">
-                2020-08-22
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-23T17:15:20+08:00">
-                2020-08-23
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/Node-js/" itemprop="url" rel="index">
-                    <span itemprop="name">Node.js</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MyBlog/categories/Node-js/Koa/" itemprop="url" rel="index">
-                    <span itemprop="name">Koa</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  790
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Koa路由介绍和使用"><a href="#Koa路由介绍和使用" class="headerlink" title="Koa路由介绍和使用"></a>Koa路由介绍和使用</h1><p>&emsp;&emsp;路由（Routing）是由一个URL(或者叫路径）和一个特定的HTTP方法（GET、POST等)组成的，涉及到应用如何响应客户端对某个网站节点的访问。</p>
-<p>&emsp;&emsp;通俗的讲:路由就是根据不同的URL地址，加载不同的页面实现不同的功能。</p>
-<p>&emsp;&emsp;Koa中的路由和Express有所不同，在Express中直接引入Express就可以配置路由，但是在Koa中我们需要安装对应的<code>koa-router</code>路由模块来实现。</p>
-<blockquote>
-<p>npm install –save koa-router</p>
-</blockquote>
-<p>然后就可以使用了</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导包</span></span><br><span class="line"><span class="keyword">var</span> Koa = <span class="built_in">require</span> (<span class="string">'koa'</span>) :</span><br><span class="line"><span class="keyword">var</span> Router = <span class="built_in">require</span> (<span class="string">'koa-router'</span>);</span><br><span class="line"><span class="comment">//实例化</span></span><br><span class="line"><span class="keyword">var</span> app =  <span class="keyword">new</span> Koa ();</span><br><span class="line"><span class="keyword">var</span> router = <span class="keyword">new</span> Router();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//配置路由，在express中，调用参数有req，res，但是在Koa中request和response的所有信息都放在context（上下文）中 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//写法一</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="keyword">async</span>(ctx)=&gt; &#123;</span><br><span class="line">    <span class="comment">//ctx.body相当于res.send()</span></span><br><span class="line">    ctx.body=<span class="string">'首页'</span><span class="comment">//返回数据</span></span><br><span class="line">&#125;).get(<span class="string">'/news'</span>,<span class="keyword">async</span>(ctx)=&gt;&#123;</span><br><span class="line">    ctx.body=<span class="string">'新闻页'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//写法二</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="keyword">async</span>(ctx)=&gt; &#123;</span><br><span class="line">    <span class="comment">//ctx.body相当于res.send()</span></span><br><span class="line">    ctx.body=<span class="string">'首页'</span><span class="comment">//返回数据</span></span><br><span class="line">&#125;)</span><br><span class="line">router.get(<span class="string">'/news'</span>,<span class="keyword">async</span>(ctx)=&gt;&#123;</span><br><span class="line">    ctx.body=<span class="string">'新闻页'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//启动路由  </span></span><br><span class="line">app</span><br><span class="line">    .use(router.routes())</span><br><span class="line">    .use(router.allowedMethods());</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/MyBlog/2020/08/22/Koa%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-    <div style="text-align:center;color: #ccc;font-size:16px;">
-      ---------------- The End ----------------
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2422,7 +2377,7 @@
               
                <a href="/MyBlog/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2545,7 +2500,7 @@
     
       <span class="post-meta-item-text">站点总字数&#58;</span>
     
-    <span title="站点总字数">51k</span>
+    <span title="站点总字数">53k</span>
   
 </div>
 
