@@ -2423,9 +2423,10 @@ price和yd函数用了立即执行函数中的局部变量，所以立即执行�
 <li>PSH：接收方应该尽快将这个报文交给应用层。</li>
 <li>RST：重置连接。</li>
 <li>SYN：发起一个新连接。</li>
-<li>FIN：释放一个连接。</li>
+<li>FIN：释放一个连接。<a id="more"></a>
+<h1 id="TCP的三次握手"><a href="#TCP的三次握手" class="headerlink" title="TCP的三次握手"></a>TCP的三次握手</h1></li>
 </ul>
-<h1 id="TCP的三次握手"><a href="#TCP的三次握手" class="headerlink" title="TCP的三次握手"></a>TCP的三次握手</h1><p>&emsp;&emsp;所谓的三次握手即TCP连接的建立。这个连接必须是一方主动打开，另一方被动打开的。以下为客户端主动发起连接的图解：</p>
+<p>&emsp;&emsp;所谓的三次握手即TCP连接的建立。这个连接必须是一方主动打开，另一方被动打开的。以下为客户端主动发起连接的图解：</p>
 <p><img src="https://gitee.com/yang_yu_xiang/BlogImages/raw/master/img/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt=""></p>
 <h2 id="三次握手过程"><a href="#三次握手过程" class="headerlink" title="三次握手过程"></a>三次握手过程</h2><ul>
 <li>第一次：客户端发送初始序号x和syn=1请求标志</li>
